@@ -96,7 +96,7 @@ Si **NO** vas a completar el Lab 1 antes de continuar con el resto de ejercicios
 > [!IMPORTANT]
 > Las tablas **no** incluyen datos de ejemplo, ya que estos no se almacenan en la solución.
 
-12. Download the solution zip:
+12. Dentro de este repositorio, ve a la carpeta **Files** y descarga el archivo zip **Event Management 1.0.0.0**.
     
 14. Si es necesario, en el menú lateral de la izquierda, navega a **Solutions**. (Si ya estás dentro de una solución, dale al botón <img width="20" height="20" alt="image" src="https://github.com/user-attachments/assets/11ef5f3e-8811-4228-9070-1bf69fa6078c" /> para volver atrás.)
 
