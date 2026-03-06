@@ -268,7 +268,11 @@ Copilot es una forma maravillosa de crear tablas y columnas muy rápidamente. Si
    * En **Aggregated Related Entity Field**, selecciona **Session Registration**.
    * Haz clic en el botón **Save your changes button** (Check mark).
 
-53. Haz clic en el botón **Save and close**
+53. Haz clic en el botón **Save and close**.
+
+54. Para terminar, en el panel de **Objects**, selecciona **All**.
+   
+55. Una vez aquí, la barra de comandos, selecciona **Publish all customizations**.
 
 
 ---
