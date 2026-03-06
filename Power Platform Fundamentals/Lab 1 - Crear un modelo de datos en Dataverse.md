@@ -217,3 +217,60 @@ Tu nuevo modelo de datos debería parecerse a la siguiente imagen:
 
 
 ## Ejercicio 3: Editar tablas y columnas manualmente
+Copilot es una forma maravillosa de crear tablas y columnas muy rápidamente. Sin embargo, puede haber ocasiones en las que necesites realizar modificaciones directamente en tablas y columnas. Por ejemplo, en esta tarea vamos a actualizar algunas columnas existentes, así como llevar un registro de cuántos participantes están registrados para una sesión específica.
+
+41. De vuelta en el explorador de la solución, una vez se hayan creado todas las tablas, selecciona la tabla **Event**.
+
+<img width="915" height="455" alt="image" src="https://github.com/user-attachments/assets/66251b1b-75a1-44b2-a10d-8048bf50906a" />
+
+42. En la sección **Schema**, selecciona **Columns**.
+   
+43. Localiza y abre la columna **Event Type**.
+
+44. Baja a la lista de **Choices** . Reemplaza las etiquetas (**Label**) con las siguientes:
+   * Conference
+   * Trade Show
+   * Webinar
+   * Lunch and Learn
+   * Launch
+
+45. Establece la opción por defecto (**Default choice**) en **None**.
+
+<img width="623" height="393" alt="image" src="https://github.com/user-attachments/assets/4cd551b4-ffa9-4b32-aa44-ad9960dcda29" />
+
+46. Selecciona el botón **Save**. _(Si la columna da error al guardar la primera vez, vuelve a intentarlo.)_
+
+47. En el menú de **Objets** a la izquierda, bajo la sección **Tables**, abre la tabla **Event Session**.
+
+<img width="192" height="393" alt="image" src="https://github.com/user-attachments/assets/d421681d-b51a-4096-96d5-09367d021170" />
+
+48. En la sección **Schema**, selecciona **Columns**.
+   
+49. En la barra de comandos, selecciona el botón **New column**.
+
+50. Configura la nueva columna:
+   * **Display name:** `Total Registrations`
+   * **Data type:** Whole Number
+   * **Behavior:** Rollup
+
+51. Selecciona **Save and edit**.
+> [!IMPORTANT]
+> Si tienes los pop-ups bloqueados en tu navegador, necesitas cambiar la configuración y permitirlos para que aparezca la ventana de configuración de la columna consolidada.
+
+52. Configura la columna consolidada para que haga la suma del número total de sesiones de cada evento:
+<img width="791" height="411" alt="image" src="https://github.com/user-attachments/assets/fa0f82df-0d78-4758-b932-c96adc992fc5" />
+
+   * Bajo **Related Entity**, selecciona **Add related entity**.
+   * Elige la tabla **Session Registration**.
+   * Selecciona el botón **Save your changes button** (Check mark)
+   * Bajo **Aggregation**, selecciona **Add aggregation**.
+   * Bajo **Aggregate Function**, elige **Count**.
+   * En **Aggregated Related Entity Field**, selecciona **Session Registration**.
+   * Haz clic en el botón **Save your changes button** (Check mark).
+
+53. Haz clic en el botón **Save and close**
+
+
+---
+## 🎉 **¡Felicidades!** Has creado el modelo de datos que utilizaremos para crear una aplicación de gestión de eventos. 🎉
+
