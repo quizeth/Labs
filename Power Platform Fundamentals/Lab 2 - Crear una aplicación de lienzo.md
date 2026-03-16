@@ -93,7 +93,6 @@ Ahora, vamos a añadir una etiqueta para mostrar la fecha de hoy.
 20. Arrastra la etiqueta a **Event Screen** > **Screen Container 1** > **TableNameContainer1**, <ins>debajo</ins> de la **TableNameLabel**.
 
 21. Configura la etiqueta de texto en el panel de propiedades (panel de la derecha):
-      -
       - **Size and position**
            - **Flexible width**: On
       - **Style and theme**
@@ -109,29 +108,32 @@ Vamos a probar una forma más avanzada de personalizar el control usando Power F
 21. En la barra de fórmulas a la derecha, introduce `TableNameLabel1.Fill`.
 
 > [!NOTE]
-**> ¿Qué significa esto?
-**> Estamos estableciendo que el color de relleno de nuestra etiqueta sea el mismo que el de TableNameLabel1 (el encabezado de la página).
+> **¿Qué significa esto?**
+> 
+> Estamos estableciendo que el color de relleno de nuestra etiqueta sea el mismo que el de TableNameLabel1 (el encabezado de la página).
 
 22. En la cinta superior, selecciona el menú desplegable en la zona superior izquierda y selecciona **Height**.
 
 23. En la barra de fórmulas a la derecha, introduce `TableNameLabel1.Height`.
 
 > [!NOTE]
-**> ¿Qué significa esto?
-**> Estamos estableciendo que la altura de nuestra etiqueta sea el mismo que el de TableNameLabel1 (el encabezado de la página).
+> **¿Qué significa esto?**
+> 
+> Estamos estableciendo que la altura de nuestra etiqueta sea el mismo que el de TableNameLabel1 (el encabezado de la página).
 
 24. En la cinta superior, selecciona el menú desplegable en la zona superior izquierda y selecciona **Text**.
 
 25. En la barra de fórmulas a la derecha, introduce `Text(Today(), "dddd, mmmm d, yyyy")`.
 
 > [!NOTE]
-**> ¿Qué significa esto?
-**> Estamos estableciendo que el texto de nuestra etiqueta sea la fecha de hoy en formato _día de la semana, mes, número de día, año_.
+> **¿Qué significa esto?**
+> 
+> Estamos estableciendo que el texto de nuestra etiqueta sea la fecha de hoy en formato _día de la semana, mes, número de día, año_.
 
 26. Guarda la aplicación.
 
 ### Tarea 2.3 - Crear una nueva pantalla
-27  . En el panel de la izquierda, navega a la sección **Data** (tercer botón.)
+27. En el panel de la izquierda, navega a la sección **Data** (tercer botón.)
 
 28. En el panel de la izquierda, selecciona **+ Add Data** para añadir más tablas a nuestra app.
 
@@ -164,7 +166,8 @@ Vamos a probar una forma más avanzada de personalizar el control usando Power F
    )`
 
 > [!NOTE]
->** ¿Qué significa esto?**
+> **¿Qué significa esto?**
+> 
 > La propiedad _Items_ de una galería establece qué datos vemos en ella.
 > La expresión filtra la tabla **Contacts**: coge el texto de la barra de búsqueda **TextSearchBox1** y muestra las coincidencias con el **Full Name**.
 > Así, podemos buscar en la galería usando la barra de búsqueda.
