@@ -4,9 +4,14 @@
 > Para hacer este laboratorio, es necesario haber completado el [Lab 0 - Configuración del entorno del laboratorio](https://github.com/quizeth/Labs/blob/main/Power%20Platform%20Fundamentals/Lab%200%20-%20Configuración%20del%20entorno.md?plain=1), INCLUYENDO la tarea **Tarea 2.3 - Importar una solución**.
 
 ## Escenario
-En este ejercicio, crearás una aplicación de lienzo para que los empleados ver los eventos y contactos de MS Learn.
+En este ejercicio, crearás una aplicación de lienzo para que los empleados puedan administrar los eventos y contactos de MS Learn.
 
 Seguirás el siguiente plan para diseñar la aplicación de lienzo:
+   - Crearás una aplicación de lienzo a partir de datos en la tabla Events.
+   - Configurarás la visualización de eventos en la pantalla de navegación.
+   - Realizarás cambios básicos en la aplicación.
+   - Añadirás datos de la tabla Contacts a la aplicación.
+   - Probarás la funcionalidad de la aplicación.
 
 
 ## Ejercicio 1: Crear una aplicación de lienzo
