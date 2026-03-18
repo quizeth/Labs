@@ -6,6 +6,9 @@
 ## Escenario
 Ahti's es el equipo de mantenimiento de una empresa. Su equipo tiene una solución para poder almacenar y administrar las solicitudes de mantenimiento que reciben. Sin embargo, algunas de estas peticiones tienen un coste elevado y requieren un proceso de aprobación para determinar si son apropiadas o no. Ahti's quiere reducir el trabajo repetitivo que involucran estas aprobaciones y automatizar el proceso, pero también necesita que la decisión final de aprobar o no una solicitud quede en manos de la persona responsable.
 
+En este ejercicio crearás un flujo de nube para automatizar un proceso de aprobación. Configurarás un flujo desencadenado por eventos (automatizado) usando distintas acciones y controles para reducir la carga de trabajo de este equipo de mantenimiento.
+
+
 ## Ejercicio 1: Crea un flujo de aprobación en Power Automate
 
 ### Tarea 1.1 - Crea un flujo automatizado
