@@ -11,7 +11,7 @@ Contoso Consulting es una organización de servicios profesionales especializada
 
 Contoso desea utilizar Power Platform para crear una solución de gestión de eventos que les permita administrar los diferentes eventos que organizan durante el año.
 
-En este ejercicio crearás un entorno y una solución que se utilizará para la Administración del Ciclo de Vida de las Aplicaciones (ALM) y para agrupar todas las aplicaciones, sitios y flujos que se creen, de modo que puedan administrarse y transportarse fácilmente.
+En este ejercicio crearás un entorno e importarás una solución que incluya todos los datos y aplicaciones necesarios para hacer nuestros flujos y agentes.
 
 ## Ejercicio 1: Acceso a Microsoft Power Platform
 En este ejercicio, vas a verificar tu acceso a Power Apps.
@@ -58,52 +58,41 @@ En este ejercicio, vas a crear un entorno y una solución para el proyecto de Co
 
 Cuando actualices la página, tu entorno de práctica debería aparecer en la lista de entornos. Es posible que el aprovisionamiento del entorno tarde unos minutos.
 
-### Tarea 2.2 - Crear una solución
-6. Navega a `https://make.powerapps.com`.
-   
-7. En la cinta superior, asegúrate de que estás trabajando en tu nuevo entorno. Si no es el caso, haz clic en el nombre para abrir la lista de entornos disponibles y seleccioan el tuyo.
-<img width="300" height="326" alt="image" src="https://github.com/user-attachments/assets/7c6063b5-69f7-4072-96e4-f1a8f372a430" />
 
-8. En el menú lateral de la izquierda, navega a **Solutions**.
-   
-9. En la barra de comandos, selecciona **+ New Solution**.
-   
-10. Configura la nueva solución con estas propiedades:
-   * **Display Name:** Event Management
-   * **Name:** EventManagement
-   * **Publisher**: EventMSLearn
-   * **Version**: _Usa el valor por defecto_
-   * **Set as your preferred solution:** Marcado
-  > [!WARNING]
-  > Este publisher todavía no existe, así que primero tenemos que crearlo.
-  > 
-  > Bajo el menú desplegable, selecciona **+ New Publisher**. Configura el nuevo editor (publisher) con estas propiedades:
-  > 
-  > * **Display name:** EventMSLearn
-  > 
-  > * **Name:** EventMSLearn
-  > 
-  > * **Prefix:** mslearn
-  > 
-  > * **Choice value prefix:** _Usa el valor por defecto_
-
-11. Selecciona **Create** para crear la solución.
-
-
-### Tarea 2.3 - Importar una solución (OPCIONAL)
-Si **NO** vas a completar el Lab 1 antes de continuar con el resto de ejercicios, necesitas importar una solución con el modelo de datos que utilizaremos para crear aplicaciones y flujos automatizados.
+### Tarea 2.2 - Importar una solución
 
 > [!IMPORTANT]
-> Las tablas **no** incluyen datos de ejemplo, ya que estos no se almacenan en la solución.
+> Las tablas que importes están vacías y **no** incluyen datos de ejemplo, ya que estos no se almacenan en la solución.
 
-12. Dentro de este repositorio, ve a la carpeta **Files** y descarga el archivo zip **Event Management 1.0.0.0**.
+6. Dentro de este repositorio, ve a la carpeta **Files** y descarga el archivo zip **Event Management 1.0.0.3**.
     
-14. Si es necesario, en el menú lateral de la izquierda, navega a **Solutions**. (Si ya estás dentro de una solución, dale al botón <img width="20" height="20" alt="image" src="https://github.com/user-attachments/assets/11ef5f3e-8811-4228-9070-1bf69fa6078c" /> para volver atrás.)
+7. En el menú lateral de la izquierda, navega a **Solutions**. 
 
-15. En la barra de comandos, selecciona **Import solution**.
+8. En la barra de comandos, selecciona **Import solution**.
 
-16. Haz clic **Browse** y selecciona el archivo zip de la solución **Event Management 1.0.0.0**.
+9. Haz clic **Browse** y selecciona el archivo zip de la solución **Event Management 1.0.0.3**.
 
-17. Select **Next**.
+10. Selecciona **Next**.
 
-18. Select **Import** and wait for the solution to import.
+11. Selecciona **Import** y espera a que la solución se importe. Esto puede tardar unos minutos.
+
+
+### Tarea 2.3 - Explora la solución
+
+<img width="568" height="53" alt="image" src="https://github.com/user-attachments/assets/079f2d0c-0ccd-48ad-819b-08d949262faa" />
+
+12. Una vez la solución se haya importado correctamente, en esta misma pestaña **Solutions**, haz clic en el nombre de la solución **Event Management** para abrirla.
+    
+<img width="851" height="326" alt="image" src="https://github.com/user-attachments/assets/a27f264e-713e-4888-8ff0-962e5c899d61" />
+
+13. En la cinta superior, selecciona **Publish all customizations** y espera a que se complete la publicación.
+    
+14. Explora los componentes de esta solución como desees para familiarizarte con ellos:
+    - Seis tablas **Account**, **Contact**, **Equipment**, **Event**, **Event Session** y **Session Registration**.
+    - Una aplicación de Power Apps llamada **Contoso Event Management**. (Puedes ejecutarla seleccionándola y haciendo clic en <img width="8" height="12" alt="image" src="https://github.com/user-attachments/assets/0509b7ed-3778-4100-9f06-5c16e44b7323" />
+**Play**).
+
+<img width="573" height="326" alt="image" src="https://github.com/user-attachments/assets/a292b2c9-aae1-4163-9c1a-b0e8b1bf4e92" />
+
+      
+   El resto de elementos no listados nos son relevantes para los laboratorios.
