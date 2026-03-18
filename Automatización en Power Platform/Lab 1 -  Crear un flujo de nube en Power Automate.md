@@ -4,6 +4,7 @@
 > Para hacer este laboratorio, es necesario haber completado el [Lab 0 - Configuración del entorno del laboratorio](https://github.com/quizeth/Labs/blob/main/Automatización%20en%20Power%20Platform/Lab%200%20-%20Configuración%20del%20entorno.md).
 
 ## Escenario
+Ahti's es el equipo de mantenimiento de una empresa. Su equipo tiene una solución para poder almacenar y administrar las solicitudes de mantenimiento que reciben. Sin embargo, algunas de estas peticiones tienen un coste elevado y requieren un proceso de aprobación para determinar si son apropiadas o no. Ahti's quiere reducir el trabajo repetitivo que involucran estas aprobaciones y automatizar el proceso, pero también necesita que la decisión final de aprobar o no una solicitud quede en manos de la persona responsable.
 
 ## Ejercicio 1: Crea un flujo de aprobación en Power Automate
 
