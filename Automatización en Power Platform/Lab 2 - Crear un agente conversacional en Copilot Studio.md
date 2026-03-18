@@ -1,4 +1,4 @@
-# Laboratorio 1 - Crear un agente conversacional en Copilot Studio
+# Laboratorio 2 - Crear un agente conversacional en Copilot Studio
 
 > [!IMPORTANT]
 > Para hacer este laboratorio, es necesario haber completado el [Lab 0 - Configuración del entorno del laboratorio](https://github.com/quizeth/Labs/blob/main/Automatización%20en%20Power%20Platform/Lab%200%20-%20Configuración%20del%20entorno.md).
