@@ -57,13 +57,13 @@ Cuando actualices la página, tu entorno de práctica debería aparecer en la li
 
 ### Tarea 3.1 - Importar la solución Maintenance Management
 
-9. Dentro de este repositorio, ve a la carpeta **Files** y descarga el archivo zip **Maintenance Management 1.0.0.1**.
+9. Dentro de este repositorio, ve a la carpeta **Files** y descarga el archivo zip **AhtisJanitors_1_0_0_1.zip**.
     
 10. Vuelve a Power Automate. En el menú lateral de la izquierda, navega a **Solutions**. 
 
 11. En la barra de comandos, selecciona **Import solution**.
 
-12. Haz clic **Browse** y selecciona el archivo zip de la solución **Maintenance Management 1.0.0.1**.
+12. Haz clic **Browse** y selecciona el archivo zip de la solución **AhtisJanitors_1_0_0_1.zip**.
 
 13. Selecciona **Next**.
 
