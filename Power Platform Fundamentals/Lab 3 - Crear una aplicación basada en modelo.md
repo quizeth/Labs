@@ -22,7 +22,7 @@ En este ejercicio, vas a crear una aplicación basada en modelo en nuestra soluc
 
 1. Navega a https://make.powerapps.com.
 
-2. Asegúrate de que estás en tu entorno de prácticas (Dev One <NombreDeAlumno>).
+2. Asegúrate de que estás en tu entorno de prácticas (`Dev One <NombreDeAlumno>`).
 
 3. En el menú lateral de la izquierda, navega a **Solutions**.
   
