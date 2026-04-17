@@ -111,7 +111,7 @@ Una vez aquí, selecciona el formulario de tipo **Main**.
 
 32. Con la subgrid seleccionada, en el panel de propiedades la derecha, cambia la **Label** a `Event Sessions` y el **Name** a `SessionsSG`.
 
-33. En la esquina superior derecha, haz clic en el botón de  **Guardar y Publicar** (segundo desde la derecha).
+33. En la esquina superior derecha, haz clic en el botón de  **Guardar y Publicar**.
 
 <img width="1269" height="622" alt="image" src="https://github.com/user-attachments/assets/d763243e-5dba-4402-b35a-5c96fd299c25" />
 
@@ -142,7 +142,7 @@ Una vez aquí, selecciona la vista **Active Events** de tipo **Public View (defa
 
 <img width="561" height="204" alt="image" src="https://github.com/user-attachments/assets/dc5f1b35-31cd-43a7-9d0f-a38efb4ef29f" />
 
-42. En la esquina superior derecha, haz clic en el botón de  **Guardar y Publicar** (segundo desde la derecha).
+42. En la esquina superior derecha, haz clic en el botón de  **Guardar y Publicar**.
 
 <img width="1574" height="605" alt="image" src="https://github.com/user-attachments/assets/139aaf6a-ddc6-4dff-b0f2-afc2aa049d0d" />
 
