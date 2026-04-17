@@ -24,7 +24,7 @@ En este ejercicio, vas a crear una aplicación de lienzo a partir de tu tabla de
 
 1. Navega a https://make.powerapps.com.
 
-2. Asegúrate de que estás en tu entorno de prácticas (Dev One <NombreDeAlumno>).
+2. Asegúrate de que estás en tu entorno de prácticas (`Dev One <NombreDeAlumno>`).
 
 3. En el menú lateral, ve a la sección **Create**.
 
