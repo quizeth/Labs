@@ -7,7 +7,10 @@
 En este ejercicio, crearás una aplicación basada en modelo para que los usuarios puedan ver y administrar los datos sobre eventos, sesiones y ponentes.
 
 Seguirás el siguiente plan para diseñar la aplicación basada en modelo:
-
+- Crearás una aplicación basada en modelo a partir de tu modelo de datos.
+- Configurarás un formulario de la tabla Events.
+- Configurarás uan vista de la tabla Events.
+- Probarás la funcionalidad de la aplicación.
 
 ## Ejercicio 1: Crear una aplicación basada en modelo
 
