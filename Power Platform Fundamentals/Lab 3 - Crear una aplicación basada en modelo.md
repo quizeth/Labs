@@ -46,26 +46,26 @@ Ahora que hemos creado la aplicación, vamos a hacer algunos cambios a la manera
 
 12. En el panel de la izquierda, bajo la sección **Navigation**, haz clic en la sección **New Group**.
 
-13. A la derecha de la aplicación, haz clic en el icono <img width="15" height="15" alt="image" src="https://github.com/user-attachments/assets/82e226a6-517f-4dd6-8a18-5c35cafe3440" />
-para ampliar el panel de **Propiedades** (en este momento, muestra las propiedades de **New Group**).
+13. A la derecha de la aplicación, haz clic en el icono <img width="15" height="15" alt="image" src="https://github.com/user-attachments/assets/82e226a6-517f-4dd6-8a18-5c35cafe3440" /> para ampliar el panel de **Propiedades** (en este momento, muestra las propiedades de **New Group**).
 
-14. En este panel, cambia el **Title** a `People`.
+16. En este panel, cambia el **Title** a `People`.
 
-15. En el panel **Pages** de la izquierda, haz clic en los **tres puntos** <img width="40" height="15" alt="image" src="https://github.com/user-attachments/assets/c60a1470-91fa-42f5-be1e-e2fbdda69989" /> del grupo **People**.
+17. En el panel **Pages** de la izquierda, haz clic en los **tres puntos** <img width="40" height="15" alt="image" src="https://github.com/user-attachments/assets/c60a1470-91fa-42f5-be1e-e2fbdda69989" /> del grupo **People**.
 
-16. Selecciona **New Group**.
+18. Selecciona **New Group**.
 
-17. En el panel de **Propiedades** (a la derecha), cambia el **Title** a `Events`.
+19. En el panel de **Propiedades** (a la derecha), cambia el **Title** a `Events`.
 
-18. En el panel **Pages** de la izquierda, pasa el cursor por encima de **Events view**, selecciona los **tres puntos** <img width="40" height="15" alt="image" src="https://github.com/user-attachments/assets/c60a1470-91fa-42f5-be1e-e2fbdda69989" />, y haz clic en **Move down** para mover la tabla **Events** al grupo **Events**.
+20. En el panel **Pages** de la izquierda, pasa el cursor por encima de **Events view**, selecciona los **tres puntos** <img width="40" height="15" alt="image" src="https://github.com/user-attachments/assets/c60a1470-91fa-42f5-be1e-e2fbdda69989" /> y haz clic en **Move down** para mover la tabla **Events** al grupo **Events**.
 
-19. Repite este paso con las tablas **Session Registrations** y **Event Sessions**.
+21. Repite este paso con las tablas **Session Registrations** y **Event Sessions**.
 
 Al terminar, tu aplicación se debería ver de forma similar a esto:
 
 <img width="658" height="326" alt="image" src="https://github.com/user-attachments/assets/c97cdad3-40e2-487b-ad85-c8f98410df9b" />
 
 
+22. En la esquina superior derecha, haz clic en el botón de  **Guardar y Publicar** (segundo desde la derecha).
 
 ## Ejercicio 2: Editar los formularios y vistas de una aplicación basada en modelo
 La aplicación basada en modelo utiliza formularios y vistas para presentar datos a los usuarios en la UI (interfaz de usuario). Vamos a hacer algunos cambios a estos elementos.
