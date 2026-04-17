@@ -201,6 +201,20 @@ Una vez completada la app, vamos a añadirla al paquete de nuestra solución.
 
 46. Una vez aquí, la barra de comandos, selecciona **Publish all customizations**.
 
+---
+## Reto: Ver detalles de contacto (Opcional)
+
+Configura tu app para poder ver los detalles de un contacto al seleccionarlo en la galería de la pantalla **Contacts screen**.
+
+<details>
+<summary>¿Atascado? Aquí tienes algunas pistas:</summary>
+   
+   - Crea una nueva pantalla dedicada a ver los detalles de contacto.
+   
+   - Añade un formulario de presentación a esta pantalla.
+   
+   - Configura la propiedad `On Select` de los elementos de la galería para que redirijan a la pantalla de detalles con la selección correcta.
+</details>
 
 ---
 ## 🎉 **¡Felicidades!** Has creado tu primera aplicación de lienzo. 🎉
