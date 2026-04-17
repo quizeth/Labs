@@ -3,6 +3,9 @@
 > [!IMPORTANT]
 > Para hacer este laboratorio, es necesario haber completado el [Lab 0 - Configuración del entorno del laboratorio](https://github.com/quizeth/Labs/blob/main/Power%20Platform%20Fundamentals/Lab%200%20-%20Configuración%20del%20entorno.md?plain=1), INCLUYENDO la tarea **Tarea 2.3 - Importar una solución**.
 
+> [!NOTE]
+> Puedes descargar la solución de este ejercicio (sin datos) en la carpeta de Files: [EventManagement_1_0_0_2.zip](https://github.com/quizeth/Labs/blob/4607d0059627f14e1e45c5ddd92105701c50e2ea/Power%20Platform%20Fundamentals/Files/EventManagement_1_0_0_2.zip)
+> 
 ## Escenario
 En este ejercicio, crearás una aplicación basada en modelo para que los usuarios puedan ver y administrar los datos sobre eventos, sesiones y ponentes.
 
