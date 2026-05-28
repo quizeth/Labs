@@ -1,4 +1,4 @@
-# Laboratorio: Crear un recurso formativo multimodal con Microsoft 365 Copilot
+# Laboratorio: Crea un recurso formativo multimodal con Microsoft 365 Copilot
 
 ## Resumen
 
