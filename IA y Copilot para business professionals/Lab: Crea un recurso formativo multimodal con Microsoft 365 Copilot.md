@@ -1,6 +1,6 @@
-# Laboratorio: Crea un recurso formativo multimodal con Microsoft 365 Copilot
+# Lab: Crea un recurso formativo multimodal con Microsoft 365 Copilot
 
-## Resumen
+## Introducción
 
 En este laboratorio crearás un pequeño recurso formativo multimodal sobre un tema profesional usando **Microsoft 365 Copilot**. El flujo incluye **generación de imagen**, **edición de imagen**, **creación de vídeo**, **generación de audio a partir de un archivo** y **exploración de otros formatos visuales** disponibles en **Create** y **Copilot Library**, como **infografías**, **stories**, **posters** y **banners**. 
 
@@ -211,7 +211,22 @@ Un recurso visual adicional y una visión más amplia de los formatos no textual
 
 ---
 
-# Resumen
+# Extensión opcional
+
+Si trabajas con más tiempo, puedes:
+
+- combinar todos los materiales creados en una mini presentación de PowerPoint,
+- montar una página de curso con los recursos producidos,
+- comparar qué formato resulta más útil según el objetivo:
+  - informar,
+  - resumir,
+  - captar atención,
+  - o facilitar comprensión.
+ 
+---
+
+
+## Resumen
 
 En este laboratorio has usado **Microsoft 365 Copilot** para crear un recurso formativo multimodal:
 
@@ -225,14 +240,13 @@ También has explorado cómo Copilot puede ayudarte a producir y reutilizar cont
 
 ---
 
-# Extensión opcional
+## Recursos adicionales
+- **Build the Vision (Microsoft Learn)** — Modulo oficial de formacion (1 h 22 min, 9 unidades) sobre creacion visual con Copilot, Designer y Clipchamp: generacion de imagenes, edicion de video y refinamiento creativo. Ideal como referencia de estructura de lab.  
+  https://learn.microsoft.com/en-us/training/modules/build-the-vision/
 
-Si trabajas con más tiempo, puedes:
+- **Get started with Create in the Microsoft 365 Copilot app (Microsoft Support)** — Guia oficial paso a paso para crear imagenes, banners, videos y formularios desde el hub "Create" de Copilot. Incluye prompts de ejemplo listos para copiar y pegar.  
+  https://support.microsoft.com/en-us/topic/get-started-with-microsoft-365-copilot-create-4ab3ea4d-1a0f-4a8e-8593-29c498a8edfe
 
-- combinar todos los materiales creados en una mini presentación de PowerPoint,
-- montar una página de curso con los recursos producidos,
-- comparar qué formato resulta más útil según el objetivo:
-  - informar,
-  - resumir,
-  - captar atención,
-  - o facilitar comprensión.
+- **Microsoft Copilot: using images, audio, and video for smarter workflows (DataStudios)** — Guia completa de todas las capacidades multimodales actuales de Copilot: Vision, carga de imagenes, busqueda semantica, chat por voz, resumen de video y generacion de audio.  
+  https://www.yourdatastudios.com/blog/microsoft-copilot-using-images-audio-and-video-for-smarter-workflows
+
