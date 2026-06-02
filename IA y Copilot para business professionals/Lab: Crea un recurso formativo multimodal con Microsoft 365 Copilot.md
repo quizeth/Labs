@@ -135,6 +135,9 @@ Un vídeo breve que sirva como introducción o resumen audiovisual de la microle
 
 Crear un recurso de audio resumido a partir de un archivo compatible.
 
+> [!IMPORTANT]
+> Si la función de audio no aparece o no funciona con tu archivo, documenta la limitación y continúa con la siguiente tarea.
+
 ## Pasos
 
 1. Abre **OneDrive** en la web e inicia sesión con tu cuenta de trabajo o escuela.
@@ -152,8 +155,6 @@ Crear un recurso de audio resumido a partir de un archivo compatible.
    - revisar la transcripción,
    - guardar el audio.
 
-> [!IMPORTANT]
-> Si la función de audio no aparece o no funciona con tu archivo, documenta la limitación y continúa con la siguiente tarea.
 
 ## Resultado esperado
 
