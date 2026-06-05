@@ -114,7 +114,7 @@ Create puede ayudarte a idear contenido audiovisual.
 Crea un guion corto para un video promocional del servicio.
 
 - Prompt avanzado:
-Genera un guion de video de 60 segundos con estructura: apertura impactante, problema, solución, beneficios y cierre con llamada a la acción. Incluye सुझाव visuales por escena.
+Genera un guion de video de 60 segundos con estructura: apertura impactante, problema, solución, beneficios y cierre con llamada a la acción. Incluye 2-3 visuales por escena.
 
 ---
 
