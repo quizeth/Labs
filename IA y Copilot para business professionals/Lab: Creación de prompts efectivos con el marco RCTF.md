@@ -1,4 +1,4 @@
-# Lab: Creación de prompts efectivos con el marco RCTF
+## Lab: Creación de prompts efectivos con el marco RCTF
 
 ## Introducción
 
