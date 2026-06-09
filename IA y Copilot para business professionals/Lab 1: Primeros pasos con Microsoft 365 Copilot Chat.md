@@ -121,7 +121,7 @@ En esta tarea, subirás el resumen de planificación de la Tarea 4 y harás que 
 Resume los puntos clave de este resumen de planificación en solo 5 viñetas condensadas:
 ```
 
-- Selecciona **Agregar un archivo (icono de clip)** en la esquina inferior derecha del cuadro de texto para abrir el Explorador de archivos.
+- Selecciona el **icono de +** > **Cargar** > **Cargar imágenes y archivos** en la esquina inferior derecha del cuadro de texto para abrir el Explorador de archivos.
   
 - Selecciona **Documentos** a la derecha del Explorador de archivos para localizar tu documento guardado en la **Tarea 4**.
   
