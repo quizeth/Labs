@@ -30,12 +30,15 @@ Al finalizar este laboratorio serás capaz de:
 
 ## Tarea 1. Verificar ausencia de relaciones automáticas
 
-- Abre tu archivo de Power BI del laboratorio anterior.
-- Ve a la **vista de modelo**.
-- Observa que todas las tablas aparecen **sin relaciones**.
+1. Abre tu archivo de Power BI del laboratorio anterior.
+2. Ve a la **vista de modelo**.
+3. Observa que todas las tablas aparecen **sin relaciones**.
 
-Este es el comportamiento esperado, ya que la detección automática está deshabilitada.
+Este es el comportamiento esperado, ya que la detección automática está deshabilitada. Para examinar el impacto de esta falta de relaciones, vamos a crear un objeto visual de tabla.
 
+4. En la vista de informe, crea un objeto visual de Tabla con las columnas **Oficina[Oficina]** y **Envíos[Precio total]**.
+
+Como ves, la tabla lista seis oficinas, pero el valor del precio total es el mismo para todas así como para el total.
 
 ## Tarea 2. Crear y modificar relaciones
 
@@ -53,16 +56,13 @@ Este es el comportamiento esperado, ya que la detección automática está desha
   - Columna destino: [ClienteID]
 6. Guarda la configuración.
 7. Desde el panel de **Administrar relaciones**, selecciona **Detección automática**.
-8. Elimina la relación Destino[Ciudad (Destino)] → Oficina[Ciudad].
-9. Selecciona la relación. Destino[Ciudad (Destino)] → Envíos[(Código Postal (Destino))] y haz clic en **Editar**.
-10. Cambia la cardinalidad a **Uno a varios(1:*)** y la dirección del filtro **único**.
 
 ## Tarea 3. Diseñar el modelo (layout)
 
 - Vuelve a la vista de modelo.
 - Organiza las tablas manualmente en forma de **modelo en estrella**:
   - Envíos en el centro
-  - Dimensiones alrededor (Oficina, Cliente, Servicio, Destino)
+  - Dimensiones alrededor (Oficina, Cliente, Servicio)
 
 - Ajusta el tamaño de las tablas para mejorar la legibilidad.
 - Alinea las tablas visualmente.
@@ -70,71 +70,25 @@ Este es el comportamiento esperado, ya que la detección automática está desha
 
 El objetivo es que el modelo sea claro y comprensible para cualquier usuario.
 
-<img width="991" height="725" alt="image" src="https://github.com/user-attachments/assets/c4cab811-3b54-417e-a181-a3ed4e03be3a" />
+<img width="1119" height="768" alt="image" src="https://github.com/user-attachments/assets/08be986d-56d4-48e0-bdbe-8042cdeea24c" />
 
-### Tarea 6. Comprobar el impacto de una relación en un visual
+Ahora, vuelve a la vista de informe. El objeto visual de tabla ahora muestra los valores correctos para cada oficina.
 
-- Ve a la **vista de informe**.
-- Crea una tabla visual.
-- Añade:
-  - Oficina[Oficina]
-  - Envíos[Precio total]
 
-Observa que los datos se agregan correctamente.
+## Tarea 4. Crear y usar jerarquías
 
-Ahora:
-- Vuelve a la vista de modelo.
-- Elimina la relación entre Envíos y Oficina.
-
-Regresa al informe.
-
-Observa:
-- Los datos dejan de comportarse correctamente (repeticiones o agregaciones incorrectas).
-
-Esto demuestra la importancia de las relaciones.
+1. Ve a la vista de modelo.
+2. En la tabla **Oficina**, haz clic derecho sobre el campo **Oficina (Región)**.
+3. Selecciona **Crear jerarquía**.
+4. En el panel **Propiedades** (a la izquierda del de **Datos**; puede estar colapsado), renombra la jerarquía como `Geografía`.
+5. En este mismo panel, agrega y ordena las columnas de la jerarquía:
+  - Región 
+  - Ciudad
+6. Vuelve a la vista de informe.
+7. Inserta un **gráfico de columnas**.
+8. Añade la jerarquía `Geografía` al eje X.
+9. Añade **Precio total** al eje Y.
+10. En el gráfico, activa el **modo detallado** (flecha hacia abajo) y navega entre niveles de la jerarquía. Observa cómo puedes analizar los datos de forma progresiva.
 
 ---
-
-### Tarea 7. Crear jerarquías
-
-- Ve a la vista de modelo.
-- En la tabla **Destino**, haz clic derecho sobre el campo **Región (Destino)**.
-- Selecciona **Crear jerarquía**.
-
-- Añade los siguientes campos a la jerarquía:
-  - Región (Destino)
-  - Ciudad (Destino)
-  - Código Postal (Destino)
-
-Renombra la jerarquía como:
-
-**Jerarquía Geográfica Destino**
-
----
-
-### Tarea 8. Usar jerarquías en un visual
-
-- Ve a la vista de informe.
-- Inserta un **gráfico de columnas**.
-- Añade la jerarquía creada al eje.
-- Añade **Precio total** como valor.
-
-- Activa la opción de **drill down**.
-- Navega entre niveles de la jerarquía.
-
-Observa cómo puedes analizar los datos de forma progresiva.
-
----
-
-### Tarea 9. Validación final del modelo
-
-Comprueba que:
-
-- Todas las tablas están relacionadas correctamente.
-- El modelo sigue un diseño en estrella.
-- No existen relaciones redundantes.
-- Los objetos visuales responden correctamente a los filtros.
-
----
-
-Este laboratorio refuerza la importancia del modelado en Power BI. Un modelo bien diseñado es clave para obtener análisis correctos, eficientes y mantenibles.
+# Resumen
