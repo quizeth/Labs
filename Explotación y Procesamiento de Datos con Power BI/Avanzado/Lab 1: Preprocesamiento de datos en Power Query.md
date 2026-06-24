@@ -45,10 +45,11 @@ Al finalizar este laboratorio serás capaz de:
 4. En la **Ruta de acceso al archivo**, examina y selecciona el archivo `ParcelCraft_Flat_v1`.
 5. Haz clic en **Siguiente**.
 6. Selecciona la flecha para desplegar el menú en la esquina inferior derecha y selecciona **Transform**.
+7. Renombra la consulta a `ParcelCraft_Flat`.
 
 ## Tarea 2. Crear parámetro de ruta al archivo
 
-1. Desde Power Query, en el panel de **Pasos Aplicados**, selecciona el paso **Origen** de tu consulta `ParcelCraft_Flat_v1`.
+1. Desde Power Query, en el panel de **Pasos Aplicados**, selecciona el paso **Origen** de tu consulta `ParcelCraft_Flat`.
 2. Desde la barra de fórmulas de M, copia la ruta de acceso del archivo.
 
 <img width="1615" height="238" alt="image" src="https://github.com/user-attachments/assets/a51878f9-3abd-4357-910e-f8758915af41" />
@@ -60,7 +61,7 @@ Al finalizar este laboratorio serás capaz de:
 
 <img width="609" height="662" alt="image" src="https://github.com/user-attachments/assets/70c093c2-1c51-4480-b7ef-236e646b7d94" />
 
-6. Vuelve al paso **Origen** de tu consulta `ParcelCraft_Flat_v1`.
+6. Vuelve al paso **Origen** de tu consulta `ParcelCraft_Flat`.
 7. Sustituye la ruta de acceso del archivo por `pFilePath`.
 
 <img width="705" height="38" alt="image" src="https://github.com/user-attachments/assets/0ad173dd-8b9e-4ee9-a6a8-46f17e028018" />
@@ -69,7 +70,7 @@ Al finalizar este laboratorio serás capaz de:
 
 ## Tarea 3. Perfilado inicial
 
-Explora la consulta `ParcelCraft_Flat_v1` usando las opciones de vista previa de datos y tu familiaridad con los datos:
+Explora la consulta `ParcelCraft_Flat` usando las opciones de vista previa de datos y tu familiaridad con los datos:
 
 <img width="344" height="117" alt="image" src="https://github.com/user-attachments/assets/0bd4b6fe-9cf1-467e-9823-74de9168ef63" />
 
@@ -78,7 +79,7 @@ Explora la consulta `ParcelCraft_Flat_v1` usando las opciones de vista previa de
 - Hay varios duplicados, un `ATTEMPT_COUNT` vacío y un `WEIGHT_BAND_RAW` vacío.
 
 ## Tarea 4. Crear la consulta limpia de negocio
-1. Haz una **referencia** sobre `ParcelCraft_Flat_v1`.
+1. Haz una **referencia** sobre `ParcelCraft_Flat`.
 2. Renómbrala como `ParcelCraft_Flat_CLEAN`.
 3. Selecciona **Elegir columnas**.
 4. Desmarca las siguientes columnas, ya que no aportan valor analítico en este escenario.
@@ -97,7 +98,7 @@ Ahora, aplica las siguientes transformaciones usando la interfaz:
 > ℹ️ Recuerda que puedes navegar la tabla fácilmente mediante la opción **Ir a columna** de la pestaña **Vista**.
 
 
-### Tarea 6. Agregar columnas personalizadas
+## Tarea 6. Agregar columnas personalizadas
 
 1. **Agrega columna personalizada** para recalcular `WeightBand` si `WEIGHT_BAND_RAW` está vacío.
   - Ve a **Agregar columna > Columna personalizada**.
@@ -122,24 +123,26 @@ Ahora, aplica las siguientes transformaciones usando la interfaz:
 
 2. **Agregar columna condicional** para marcar qué envíos han tenido una incidencia:
    - Ve a **Agregar columna > Columna condicional**.
+   - Nombra a la columna `Has Incidence`.
    - Configura las condiciones:
      - Si `DELIVERY_STATUS` es `Exception` → `true`
      - Si `DELIVERY_STATUS` es `Returned` → `true`
      - De lo contrario → `false`
        
-<img width="931" height="449" alt="image" src="https://github.com/user-attachments/assets/3767b88a-48b6-474c-b173-814b869632cc" />
+<img width="930" height="448" alt="image" src="https://github.com/user-attachments/assets/98f64d63-8750-46fd-aa79-ecb45fbb86c9" />
 
-### Tarea 5. Mejorar la legibilidad del modelo
+## Tarea 7. Mejorar la legibilidad del modelo
 
 Revisa todos los campos de la consulta y ajústalos para mejorar la claridad y consistencia del modelo:
   - Renombra las columnas.
   - Verifica que cada columna tenga el **tipo de dato correcto**:
-    - Fechas → `datetime` (`*_TS_UTC`, `*_DATE`)
-    - Numéricos decimales → `decimal number` (`WEIGHT_KG`, precios)
-    - Enteros → `whole number` (`ATTEMPT_COUNT`)
-    - Booleanos → `true/false` (`HasIncident`)
-    - Texto → columnas descriptivas
+    - Fechas (`*_TS_UTC`, `*_DATE`)
+    - Enteros (`ATTEMPT_COUNT`)
+    - Decimales fijos (divisas) (`BASE_PRICE_EUR`)
+    - Booleanos (true/false) (`HasIncident`)
+    - Texto
   - **Presta especial atención a columnas creadas en pasos anteriores:**
+  - Renombra los pasos de la consulta.
 
 Utiliza las siguientes convenciones:
 
@@ -159,3 +162,115 @@ Utiliza las siguientes convenciones:
   - `WeightBand` → texto
   - `HasIncident` → booleano
   - `DeliverySpeedCategory` → texto categórico
+
+## Tarea 8. Cambiar la fuente de datos de una consulta ya cargada y transformada
+1. Abre el parámetro `pFilePath`.
+2. Cambia el valor de `pFilePath` a la ruta de `ParcelCraft_Flat_v2.csv`.
+
+> ℹ️ Si has guardado ambos archivos en la misma carpeta, solo tienes que cambiar el nombre.
+
+4. Actualiza la vista previa.
+5. Verifica que toda la transformación se mantiene.
+6. Comprueba que el número de filas pasa de **40** a **46**.
+
+## Tarea 9. Separar la tabla plana en hechos y dimensiones
+
+### 1. Organizar las consultas
+1. En el panel de consultas, haz clic derecho y crea los grupos:
+  - `Fact`
+  - `Dim`
+  - `Staging`
+2. Mueve las consultas existentes (`ParcelCraft_Flat` y `pFilePath`) a `Staging`.
+
+### 2. Crear la tabla de hechos fct_shipments
+1. Haz una referencia sobre `ParcelCraft_Flat`.
+2. Renombra la consulta a `Envíos`.
+## Tarea 9. Separar la tabla plana en hechos y dimensiones
+
+### 1 Organizar las consultas
+En el panel de consultas:
+
+- Crea los grupos:
+  - Fact
+  - Dim
+  - Staging
+- Mueve la consulta base `ParcelCraft_Flat` al grupo **Staging**
+
+### 2 Crear la tabla de hechos `Envíos`
+1. Haz una **referencia** sobre `ParcelCraft_Flat`
+2. Renombra la nueva consulta a **Envíos**
+3. Conserva exactamente estas columnas:
+   - `EnvíoID` (`SHIPMENT_ID`)
+   - `FechaEnvío` (`SHIPMENT_DATE`)
+   - `FechaCreación` (`ORDER_CREATED_TS_UTC`)
+   - `FechaActualización` (`LAST_EVENT_TS_UTC`)
+   - `FechaEntrega` (`DELIVERED_TS_UTC`)
+   - `OficinaID` (`OFFICE_CODE`)
+   - `ClienteID` (`CUSTOMER_CODE`)
+   - `ServicioID` (`SERVICE_CODE`)
+   - `Código Postal (Destino)` (`DEST_POSTAL_CODE`)
+   - `RutaID` (`ROUTE_CODE`)
+   - `Modo de transporte` (`CARRIER_MODE`)
+   - `Peso (KG)` (`WEIGHT_KG`)
+   - `Rango de peso` (`WEIGHT_BAND_RAW`)
+   - `Precio base` (`BASE_PRICE_EUR`)
+   - `Surplus fuel` (`FUEL_SURCHARGE_EUR`)
+   - `Precio total` (`TOTAL_PRICE_EUR`)
+   - `Estado` (`DELIVERY_STATUS`)
+   - `Intentos` (`ATTEMPT_COUNT`)
+   - `Incidencia` (`HAS_INCIDENT_RAW`)
+   - `ÚltimaExtracción` (`EXTRACT_TS_UTC`)
+
+4. Comprueba que el grano es:
+   - **1 fila = 1 envío**
+5. Mueve la consulta al grupo **Fact**
+
+### 3 Crear las dimensiones
+Crea las siguientes tablas a partir de una referencia a `ParcelCraft_Flat`:
+
+#### `Oficina`
+- Columnas:
+  - `OficinaID` (`OFFICE_CODE`)
+  - `Oficina` (`OFFICE_NAME`)
+  - `Ciudad` (`CITY`)
+  - `Región` (`REGION`)
+  - `Tipo de hub` (`HUB_TYPE`)
+- Quita duplicados por `OficinaID`
+- Mueve a **Dim**
+
+#### `Cliente`
+- Columnas:
+  - `ClienteID` (`CUSTOMER_CODE`)
+  - `Cliente` (`CUSTOMER_NAME`)
+  - `Segmento` (`CUSTOMER_SEGMENT`)
+  - `Tipo de cliente` (`CUSTOMER_TYPE`)
+  - `Servicio preferido` (`PREFERRED_SERVICE_CODE`)
+- Quita duplicados por `ClienteID`
+- Mueve a **Dim**
+
+#### `Servicio`
+- Columnas:
+  - `ServicioID` (`SERVICE_CODE`)
+  - `Nombre del servicio` (`SERVICE_NAME`)
+  - `Prioridad` (`PRIORITY_LEVEL`)
+  - `Horas SLA` (`SLA_HOURS`)
+- Quita duplicados por `ServicioID`
+- Mueve a **Dim**
+
+#### `Destino`
+- Renombra la consulta a **Destino**
+- Conserva exactamente estas columnas:
+  - `Código Postal (Destino)` (`DEST_POSTAL_CODE`)
+  - `Ciudad (Destino)` (`DEST_CITY`)
+  - `Región (Destino)` (`DEST_REGION`)
+- Quita duplicados por `Código Postal (Destino)`
+- Mueve a **Dim**
+
+### 5 Deshabilitar carga de staging
+Deshabilita la carga en:
+
+- `ParcelCraft_Flat`
+- `pFilePath`, si no lo está ya deshabilitada.
+
+<img width="178" height="317" alt="image" src="https://github.com/user-attachments/assets/3b4471a3-c9b0-4231-9601-4aa4d2ba60ec" />
+
