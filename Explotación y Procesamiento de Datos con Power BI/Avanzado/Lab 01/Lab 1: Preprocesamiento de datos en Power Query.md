@@ -257,22 +257,12 @@ Crea las siguientes tablas a partir de una referencia a `ParcelCraft_Flat`:
 - Quita duplicados por `ServicioID`
 - Mueve a **Dim**
 
-#### `Destino`
-- Renombra la consulta a **Destino**
-- Conserva exactamente estas columnas:
-  - `Código Postal (Destino)` (`DEST_POSTAL_CODE`)
-  - `Ciudad (Destino)` (`DEST_CITY`)
-  - `Región (Destino)` (`DEST_REGION`)
-- Quita duplicados por `Código Postal (Destino)`
-- Mueve a **Dim**
-
 ### 5 Deshabilitar carga de staging
 Deshabilita la carga en:
 
 - `ParcelCraft_Flat`
 - `pFilePath`, si no lo está ya deshabilitada.
 
-<img width="178" height="317" alt="image" src="https://github.com/user-attachments/assets/3b4471a3-c9b0-4231-9601-4aa4d2ba60ec" />
 
 ---
 
