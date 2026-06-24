@@ -13,8 +13,8 @@
 
 Guarda los siguientes archivos en tu carpeta local de trabajo:
 
-- `ParcelCraft_Fuente_Plana_Snowflake_SAP_v1.csv`
-- `ParcelCraft_Fuente_Plana_Snowflake_SAP_v2.csv`
+- `ParcelCraft_Flat_v1.csv`
+- `ParcelCraft_Flat_v2.csv`
 
 ### Descripción funcional de la fuente
 
