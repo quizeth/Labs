@@ -274,3 +274,17 @@ Deshabilita la carga en:
 
 <img width="178" height="317" alt="image" src="https://github.com/user-attachments/assets/3b4471a3-c9b0-4231-9601-4aa4d2ba60ec" />
 
+---
+
+# Resumen
+En este laboratorio hemos trabajado con una tabla plana de datos operativos de ParcelCraft y la hemos transformado en un modelo analítico útil mediante Power Query. Hemos aprendido a cargar datos desde un CSV, parametrizar la fuente para hacerla reutilizable, limpiar y tipar información, eliminar duplicados manteniendo el registro más reciente por envío, y enriquecer los datos con columnas calculadas. Finalmente, hemos reorganizado la información en un modelo en estrella separando hechos y dimensiones, mejorando la calidad y mantenibilidad del modelo.
+
+### Recursos útiles
+- Documentación oficial de Power Query: https://learn.microsoft.com/power-query/
+- Mejores prácticas de modelado en Power BI: https://learn.microsoft.com/power-bi/guidance/star-schema
+- Funciones del lenguaje M: https://learn.microsoft.com/powerquery-m/
+- Guía de transformación de datos en Power BI: https://learn.microsoft.com/power-bi/transform-model/
+
+### 🎉 Fin del laboratorio
+¡Enhorabuena! Has completado este laboratorio y ya tienes una base sólida en preprocesamiento de datos con Power Query. Este es un paso clave para construir modelos analíticos robustos y escalables. ¡Nos vemos en el siguiente lab! 👏
+
