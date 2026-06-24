@@ -90,5 +90,74 @@ Ahora, vuelve a la vista de informe. El objeto visual de tabla ahora muestra los
 9. Añade **Precio total** al eje Y.
 10. En el gráfico, activa el **modo detallado** (flecha hacia abajo) y navega entre niveles de la jerarquía. Observa cómo puedes analizar los datos de forma progresiva.
 
+## Tarea 5. Configurar propiedades de tablas y columnas
+En esta tarea vas a mejorar la usabilidad del modelo configurando propiedades clave y ocultando campos técnicos.
+
+> [!IMPORTANT]
+> Asegúrate de que estás en la vista de modelo.
+> Además, puedes seleccionar varios campos a la vez para aplicar cambios en lote.
+
+
+#### Tabla Cliente
+
+Oculta las siguientes columnas técnicas:
+- Cliente[ClienteID]
+
+#### Tabla Envíos
+
+1. Oculta las siguientes columnas técnicas:
+- Envíos[OficinaID]  
+- Envíos[ClienteID]  
+- Envíos[ServicioID]  
+- Envíos[RutaID]
+
+2. Configura las siguientes propiedades:
+
+- **Precio total**
+  - Formato: Moneda
+  - Símbolo: €
+  - Número de decimales: 2
+  - Separador de miles: Activado
+
+- **Precio base**
+  - Formato: Moneda
+  - Símbolo: €
+  - Número de decimales: 2
+  - Separador de miles: Activado
+
+3. Asigna las columnas **Precio total** y **Precio base** a la carpeta para mostrar **Precios**.
+
+#### Tabla Oficina
+
+1. Configura las siguientes propiedades:
+
+- **Ciudad**
+  - Categoría de datos: Ciudad
+
+- **Región**
+  - Categoría de datos: País o región
+
+2. Oculta las siguientes columnas técnicas:
+- Oficina[OficinaID]
+
+#### Tabla Servicio
+
+1. Oculta las siguientes columnas técnicas:
+- Servicio[ServicioID]
+
 ---
 # Resumen
+En este laboratorio hemos trabajado en la construcción y mejora del modelo semántico de ParcelCraft dentro de Power BI. Hemos comenzado verificando la ausencia de relaciones automáticas y analizando su impacto en los objetos visuales. Posteriormente, hemos aprendido a crear relaciones manualmente entre tablas utilizando distintas técnicas, así como a validar su configuración y efecto en el análisis.
+
+Además, hemos diseñado el modelo siguiendo un esquema en estrella, organizando adecuadamente las tablas en la vista de modelo para mejorar su claridad y mantenibilidad. También hemos creado jerarquías que permiten explorar los datos a diferentes niveles de granularidad dentro de los informes.
+
+Finalmente, hemos configurado propiedades clave de tablas y columnas, incluyendo formato, categorías de datos y ocultación de campos técnicos, para mejorar la experiencia de uso y facilitar la interpretación de los datos por parte de los usuarios de negocio.
+
+### Recursos útiles
+- Documentación de modelado en Power BI: https://learn.microsoft.com/power-bi/transform-model/
+- Mejores prácticas de esquema en estrella: https://learn.microsoft.com/power-bi/guidance/star-schema
+- Relaciones en Power BI: https://learn.microsoft.com/power-bi/transform-model/desktop-relationships-understand
+- Jerarquías en Power BI: https://learn.microsoft.com/power-bi/create-reports/desktop-hierarchies
+
+### 🎉 Fin del laboratorio
+¡Enhorabuena! Has completado este laboratorio y ya tienes una base sólida en modelado de datos en Power BI. Este paso es fundamental para garantizar análisis fiables, modelos eficientes y una mejor experiencia de usuario en tus informes. ¡Nos vemos en el siguiente lab! 👏
