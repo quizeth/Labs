@@ -370,7 +370,8 @@ En este laboratorio hemos trabajado con una tabla plana de datos operativos de P
 ### Recursos útiles
 - Mejores prácticas de modelado en Power BI: https://learn.microsoft.com/power-bi/guidance/star-schema
 - Guía de transformación de datos en Power BI: https://learn.microsoft.com/power-bi/transform-model/
-- - Documentación oficial de Power Query: https://learn.microsoft.com/power-query/
+- Documentación oficial de Power Query: https://learn.microsoft.com/power-query/
 
+---
 ### 🎉 Fin del laboratorio
 ¡Enhorabuena! Has completado este laboratorio y ya tienes una base sólida en preprocesamiento de datos con Power Query. Este es un paso clave para construir modelos analíticos robustos y escalables. ¡Nos vemos en el siguiente lab! 👏
