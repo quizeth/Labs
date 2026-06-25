@@ -8,7 +8,7 @@ En este laboratorio trabajarás principalmente en la **vista de datos** y en la 
 
 ## Objetivos de aprendizaje
   
-**Tiempo estimado total: 20 minutos**  
+**Tiempo estimado total: 30 minutos**  
 
 Al finalizar este laboratorio serás capaz de:
 
