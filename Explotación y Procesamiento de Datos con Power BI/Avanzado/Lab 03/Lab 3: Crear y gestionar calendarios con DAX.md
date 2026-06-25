@@ -81,7 +81,7 @@ MesN = MONTH('Fecha'[Date])
 5. Crea otra columna con la siguiente expresión:
 
 ```DAX
-Mes = FORMAT('Fecha'[Date], "mmm YYY")
+Mes = FORMAT('Fecha'[Date], "mmm YYYY")
 ```
 
 6. Crea otra columna con la siguiente expresión:
