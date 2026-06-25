@@ -1,4 +1,4 @@
-# Laboratorio 0: Preparación del laboratorio
+# Laboratorio 0: Preparación inicial del laboratorio
 
 ## Requisitos previos
 
