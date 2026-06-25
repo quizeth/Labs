@@ -115,17 +115,18 @@ Este paso registra la tabla de fechas como calendario del modelo y la prepara pa
 
 Con esta relación, la tabla **Fecha** actuará como dimensión temporal del modelo en estrella.
 
-5. En la cinta, selecciona **Administrar relaciones** y añade dos relaciones más.
+5. En la cinta, selecciona **Administrar relaciones** y añade cuatro relaciones más.
    - **Fecha[Date]** > **Envíos[FechaActualización]**
    - **Fecha[Date]** > **Envíos[FechaEntrega]**
    - **Fecha[Date]** > **Envíos[FechaEnvío]**
    - **Fecha[Date]** > **Envíos[ÚltimaExtracción]**
 
-
    Todas estas relaciones deben tener las mismas propiedades:
    - Cardinalidad: Uno a varios (1:*)
    - Dirección del filtro cruzado: Único
    - Activar esta relación: **no marcado**
+
+<img width="1229" height="732" alt="image" src="https://github.com/user-attachments/assets/9a966713-e2cb-416b-8b3d-24f015486d51" />
 
 6. Oculta los campos de fechas la tabla **Envíos:**
    - Envíos[FechaActualización]
@@ -151,14 +152,17 @@ Con esta relación, la tabla **Fecha** actuará como dimensión temporal del mod
   - Año
   - Trimestre
   - Mes
+  - Date
 
 5. Configura las siguientes propiedades:
   - **Año**
-  - Tipo de datos: Número entero
+    - **Tipo de datos**: Número entero
   - **MesN**
-  - Tipo de datos: Número entero
+    - **Tipo de datos**: Número entero
   - **Mes**
-  - Ordenar por columna: **MesN**
+    - **Ordenar por columna**: MesN
+  - **Date**
+    - **Formato de fecha y hora**: Short date
 
  6. Oculta las siguientes columnas técnicas que no van a utilizarse en los informes:
   - Fecha[MesN]
