@@ -1,0 +1,10 @@
+rows_total: 25000
+columns_total: 37
+date_min: 2023-01-01
+date_max: 2026-06-30
+years: [2023, 2024, 2025, 2026]
+distinct_months: 42
+top_6_peak_months: {'2025-12': 1071, '2024-12': 962, '2025-11': 933, '2024-11': 838, '2023-12': 833, '2023-11': 725}
+status_distribution: {'Delivered': 23277, 'Exception': 1075, 'Returned': 465, 'In Transit': 183}
+repeat_customers: 10
+service_mix_pct_by_customer: {'CUST-100': {'ECO': 5.8, 'EXP': 69.8, 'SAM': 5.1, 'STD': 19.3}, 'CUST-101': {'ECO': 8.7, 'EXP': 59.2, 'SAM': 11.9, 'STD': 20.2}, 'CUST-102': {'ECO': 15.5, 'EXP': 17.7, 'SAM': 5.3, 'STD': 61.6}, 'CUST-103': {'ECO': 7.3, 'EXP': 8.3, 'SAM': 73.5, 'STD': 11.0}, 'CUST-104': {'ECO': 32.3, 'EXP': 9.3, 'SAM': 5.5, 'STD': 53.0}, 'CUST-105': {'ECO': 45.0, 'EXP': 7.9, 'SAM': 5.6, 'STD': 41.5}, 'CUST-106': {'ECO': 68.9, 'EXP': 9.4, 'SAM': 3.8, 'STD': 17.9}, 'CUST-107': {'ECO': 7.1, 'EXP': 6.2, 'SAM': 79.8, 'STD': 6.9}, 'CUST-108': {'ECO': 10.1, 'EXP': 64.6, 'SAM': 5.1, 'STD': 20.2}, 'CUST-109': {'ECO': 36.3, 'EXP': 9.2, 'SAM': 2.8, 'STD': 51.7}}
