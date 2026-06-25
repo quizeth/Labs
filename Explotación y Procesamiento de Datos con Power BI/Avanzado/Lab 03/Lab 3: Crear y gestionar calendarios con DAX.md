@@ -149,10 +149,10 @@ Con esta relación, la tabla **Fecha** actuará como dimensión temporal del mod
 2. Selecciona **Crear jerarquía**.
 3. Renombra la jerarquía como **Calendario**.
 4. Agrega y ordena las columnas:
-  - Año
-  - Trimestre
-  - Mes
-  - Date
+    - Año
+    - Trimestre
+    - Mes
+    - Date
 
 5. Configura las siguientes propiedades:
   - **Año**
