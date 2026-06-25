@@ -45,28 +45,28 @@ Como ves, la tabla lista seis oficinas, pero el valor del precio total es el mis
 1. En la vista de modelo, identifica la tabla **Envíos**.
 2. Arrastra el campo **OficinaID** de la tabla Envíos hacia el campo **OficinaID** de la tabla Oficina.
 - Verifica:
-  - Cardinalidad: Varios a uno (*:1)
-  - Dirección del filtro cruzado: Único
+  - **Cardinalidad**: Varios a uno (*:1)
+  - **Dirección del filtro cruzado**: Único
 3. En la cinta de opciones, selecciona **Administrar relaciones**.
 4. Haz clic en **Nuevo**.
 5. Configura una relación manualmente seleccionando:
-  - Tabla origen: Envíos
-  - Columna origen: [ClienteID]
-  - Tabla destino: Cliente
-  - Columna destino: [ClienteID]
+  - **Tabla origen**: Envíos
+  - **Columna origen**: [ClienteID]
+  - **Tabla destino**: Cliente
+  - **Columna destino**: [ClienteID]
 6. Guarda la configuración.
 7. Desde el panel de **Administrar relaciones**, selecciona **Detección automática**.
 
 ## Tarea 3. Diseñar el modelo (layout)
 
-- Vuelve a la vista de modelo.
-- Organiza las tablas manualmente en forma de **modelo en estrella**:
+1. Vuelve a la vista de modelo.
+2. Organiza las tablas manualmente en forma de **modelo en estrella**:
   - Envíos en el centro
   - Dimensiones alrededor (Oficina, Cliente, Servicio)
 
-- Ajusta el tamaño de las tablas para mejorar la legibilidad.
-- Alinea las tablas visualmente.
-- Evita cruces de relaciones.
+3. Ajusta el tamaño de las tablas para mejorar la legibilidad.
+  - Alinea las tablas visualmente.
+  - Evita cruces de relaciones.
 
 El objetivo es que el modelo sea claro y comprensible para cualquier usuario.
 
@@ -84,11 +84,12 @@ Ahora, vuelve a la vista de informe. El objeto visual de tabla ahora muestra los
 5. En este mismo panel, agrega y ordena las columnas de la jerarquía:
   - Región 
   - Ciudad
+  - Oficina
 6. Vuelve a la vista de informe.
 7. Inserta un **gráfico de columnas**.
 8. Añade la jerarquía `Geografía` al eje X.
 9. Añade **Precio total** al eje Y.
-10. En el gráfico, activa el **modo detallado** (flecha hacia abajo) y navega entre niveles de la jerarquía. Observa cómo puedes analizar los datos de forma progresiva.
+10. En el gráfico, activa la **exploración en profundidad**/**modo detallado** (flecha hacia abajo) y navega entre niveles de la jerarquía. Observa cómo puedes analizar los datos de forma progresiva.
 
 ## Tarea 5. Configurar propiedades de tablas y columnas
 En esta tarea vas a mejorar la usabilidad del modelo configurando propiedades clave y ocultando campos técnicos.
@@ -98,52 +99,47 @@ En esta tarea vas a mejorar la usabilidad del modelo configurando propiedades cl
 > Además, puedes seleccionar varios campos a la vez para aplicar cambios en lote.
 
 
-#### Tabla Cliente
+### Tabla Cliente
 
-Oculta las siguientes columnas técnicas:
+1. Oculta las siguientes columnas técnicas:
 - Cliente[ClienteID]
 
-#### Tabla Envíos
+### Tabla Envíos
 
 1. Oculta las siguientes columnas técnicas:
 - Envíos[OficinaID]  
 - Envíos[ClienteID]  
 - Envíos[ServicioID]  
 - Envíos[RutaID]
+- Envíos[ÚltimaExtracción]
 
-2. Configura las siguientes propiedades:
+2. Configura la propiedad **Código Postal (Destino)**:
+   - **Categoría de datos**: Código postal
+   - **Resumir por**: Ninguno
 
-- **Precio total**
-  - Formato: Moneda
-  - Símbolo: €
-  - Número de decimales: 2
-  - Separador de miles: Activado
-
-- **Precio base**
-  - Formato: Moneda
-  - Símbolo: €
-  - Número de decimales: 2
-  - Separador de miles: Activado
-
-3. Asigna las columnas **Precio total** y **Precio base** a la carpeta para mostrar **Precios**.
+4. Configura las propiedades **Precio total** y **Precio base** de la siguiente manera:
+    - **Carpeta para mostrar**: Precios
+    - **Formato**: Moneda
+    - **Símbolo**: €
+    - **Número de decimales**: 2
+    - **Separador de miles**: Activado
 
 #### Tabla Oficina
 
 1. Configura las siguientes propiedades:
-
-- **Ciudad**
-  - Categoría de datos: Ciudad
-
-- **Región**
-  - Categoría de datos: País o región
+  - **Ciudad**
+    - Categoría de datos: Ciudad
+  
+  - **Región**
+    - Categoría de datos: País o región
 
 2. Oculta las siguientes columnas técnicas:
-- Oficina[OficinaID]
+  - Oficina[OficinaID]
 
 #### Tabla Servicio
 
 1. Oculta las siguientes columnas técnicas:
-- Servicio[ServicioID]
+  - Servicio[ServicioID]
 
 ---
 # Resumen
