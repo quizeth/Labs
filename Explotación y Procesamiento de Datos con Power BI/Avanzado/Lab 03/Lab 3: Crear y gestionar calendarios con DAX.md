@@ -75,19 +75,19 @@ Año = YEAR('Fecha'[Date])
 4. Crea otra columna con la siguiente expresión:
 
 ```DAX
-MesN = MONTH('Fecha'[Date])
+Mes = FORMAT('Fecha'[Date], "mmm YYYY")
 ```
 
 5. Crea otra columna con la siguiente expresión:
 
 ```DAX
-Mes = FORMAT('Fecha'[Date], "mmm YYYY")
+Trimestre = "Q" & FORMAT('Fecha'[Date], "Q")
 ```
 
 6. Crea otra columna con la siguiente expresión:
 
 ```DAX
-Trimestre = "Q" & FORMAT('Fecha'[Date], "Q")
+MesN = MONTH('Fecha'[Date])
 ```
 
 Estas columnas permitirán agrupar, ordenar y analizar los envíos por distintos niveles temporales.
@@ -102,7 +102,7 @@ Estas columnas permitirán agrupar, ordenar y analizar los envíos por distintos
 
 Este paso registra la tabla de fechas como calendario del modelo y la prepara para trabajar con la administración moderna de calendarios en Power BI.
 
-<img width="775" height="702" alt="image" src="https://github.com/user-attachments/assets/2fea152b-cd3b-4b97-a354-df42d0d1cf3e" />
+<img width="780" height="699" alt="image" src="https://github.com/user-attachments/assets/02f7ad52-5d4f-42db-a248-fe7b8baa9de7" />
 
 ## Tarea 5. Relacionar la tabla de fechas con Envíos
 1. Ve a la **vista de modelo**.
