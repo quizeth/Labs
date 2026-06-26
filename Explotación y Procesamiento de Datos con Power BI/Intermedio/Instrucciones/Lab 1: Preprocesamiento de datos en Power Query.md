@@ -41,7 +41,7 @@ Al completar este laboratorio serás capaz de:
 
 1. Abrir Power BI Desktop y crea un nuevo informe en blanco.
 2. Guarda el informe en tu carpeta de trabajo (ej. `C:\Labs\ParcelCraft'`) bajo el nombre **Análisis ParcelCraft**.
-3. Desde la cinta, selecciona **Obtener datos** > **Web**.
+3. Desde la cinta, selecciona **Obtener datos** > **API Web**.
 4. Configura la conexión:
      **Dirección URL:** `https://raw.githubusercontent.com/quizeth/Labs/refs/heads/main/Explotaci%C3%B3n%20y%20Procesamiento%20de%20Datos%20con%20Power%20BI/Intermedio/Files/ParcelCraft_50k.csv`
      **Tipo de autenticación**: Anónima
