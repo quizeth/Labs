@@ -1,0 +1,915 @@
+# Laboratorio 1: Ingesta, preparación y carga de datos en Power Query
+
+**ParcelCraft** es una empresa ficticia de logística que necesita preparar sus datos operativos para análisis en Power BI.
+
+El equipo de BI recibe un archivo CSV llamado **`ParcelCraft_50k.csv`** con información de envíos, clientes, servicios, ubicaciones, transportistas, fechas, costes e incidencias en una única **tabla plana**.
+
+El objetivo del laboratorio es usar **Power Query** para transformar esa fuente en un modelo analítico limpio y mantenible. Para ello, trabajarás con parámetros, limpieza de datos, creación de columnas, detección de duplicados y organización de consultas.
+
+A partir del CSV original, construirás un **modelo en estrella** compuesto por una tabla de hechos de envíos y varias dimensiones, como fecha, cliente, servicio, ubicación, transportista y estado.
+
+Al finalizar, tendrás un modelo preparado para analizar trazabilidad, rendimiento operativo, entregas tardías e incidencias logísticas.
+
+> ℹ️ El enfoque del laboratorio está diseñado para reflejar una práctica frecuente en entornos reales: la capa analítica recibe una **tabla plana “silver/gold”** desde Snowflake o SAP y el equipo de BI debe volver a separar hechos y dimensiones para conseguir un modelo mantenible, rápido y predecible.
+
+## Objetivos de aprendizaje
+
+**Tiempo estimado total: 45 minutos**
+
+Al finalizar este laboratorio serás capaz de:
+
+- Importar un archivo CSV operativo mediante una **fuente parametrizada**.
+- Cambiar la **ruta o URL de origen** sin rehacer las transformaciones aplicadas.
+- Limpiar, perfilar y tipar datos con **Power Query**.
+- Crear columnas de negocio mediante **columnas personalizadas** y **columnas a partir de ejemplos**.
+- Identificar y filtrar **duplicados** usando múltiples columnas clave.
+- Transformar una **tabla plana** en un **modelo en estrella**.
+- Crear una **tabla de hechos** de envíos y dimensiones reutilizables.
+- Aplicar operaciones de **dinamización** y **anulación de dinamización**.
+- Combinar y anexar consultas para enriquecer o reconstruir datos.
+- Organizar consultas, deshabilitar cargas auxiliares y aplicar buenas prácticas.
+- Revisar código **M**, comentar pasos y comprender el impacto del **plegado de consultas**.
+
+---
+## Antes de empezar
+
+### Requisitos
+
+Para completar el laboratorio necesitas:
+
+- Power BI Desktop instalado.
+- Conexión a Internet.
+- Conocimientos básicos de Power Query.
+- Comprensión básica de modelos relacionales y modelo de estrella.
+
+### Convenciones usadas en el laboratorio
+
+- Cuando se indique seleccionar una consulta, hazlo desde el panel **Consultas** del Editor de Power Query.
+- Cuando se indique una opción de cinta, se mostrará como **pestaña > grupo > comando**.
+- Los nombres de consultas, columnas y parámetros deben escribirse exactamente como se indica, salvo que el archivo tenga nombres equivalentes ligeramente distintos.
+- Si Power Query detecta nombres de columnas diferentes a los esperados, usa la columna equivalente según el perfil de datos. Por ejemplo, una columna de fecha de envío puede llamarse `ShipDate`, `ShipmentDate`, `ShippingDate` o similar.
+
+---
+## Ejercicio 1: Conectar al archivo CSV mediante parámetro
+
+En este ejercicio crearás un parámetro para almacenar la URL del archivo CSV y lo usarás como origen de datos. Esto facilitará cambiar la fuente posteriormente sin editar todos los pasos de la consulta.
+
+### Tarea 1: Crear un archivo de Power BI
+
+1. Abre **Power BI Desktop**.
+2. Crea un informe en blanco.
+3. En la cinta **Inicio**, selecciona **Transformar datos**.
+4. Se abrirá el **Editor de Power Query**.
+
+### Tarea 2: Crear un parámetro para la URL
+
+1. En el Editor de Power Query, selecciona **Inicio > Administrar parámetros > Parámetro nuevo**.
+2. Configura el parámetro con estos valores:
+
+   | Propiedad | Valor |
+   |---|---|
+   | Nombre | `pRutaArchivo` |
+   | Descripción | `URL o ruta del archivo ParcelCraft_50k.csv` |
+   | Requerido | Activado |
+   | Tipo | Texto |
+   | Valores sugeridos | Cualquier valor |
+   | Valor actual | `https://raw.githubusercontent.com/quizeth/Labs/refs/heads/main/Explotaci%C3%B3n%20y%20Procesamiento%20de%20Datos%20con%20Power%20BI/Avanzado/Lab%2001/Files/ParcelCraft_50k.csv` |
+
+3. Selecciona **Aceptar**.
+
+### Tarea 3: Conectar usando el parámetro
+
+1. En Power Query, selecciona **Inicio > Nueva fuente > Consulta en blanco**.
+2. Selecciona **Siguiente** para crear la consulta.
+3. En el panel **Configuración de consulta**, cambia el nombre de la consulta a `stg_ParcelCraft_Raw`.
+4. En la barra de fórmulas, escribe la siguiente expresión:
+
+```powerquery
+= Csv.Document(
+    Web.Contents(pRutaArchivo),
+    [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]
+)
+```
+
+4. Presiona **Entrar**.
+5. Si no ha identificado automáticamente los encabezados y tipos de datos de cada columna, en la cinta, selecciona **Transformar > Usar la primera fila como encabezados**.
+6. Revisa visualmente los nombres y tipos de columnas.
+7. En **Vista > Calidad de columnas**, activa:
+   - Calidad de columnas;
+   - Distribución de columnas;
+   - Perfil de columnas.
+
+> Nota: Si Power Query muestra el perfil basado solo en las primeras 1.000 filas, cambia el perfil a **Basado en todo el conjunto de datos** desde la parte inferior de la ventana.
+
+### Tarea 4: Cambiar la fuente de datos usando el parámetro
+
+1. En el panel de consultas, selecciona el parámetro `pRutaArchivo`.
+2. Copia la URL actual en un bloc de notas.
+3. Modifica temporalmente el valor del parámetro agregando un carácter al final, por ejemplo `x`.
+4. Selecciona la consulta `stg_ParcelCraft_Raw`.
+5. Observa que Power Query muestra un error de conexión.
+6. Vuelve al parámetro y restaura la URL original.
+7. Selecciona de nuevo `stg_ParcelCraft_Raw` y comprueba que los datos vuelven a cargarse.
+
+**Resultado esperado:** la consulta depende del parámetro y no de una URL escrita directamente dentro de varios pasos.
+
+---
+
+## Ejercicio 2: Perfilado, limpieza inicial y buenas prácticas
+
+En este ejercicio prepararás una consulta base limpia que servirá como punto de partida para el modelo de estrella.
+
+### Tarea 1: Crear una consulta staging
+
+1. Haz clic derecho en `stg_ParcelCraft_Raw`.
+2. Selecciona **Referencia**.
+3. Cambia el nombre de la nueva consulta a `stg_ParcelCraft_Clean`.
+
+> Importante: Usa **Referencia** y no **Duplicar**. Referenciar una consulta reduce mantenimiento porque los cambios del origen se heredan en las consultas dependientes.
+
+### Tarea 2: Aplicar tipos de datos
+
+1. Selecciona `stg_ParcelCraft_Clean`.
+2. Revisa los tipos de datos detectados automáticamente.
+3. Cambia manualmente los tipos según corresponda:
+   - columnas de fecha: **Fecha** o **Fecha/Hora**;
+   - columnas de importes: **Número decimal fijo**,
+   - columnas de costes, pesos o distancias: **Número decimal**;
+   - columnas de cantidades: **Número entero**;
+   - identificadores: **Texto** o **Número entero**, según su naturaleza;
+   - categorías, estados, ciudades, países, transportistas: **Texto**.
+4. Cambia el nombre del paso aplicado a `Tipos definidos`.
+   1. En **Pasos aplicados**, haz clic derecho sobre el paso.
+   2. Selecciona **Cambiar nombre**.
+   3. Escribe el nuevo nombre.
+
+### Tarea 3: Renombrar columnas
+
+En esta tarea renombrarás las columnas técnicas del archivo original para que sean más comprensibles para el usuario de negocio.
+
+Los nombres originales proceden del sistema operativo de envíos y usan una convención técnica en mayúsculas, por ejemplo `SHIPMENT_ID`, `CUSTOMER_CODE` o `TOTAL_PRICE_EUR`. En Power BI es recomendable usar nombres más descriptivos, legibles y consistentes.
+
+---
+
+#### Opción A: Renombrar columnas manualmente
+
+1. Selecciona la consulta `stg_ParcelCraft_Clean`.
+2. En la vista previa de datos, localiza la columna `SHIPMENT_ID`.
+3. Haz doble clic sobre el encabezado de la columna.
+4. Cambia el nombre a:
+
+   ```text
+   EnvíoID
+   ```
+5. Repite el proceso con las siguientes columnas:
+      - SHIPMENT_DATE → FechaEnvío
+      - ORDER_CREATED_TS_UTC → FechaCreación
+      - LAST_EVENT_TS_UTC → FechaActualización
+      - DELIVERED_TS_UTC → FechaEntrega
+      - OFFICE_CODE → OficinaID
+      - OFFICE_NAME → Oficina
+      - CITY → Ciudad
+      - REGION → Región
+      - CUSTOMER_CODE → ClienteID
+      - CUSTOMER_NAME → Cliente
+      - SERVICE_CODE → ServicioID
+      - SERVICE_NAME → Nombre del servicio
+      - TOTAL_PRICE_EUR → Precio total
+      - DELIVERY_STATUS → Estado
+      - ATTEMPT_COUNT → Intentos
+
+6. En el panel Pasos aplicados, renombra el paso como `Columnas renombradas`.
+
+
+#### Opción B: Renombrar mediante M
+
+También puedes renombrar todas las columnas en un único paso usando el Editor avanzado.
+
+1. Selecciona la consulta `stg_ParcelCraft_Clean`.
+2. En la cinta, selecciona Inicio > Editor avanzado.
+3. Localiza el paso anterior al renombrado y añade una coma al final. En este caso, el paso anterior se llama `#"Tipos definidos"`.
+4. Agrega el siguiente paso después de ese paso:
+   ```
+   #"Columnas renombradas" =
+    Table.RenameColumns(
+        #"Tipos definidos",
+        {
+            {"SHIPMENT_ID", "EnvíoID"},
+            {"SHIPMENT_DATE", "FechaEnvío"},
+            {"ORDER_CREATED_TS_UTC", "FechaCreación"},
+            {"LAST_EVENT_TS_UTC", "FechaActualización"},
+            {"DELIVERED_TS_UTC", "FechaEntrega"},
+            {"OFFICE_CODE", "OficinaID"},
+            {"OFFICE_NAME", "Oficina"},
+            {"CITY", "Ciudad"},
+            {"REGION", "Región"},
+            {"HUB_TYPE", "Tipo de hub"},
+            {"CUSTOMER_CODE", "ClienteID"},
+            {"CUSTOMER_NAME", "Cliente"},
+            {"CUSTOMER_SEGMENT", "Segmento"},
+            {"CUSTOMER_TYPE", "Tipo de cliente"},
+            {"PREFERRED_SERVICE_CODE", "Servicio preferido"},
+            {"SERVICE_CODE", "ServicioID"},
+            {"SERVICE_NAME", "Nombre del servicio"},
+            {"PRIORITY_LEVEL", "Prioridad"},
+            {"SLA_HOURS", "Horas SLA"},
+            {"TEMPERATURE_CONTROL_FLAG", "ControlTemperatura"},
+            {"DEST_POSTAL_CODE", "Código Postal (Destino)"},
+            {"DEST_CITY", "Ciudad (Destino)"},
+            {"DEST_REGION", "Región (Destino)"},
+            {"ROUTE_CODE", "RutaID"},
+            {"CARRIER_MODE", "Modo de transporte"},
+            {"WEIGHT_KG", "Peso (KG)"},
+            {"BASE_PRICE_EUR", "Precio base"},
+            {"FUEL_SURCHARGE_EUR", "Surplus fuel"},
+            {"TOTAL_PRICE_EUR", "Precio total"},
+            {"DELIVERY_STATUS", "Estado"},
+            {"ATTEMPT_COUNT", "Intentos"},
+            {"EXTRACT_TS_UTC", "ÚltimaExtracción"}
+        }
+    )
+   ```
+5. Asegúrate de que la sección final `in` devuelve el nuevo paso:
+   ```
+   in
+    #"Columnas renombradas"
+   ```
+**Resultado esperado**: ahora las columnas de la consulta tienen nombres funcionales y más adecuados para construir el modelo analítico.
+
+
+### Tarea 4: Corregir errores de calidad
+En la columna de Intentos se ha añadido un 0 al final. Como resultado, el número de intentos que se muestra no es real.
+
+1. Ve a la columna **Intentos**.
+2. Selecciona **Transformar** > **Extraer** > **Primeros caracteres**.
+3. En **Recuento**, escribe 1 y selecciona **Aceptar**.
+4. Renombra el paso aplicado como `Eliminado 0 final en intentos`.
+
+### Tarea 4: Crear columnas personalizadas
+
+Crea indicadores de negocio que se usarán después en la tabla de hechos.
+
+1. Selecciona **Agregar columna > Columna personalizada**.
+2. Renombra la columna a `FechaCompromisoSLA`.
+3. Configura la nueva columna con estos valores:
+
+   - **Nombre de nueva columna:** `FechaCompromisoSLA`
+   - **Fórmula de columna personalizada:**
+
+   ```powerquery
+   [FechaCreación] + #duration(0, [Horas SLA], 0, 0)
+   ```
+
+4. Selecciona **Aceptar**.
+5. Renombra el paso aplicado a `FechaCompromisoSLA agregada`.
+6. Cambia el tipo de datos de `FechaCompromisoSLA`a **Fecha/Hora**.
+
+> La función `#duration(días, horas, minutos, segundos)` permite sumar una duración a una fecha u hora. En este caso, se suman 0 días, las horas indicadas en Horas SLA, 0 minutos y 0 segundos.
+
+1. Selecciona **Agregar columna > Columna condicional**.
+2. Crea una segunda columna llamada `Entrega tardía`.
+3. Configura la nueva columna con estos valores:
+   - Si **FechaEntrega** es igual a **null**, entonces **null**
+   - O si **FechaEntrega** es posterior a **FechaCompromisoSla**, entonces **true**
+   - De lo contrario, **false**
+
+> Recuerda cambiar el tipo de valor de la segunda condición haciendo click en el icono y seleccionando **Seleccionar una columna**.
+
+4. Selecciona **Aceptar**.
+5. Renombra el paso aplicado a `Entrega tardía agregada`.
+6. Cambia el tipo de datos de `Entrega tardía`a **Verdadero/Falso**.
+
+**Resultado esperado**: la columna FechaCompromisoSLA representa la fecha y hora máxima esperada de entrega según el SLA, y EntregaTardia indica si el envío fue entregado fuera de plazo.
+
+
+### Tarea 5: Crear una columna desde ejemplos
+
+1. Selecciona **Agregar columna > Columna a partir de ejemplos > A partir de todas las columnas**.
+2. Crea una columna llamada `Segmento de servicio`.
+3. Escribe ejemplos basados en el contenido de columnas como tipo de servicio, prioridad o método de envío. Por ejemplo:
+   - si el servicio contiene `Express` o `Urgente`, escribe `Premium`;
+   - si contiene `Standard` o `Economy`, escribe `Estándar`;
+4. Revisa la fórmula que Power Query genera automáticamente.
+5. Selecciona **Aceptar**.
+6. 5. Renombra el paso aplicado a `Segmento de servicio agregada`.
+
+
+**Resultado esperado:** tendrás una consulta limpia, tipada y enriquecida con columnas calculadas.
+
+### Tarea 5: Crear una columna para limpiar datos
+
+1. Selecciona **Agregar columna > Columna condicional**.
+2. Crea una segunda columna llamada `Rango de peso`.
+3. Configura la nueva columna con estos valores:
+      - Si `WEIGHT_BAND_RAW` no está vacío, devolver WEIGHT_BAND_RAW.
+      - Si `Peso (KG)` es menor o igual que 1, entonces `0-1 kg`.
+      - Si `Peso (KG)` es menor o igual que 5, entonces `1-5 kg`.
+      - Si `Peso (KG)` es menor o igual que 10, entonces `5-10 kg`.
+      - De lo contrario, `10+ kg`.
+
+4. Selecciona **Aceptar**.
+5. Renombra el paso aplicado a `Rango de peso agregada`.
+6. Cambia el tipo de datos de `Rango de peso`a **Texto**.
+
+---
+
+## Ejercicio 3: Convertir tabla plana en modelo de estrella
+
+En este ejercicio separarás la tabla plana en una tabla de hechos y varias dimensiones.
+
+### Diseño objetivo
+
+El modelo resultante tendrá esta estructura lógica:
+
+- `Envíos`: tabla de hechos con métricas e identificadores.
+- `Cliente`: información del cliente.
+- `Servicio`: información del producto, servicio o tipo de envío.
+- `Oficina`: información de cada oficina operativa.
+- `Destino`: información geográfica del destino del envío.
+- `Ruta`: información sobre el método de envío o canal logístico.
+
+### Tarea 1: Crear la tabla de hechos
+
+1. Haz clic derecho en `stg_ParcelCraft_Clean`.
+2. Selecciona **Referencia**.
+3. Cambia el nombre de la nueva consulta a `Envíos`.
+4. Ve a **Inicio > Administrar columnas > Elegir columnas**.
+5. En la ventana **Elegir columnas**, desactiva todas las columnas y selecciona únicamente las columnas  necesarias para análisis transaccional:
+
+   - `EnvíoID`
+   - `FechaEnvío`
+   - `FechaCreación`
+   - `FechaActualización`
+   - `FechaEntrega`
+   - `FechaCompromisoSLA`
+   - `OficinaID`
+   - `ClienteID`
+   - `ServicioID`
+   - `RutaID`
+   - `Estado`
+   - `Modo de transporte`
+   - `Horas SLA`
+   - `ControlTemperatura`
+   - `Peso (KG)`
+   - `Rango de peso`
+   - `Precio base`
+   - `Surplus fuel`
+   - `Precio total`
+   - `Intentos`
+   - `EntregaTardia`
+
+6. Comprueba que los tipos de datos son correctos.
+7. Renombra el paso aplicado como `Columnas de hechos seleccionadas`.
+
+### Tarea 2: Crear la dimensión `Cliente`
+
+1. Haz clic derecho en `stg_ParcelCraft_Clean`.
+2. Selecciona **Referencia**.
+3. Cambia el nombre a `Cliente`.
+4. Conserva las columnas relacionadas con clientes:
+   - `ClienteID`;
+   - `Cliente`;
+   - `Segmento`;
+   - `Industria`;
+   - `Servicio preferido`.
+5. Renombra el paso aplicado como `Columnas de cliente seleccionadas`.
+6. Selecciona la columna que identifica de forma única a un cliente, `ClienteID`
+7. En la cinta, selecciona **Inicio > Quitar filas > Quitar duplicados**.
+8. Ordena de forma ascendente por el identificador de cliente.
+9. Renombra el paso aplicado como `Filas ordenadas por ClienteID`.
+
+### Tarea 3: Crear la dimensión `Servicio`
+
+1. Crea una referencia desde `stg_ParcelCraft_Clean`.
+2. Cambia el nombre a `Servicio`.
+3. Conserva las columnas relacionadas con servicios:
+   - `ServicioID`
+   - `Nombre del servicio`
+   - `Prioridad`
+   - `Horas SLA`
+
+5. Renombra el paso aplicado como `Columnas de servicio seleccionadas`.
+6. Selecciona la columna que identifica de forma única a un cliente, `ServicioID`
+7. En la cinta, selecciona **Inicio > Quitar filas > Quitar duplicados**.
+8. Ordena de forma ascendente por `Horas SLA`.
+9. Renombra el paso aplicado como `Filas ordenadas por SLA`.
+
+### Tarea 4: Crear la dimensión `Oficina`
+
+1. Crea una referencia desde `stg_ParcelCraft_Clean`.
+2. Cambia el nombre a `Oficina`.
+3. Conserva las columnas relacionadas con ubicación de oficina y destino:
+   - `OficinaID`
+   - `Oficina`
+   - `Ciudad`
+   - `Región`
+   - `Tipo de hub`
+
+4. Renombra el paso aplicado como `Columnas de oficina seleccionadas`.
+5. Selecciona la columna que identifica de forma única a una oficina, `OficinaID`
+6. En la cinta, selecciona **Inicio > Quitar filas > Quitar duplicados**.
+7. Selecciona la columna `Región`.
+8. En la cinta, selecciona **Inicio > Ordenar ascendente**.
+9. Después, selecciona la columna `OficinaID`.
+10. Mantén pulsada la tecla **Ctrl** y selecciona **Ordenar ascendente**.
+11. Comprueba que los datos quedan ordenados primero por `Región` y, dentro de cada región, por `OficinaID`.
+12. Renombra el paso aplicado como `Filas ordenadas por región y oficina`.
+
+### Tarea 5: Crear la dimensión `Destino`
+1. Crea una referencia desde `stg_ParcelCraft_Clean`.
+2. Cambia el nombre a `Destino`.
+3. Conserva las columnas relacionadas con el destino del envío:
+   - `Código Postal (Destino)`
+   - `Ciudad (Destino)`
+   - `Región (Destino)`
+4. Renombra el paso aplicado como `Columnas de destino seleccionadas`.
+5. Selecciona la columna que identifica de forma única a un destino, `Código Postal (Destino)`
+6. En la cinta, selecciona **Inicio > Quitar filas > Quitar duplicados**.
+7. Ordena primero por `Región (Destino)` y después por `Ciudad (Destino)`:
+   1. Selecciona la columna `Región (Destino)`.
+   2. En la cinta, selecciona **Inicio** > **Ordenar ascendente**.
+   3. Selecciona la columna `Ciudad (Destino)`.
+   4. Mantén pulsada la tecla **Ctrl** y selecciona **Ordenar ascendente**.
+8. Renombra el paso aplicado como `Filas ordenadas por región y CP`.
+9. Añade una clave artificial para la dimensión. En la cinta, selecciona **Agregar columna **> **Columna de índice** > **Desde 1**.
+    
+> La columna `DestinoID` funcionará como clave sustituta de la dimensión. Esto evita relacionar la tabla de hechos usando varias columnas de texto como ciudad, región y código postal. Aunque ahora mismo cada código postal es único, esto lo hace más sostenible ya que `DestinoID` se mantiene única incluso si más adelante se añaden múltiples valores por código postal, como direcciones concretas.
+
+10. Cambia el nombre de la nueva columna a `DestinoID`.
+11. Renombra el paso aplicado como `Clave de destino agregada`.
+12. Mueve la columna `DestinoID` al principio de la tabla.
+
+> Más adelante, añadiremos la nueva columna de clave a la tabla de hechos `Envíos`.
+
+### Tarea 6: Crear la dimensión `Ruta`
+
+1. Crea una referencia desde `stg_ParcelCraft_Clean`.
+2. Cambia el nombre a `Ruta`.
+3. Conserva las columnas relacionadas con ruta y transporte:
+   - `RutaID`
+   - `Modo de transporte`
+
+4. Renombra el paso aplicado como `Columnas de ruta seleccionadas`.
+5. Selecciona la columna que identifica de forma única a una ruta, `RutaID`.
+6. En la cinta, selecciona **Inicio > Quitar filas > Quitar duplicados**.
+7. Selecciona la columna `RutaID`.
+8. En la cinta, selecciona **Inicio > Ordenar ascendente**.
+12. Renombra el paso aplicado como `Filas ordenadas por ruta`.
+
+### Tarea 7: Ordena las consultas
+
+1. En el panel de consulta, crea los siguientes grupos:
+     - `Staging`
+     - `Hechos`
+     - `Dimensiones`
+     - `Auxiliares`
+
+2. Mueve las consultas a sus grupos correspondientes:
+     - `Staging`: `pRutaArchivo`, `stg_ParcelCraft_Raw`, `stg_ParcelCraft_Clean`
+     - `Hechos`: `Envíos`
+     - `Dimensiones`: `Cliente`, `Servicio`, `Ubicación`, `Destino`, `Ruta`
+
+**Resultado esperado:** tendrás una consulta de hechos y varias dimensiones listas para cargar al modelo.
+
+---
+
+## Ejercicio 4: Dinamizar y anular dinamización de columnas
+
+En este ejercicio practicarás transformaciones de pivot y unpivot para preparar datos analíticos.
+
+### Tarea 1: Crear una consulta auxiliar de métricas
+Vamos a crear una consulta auxiliar que se usará para practicar transformaciones de análisis, como anular dinamización y dinamizar columnas, a partir de métricas operativas y económicas del envío.
+
+1. Haz clic derecho en `stg_ParcelCraft_Clean`.
+2. Selecciona **Referencia**.
+3. Cambia el nombre a `aux_MetricasPorServicio`.
+4. Mueve la consulta al grupo `Auxiliares`.
+5. Conserva columnas categóricas relacionadas con el servicio, por ejemplo:
+   - `ServicioID`
+   - `Nombre del servicio`
+   - `Prioridad`
+
+6. Conserva varias columnas numéricas que puedan analizarse como métricas:
+
+   - `Horas SLA`
+   - `Peso (KG)`
+   - `Precio base`
+   - `Surplus fuel`
+   - `Precio total`
+   - `Intentos`
+
+7. Renombra el paso aplicado como `Columnas de métricas seleccionadas`.
+
+### Tarea 2: Anular dinamización de columnas
+
+En esta tarea convertirás varias columnas numéricas en pares atributo-valor. Esto permite analizar distintas métricas bajo una misma estructura.
+
+1. Selecciona la consulta `aux_MetricasPorServicio`.
+2. Selecciona las columnas numéricas:
+
+   - `Horas SLA`
+   - `Peso (KG)`
+   - `Precio base`
+   - `Surplus fuel`
+   - `Precio total`
+   - `Intentos`
+
+3. En la cinta, selecciona **Transformar > Anular dinamización de columnas**.
+4. Power Query generará dos nuevas columnas:
+
+   - `Atributo`
+   - `Valor`
+
+5. Renombra el paso aplicado como: `Métricas anuladas`
+6. Cambia el nombre de las columnas resultantes:
+
+   - `Atributo` a `Metrica`
+   - `Valor` a `ValorMetrica`
+
+5. Renombra el paso aplicado como: `Métricas renombradas`
+
+### Tarea 3: Dinamizar columnas
+
+1. Crea una referencia de `aux_MetricasPorServicio`.
+2. Cambia el nombre a `aux_MetricasPivot`.
+3. Selecciona la columna `Metrica`.
+4. Selecciona **Transformar > Columna dinámica**.
+5. En **Columna de valores**, selecciona `ValorMetrica`.
+6. En **Opciones avanzadas**, elige **Suma**.
+7. Revisa el resultado: cada métrica debe convertirse en una columna.
+8. Ajusta el tipo de datos de las nuevas columnas:
+   - `Horas SLA`, `Peso (KG)`, `Intentos`: Número entero
+   - `Precio base`, `Surplus fuel`, `Precio total`: Número decimal fijo
+
+> Este patrón es útil para pasar de formatos anchos a largos y de formatos largos a anchos según las necesidades de visualización y modelado.
+
+---
+
+## Ejercicio 5: Combinar y anexar tablas
+
+En este ejercicio usarás consultas auxiliares para practicar merges y appends.
+
+### Tarea 1: Crear una tabla de tarifas por segmento
+
+1. Selecciona **Inicio > Introducir datos**.
+2. Crea una tabla llamada `map_TarifasServicio` con dos columnas:
+
+| SegmentoServicio | FactorTarifa |
+|---|---:|
+| Urgente | 1.25 |
+| Estándar | 1.00 |
+| Económico | 0.85 |
+| Sin clasificar | 1.00 |
+
+3. Selecciona **Aceptar**.
+4. Comprueba que `FactorTarifa` es número decimal.
+
+### Tarea 2: Combinar consultas
+
+1. Selecciona `FactEnvios`.
+2. Selecciona **Inicio > Combinar consultas > Combinar consultas como nuevas**.
+3. Tabla principal: `FactEnvios`.
+4. Tabla secundaria: `map_TarifasServicio`.
+5. Selecciona la columna `SegmentoServicio` en ambas tablas.
+6. Tipo de combinación: **Externa izquierda**.
+7. Nombra la nueva consulta `FactEnvios_ConTarifa`.
+8. Expande la columna resultante y conserva solo `FactorTarifa`.
+9. Crea una columna personalizada llamada `ImporteAjustado`:
+
+```powerquery
+[ImporteLinea] * [FactorTarifa]
+```
+
+### Tarea 3: Crear consultas para anexar
+
+1. Crea una referencia de `FactEnvios`.
+2. Cambia el nombre a `aux_Envios_Urgentes`.
+3. Filtra `SegmentoServicio` = `Urgente`.
+4. Crea otra referencia de `FactEnvios`.
+5. Cambia el nombre a `aux_Envios_NoUrgentes`.
+6. Filtra `SegmentoServicio` diferente de `Urgente`.
+7. Selecciona **Inicio > Anexar consultas > Anexar consultas como nuevas**.
+8. Anexa `aux_Envios_Urgentes` y `aux_Envios_NoUrgentes`.
+9. Nombra el resultado `aux_Envios_Reconstruidos`.
+10. Comprueba que el número de filas coincide con `FactEnvios`.
+
+---
+
+## Ejercicio 6: Organización de consultas y control de carga
+
+En este ejercicio organizarás las consultas según su propósito y deshabilitarás la carga de consultas auxiliares.
+
+### Tarea 1: Crear grupos de consultas
+
+1. En el panel **Consultas**, haz clic derecho en un espacio vacío.
+2. Selecciona **Nuevo grupo**.
+3. Crea estos grupos:
+   - `00 Parámetros`;
+   - `01 Staging`;
+   - `02 Modelo`;
+   - `03 Auxiliares`;
+   - `04 Mapeos`.
+4. Arrastra las consultas a sus grupos:
+   - `pRutaArchivo` a `00 Parámetros`;
+   - `stg_ParcelCraft_Raw` y `stg_ParcelCraft_Clean` a `01 Staging`;
+   - `FactEnvios`, `DimFecha`, `DimCliente`, `DimProductoServicio`, `DimUbicacion`, `DimTransportista`, `DimEstado` a `02 Modelo`;
+   - `aux_*` a `03 Auxiliares`;
+   - `map_TarifasServicio` a `04 Mapeos`.
+
+### Tarea 2: Deshabilitar carga de consultas
+
+1. Haz clic derecho en cada consulta staging y auxiliar:
+   - `stg_ParcelCraft_Raw`;
+   - `stg_ParcelCraft_Clean`;
+   - `aux_MetricasPorServicio`;
+   - `aux_MetricasPivot`;
+   - `aux_Envios_Urgentes`;
+   - `aux_Envios_NoUrgentes`;
+   - `aux_Envios_Reconstruidos`.
+2. Desactiva **Habilitar carga**.
+3. Si Power BI advierte que otras consultas dependen de ella, acepta mantener las dependencias.
+
+> Buena práctica: carga al modelo solo las tablas que necesitas para reportar o relacionar. Las consultas staging y auxiliares deben permanecer como preparación interna.
+
+---
+
+## Ejercicio 7: Identificar y filtrar duplicados por múltiples columnas
+
+En este ejercicio detectarás duplicados de negocio basados en una combinación de columnas.
+
+### Tarea 1: Crear consulta de auditoría de duplicados
+
+1. Haz clic derecho en `stg_ParcelCraft_Clean`.
+2. Selecciona **Referencia**.
+3. Cambia el nombre a `qa_DuplicadosNegocio`.
+4. Conserva las columnas que definen la unicidad de una transacción, por ejemplo:
+   - identificador de pedido o envío;
+   - línea de pedido;
+   - cliente;
+   - fecha;
+   - producto o servicio.
+
+### Tarea 2: Agrupar para detectar duplicados
+
+1. Selecciona **Transformar > Agrupar por**.
+2. Selecciona **Avanzado**.
+3. Agrega las columnas de negocio que definen la unicidad.
+4. Crea una nueva columna:
+   - Nombre: `ConteoFilas`
+   - Operación: **Contar filas**
+5. Selecciona **Aceptar**.
+6. Filtra `ConteoFilas` para conservar valores mayores que 1.
+
+### Tarea 3: Crear una consulta sin duplicados
+
+1. Crea otra referencia a `stg_ParcelCraft_Clean`.
+2. Cambia el nombre a `stg_ParcelCraft_SinDuplicados`.
+3. Selecciona las columnas de negocio que definen la unicidad.
+4. En la cinta, selecciona **Inicio > Quitar filas > Quitar duplicados**.
+5. Compara el número de filas con `stg_ParcelCraft_Clean`.
+
+### Tarea 4: Alternativa avanzada en M
+
+Puedes crear una consulta de duplicados usando `Table.Group`.
+
+```powerquery
+let
+    Source = stg_ParcelCraft_Clean,
+
+    // Agrupa por la clave natural del negocio.
+    // Sustituye estos nombres por las columnas reales del archivo.
+    GroupedRows = Table.Group(
+        Source,
+        {"PedidoID", "LineaPedido", "ClienteID", "FechaPedido", "ProductoID"},
+        {
+            {"ConteoFilas", each Table.RowCount(_), Int64.Type},
+            {"Filas", each _, type table}
+        }
+    ),
+
+    // Conserva solo combinaciones repetidas
+    OnlyDuplicates = Table.SelectRows(GroupedRows, each [ConteoFilas] > 1)
+in
+    OnlyDuplicates
+```
+
+> Este enfoque permite conservar una tabla anidada con las filas duplicadas originales para auditoría.
+
+---
+
+## Ejercicio 8: Sección avanzada de M y comentarios en pasos aplicados
+
+En este ejercicio revisarás el código M generado por Power Query y añadirás comentarios para documentar la lógica.
+
+### Tarea 1: Abrir el Editor avanzado
+
+1. Selecciona `stg_ParcelCraft_Clean`.
+2. En la cinta, selecciona **Inicio > Editor avanzado**.
+3. Revisa la estructura general:
+
+```powerquery
+let
+    Source = ...,
+    #"Promoted Headers" = ...,
+    #"Changed Type" = ...
+in
+    #"Changed Type"
+```
+
+### Tarea 2: Añadir comentarios
+
+Modifica el script para incluir comentarios de una línea y de bloque.
+
+```powerquery
+let
+    // Paso 1: lectura del archivo CSV desde la URL parametrizada
+    Source = Csv.Document(
+        Web.Contents(pRutaArchivo),
+        [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]
+    ),
+
+    /*
+       Paso 2: promoción de encabezados.
+       Mantener este paso cerca del origen facilita interpretar las columnas.
+    */
+    #"Encabezados promovidos" = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+
+    // Paso 3: definición explícita de tipos de datos
+    #"Tipos definidos" = Table.TransformColumnTypes(#"Encabezados promovidos", {
+        {"FechaPedido", type date},
+        {"ClienteID", type text},
+        {"ImporteLinea", type number}
+    })
+in
+    #"Tipos definidos"
+```
+
+4. Selecciona **Listo**.
+
+> Nota: Ajusta la lista de columnas y tipos al esquema real de tu CSV. Si una columna no existe, Power Query devolverá error.
+
+### Tarea 3: Crear un paso manual en M
+
+1. En `FactEnvios`, abre el **Editor avanzado**.
+2. Antes de la línea `in`, agrega un paso para reemplazar valores nulos en una columna categórica:
+
+```powerquery
+#"Segmento sin nulos" = Table.ReplaceValue(
+    #"Paso anterior",
+    null,
+    "Sin clasificar",
+    Replacer.ReplaceValue,
+    {"SegmentoServicio"}
+)
+```
+
+3. Cambia `#"Paso anterior"` por el nombre real del paso inmediatamente anterior.
+4. Cambia la línea después de `in` para que devuelva `#"Segmento sin nulos"`.
+
+---
+
+## Ejercicio 9: Plegado de consultas
+
+En este ejercicio analizarás el plegado de consultas y por qué no todas las operaciones pueden plegarse.
+
+### Concepto
+
+El plegado de consultas ocurre cuando Power Query traduce pasos de transformación al lenguaje del origen, por ejemplo SQL, para que el procesamiento ocurra en el sistema de origen en lugar de en Power BI Desktop.
+
+Con archivos CSV, como en este laboratorio, normalmente no hay un motor remoto capaz de ejecutar filtros, agrupaciones o joins. Por ello, muchas transformaciones no tendrán la opción **Ver consulta nativa**.
+
+### Tarea 1: Comprobar consulta nativa
+
+1. Selecciona `stg_ParcelCraft_Clean`.
+2. En **Pasos aplicados**, haz clic derecho sobre un paso intermedio, por ejemplo `Filas filtradas`.
+3. Busca la opción **Ver consulta nativa**.
+4. Observa que probablemente aparece deshabilitada.
+
+### Tarea 2: Interpretar el resultado
+
+1. Documenta en una nota del informe:
+   - el origen es CSV/web;
+   - no hay motor SQL subyacente;
+   - Power Query procesa las transformaciones después de descargar el archivo;
+   - en orígenes como SQL Server, Dataverse o algunos conectores OData, el plegado puede mejorar rendimiento.
+
+### Tarea 3: Buenas prácticas relacionadas con plegado
+
+Aplica estas recomendaciones:
+
+- Filtra filas lo antes posible.
+- Elimina columnas innecesarias al inicio.
+- Evita pasos que rompan el plegado cuando trabajes con orígenes que sí lo soportan.
+- Usa parámetros para facilitar cambios entre desarrollo, pruebas y producción.
+- Revisa **Ver consulta nativa** cuando el origen sea SQL u otro motor compatible.
+
+---
+
+## Ejercicio 10: Cargar el modelo y validar relaciones
+
+En este ejercicio cargarás únicamente las consultas finales y validarás el modelo.
+
+### Tarea 1: Cerrar y aplicar
+
+1. Revisa que solo estén habilitadas para carga:
+   - `FactEnvios` o `FactEnvios_ConTarifa`;
+   - `DimFecha`;
+   - `DimCliente`;
+   - `DimProductoServicio`;
+   - `DimUbicacion`;
+   - `DimTransportista`;
+   - `DimEstado`;
+   - opcionalmente `map_TarifasServicio` si será usada como dimensión de mapeo.
+2. Selecciona **Inicio > Cerrar y aplicar**.
+3. Espera a que el modelo se cargue.
+
+### Tarea 2: Crear relaciones
+
+1. Ve a la vista **Modelo**.
+2. Crea relaciones de uno a varios desde dimensiones hacia la tabla de hechos:
+   - `DimCliente` 1 → * `FactEnvios`;
+   - `DimProductoServicio` 1 → * `FactEnvios`;
+   - `DimUbicacion` 1 → * `FactEnvios`;
+   - `DimTransportista` 1 → * `FactEnvios`;
+   - `DimEstado` 1 → * `FactEnvios`;
+   - `DimFecha` 1 → * `FactEnvios` usando la fecha principal.
+3. Asegura que la dirección de filtro sea **Única** desde dimensión hacia hecho, salvo que exista una razón clara para usar bidireccional.
+
+### Tarea 3: Validación rápida
+
+1. Crea una página de informe llamada `Validación`.
+2. Agrega una tarjeta con el conteo de filas de `FactEnvios`.
+3. Agrega una matriz con:
+   - filas: `DimFecha[Año]`, `DimFecha[Mes]`;
+   - valores: suma de `FactEnvios[ImporteLinea]` o métrica equivalente.
+4. Agrega un gráfico de barras con:
+   - eje: `DimTransportista[Transportista]` o equivalente;
+   - valores: conteo de envíos.
+5. Comprueba que los filtros funcionan desde las dimensiones.
+
+---
+
+## Buenas prácticas aplicadas en el laboratorio
+
+- Usar parámetros para rutas y conexiones.
+- Separar consultas staging, auxiliares y de modelo.
+- Usar referencias para reutilizar lógica común.
+- Deshabilitar la carga de staging y auxiliares.
+- Definir tipos de datos explícitamente.
+- Filtrar filas y columnas tempranamente.
+- Nombrar consultas y pasos de forma clara.
+- Evitar columnas innecesarias en la tabla de hechos.
+- Crear dimensiones sin duplicados.
+- Documentar código M con comentarios.
+- Auditar duplicados antes de cargar el modelo final.
+- Revisar plegado de consultas cuando el origen lo permita.
+
+---
+
+## Entregables
+
+Al finalizar, debes tener un archivo `.pbix` con:
+
+1. Parámetro `pRutaArchivo`.
+2. Consultas organizadas en grupos.
+3. Una consulta staging limpia.
+4. Una tabla de hechos.
+5. Al menos cinco dimensiones.
+6. Consultas auxiliares con carga deshabilitada.
+7. Una consulta de auditoría de duplicados.
+8. Uso de combinación y anexo de consultas.
+9. Uso de dinamización y anulación de dinamización.
+10. Al menos una columna personalizada y una columna desde ejemplos.
+11. Código M documentado.
+12. Página de validación con visuales básicos.
+
+---
+
+## Reto opcional avanzado
+
+Si terminas antes de tiempo:
+
+1. Crea un parámetro adicional llamado `pFiltrarAnio` de tipo número entero.
+2. Úsalo para filtrar `FactEnvios` por año.
+3. Crea una función personalizada que reciba una fecha y devuelva una etiqueta:
+   - `Antes de plazo`;
+   - `En plazo`;
+   - `Tarde`.
+4. Aplica la función a la tabla de hechos.
+5. Documenta en M qué pasos podrían plegarse si el origen fuera SQL Server.
+
+
+---
+
+# Resumen
+En este laboratorio has creado un flujo completo de preparación de datos en Power Query: desde la ingesta parametrizada de un CSV web hasta la construcción de un modelo de estrella preparado para análisis. También has practicado transformaciones intermedias y avanzadas, técnicas de auditoría, organización profesional de consultas y fundamentos de M.
+
+### Recursos útiles
+- Documentación oficial de Power Query: https://learn.microsoft.com/power-query/
+- Mejores prácticas de modelado en Power BI: https://learn.microsoft.com/power-bi/guidance/star-schema
+- Funciones del lenguaje M: https://learn.microsoft.com/powerquery-m/
+- Guía de transformación de datos en Power BI: https://learn.microsoft.com/power-bi/transform-model/
+
+### 🎉 Fin del laboratorio
+¡Enhorabuena! Has completado este laboratorio y ya tienes una base sólida en preprocesamiento de datos con Power Query. Este es un paso clave para construir modelos analíticos robustos y escalables. ¡Nos vemos en el siguiente lab! 👏
+
