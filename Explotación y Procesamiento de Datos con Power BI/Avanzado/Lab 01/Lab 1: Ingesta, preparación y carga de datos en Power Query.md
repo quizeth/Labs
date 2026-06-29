@@ -97,7 +97,7 @@ En este ejercicio crearás un parámetro para almacenar la URL del archivo CSV y
 )
 ```
 
-4. Presiona **Entrar**.
+4. Presiona **Enter**.
 5. Si no ha identificado automáticamente los encabezados y tipos de datos de cada columna, en la cinta, selecciona **Transformar > Usar la primera fila como encabezados**.
 6. Revisa visualmente los nombres y tipos de columnas.
 7. En **Vista > Calidad de columnas**, activa:
@@ -162,11 +162,7 @@ Los nombres originales proceden del sistema operativo de envíos y usan una conv
 1. Selecciona la consulta `stg_ParcelCraft_Clean`.
 2. En la vista previa de datos, localiza la columna `SHIPMENT_ID`.
 3. Haz doble clic sobre el encabezado de la columna.
-4. Cambia el nombre a:
-
-   ```text
-   EnvíoID
-   ```
+4. Cambia el nombre a `EnvíoID`.
 5. Repite el proceso con las siguientes columnas:
       - SHIPMENT_DATE → FechaEnvío
       - ORDER_CREATED_TS_UTC → FechaCreación
