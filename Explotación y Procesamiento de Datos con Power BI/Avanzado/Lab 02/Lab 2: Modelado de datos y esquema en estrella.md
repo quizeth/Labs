@@ -4,7 +4,7 @@
 
 En el laboratorio anterior transformaste el archivo **ParcelCraft_50k.csv** en una tabla de hechos de envíos y varias dimensiones. En esta segunda parte trabajarás principalmente en la **vista Modelo** de Power BI Desktop para organizar las tablas, crear y administrar relaciones, aplicar propiedades del modelo, definir jerarquías de negocio y dejar preparado el modelo para análisis.
 
-> Nota: la creación de la tabla `Fecha`, los calendarios y las relaciones de fechas alternativas se trasladan al **Laboratorio 3**. Este laboratorio se centra en el modelo en estrella y las relaciones principales entre hechos y dimensiones.
+---
 
 ### Objetivos de aprendizaje
 
@@ -20,9 +20,11 @@ Al finalizar este laboratorio serás capaz de:
 - Configurar propiedades de tablas, columnas, relaciones y modelo.
 - Ocultar columnas técnicas y mejorar la experiencia del usuario final.
 
-### Antes de empezar
+---
 
-#### Requisitos
+## Antes de empezar
+
+### Requisitos
 
 Para completar este laboratorio necesitas:
 - Power BI Desktop instalado.
@@ -32,9 +34,9 @@ Para completar este laboratorio necesitas:
 
 Tienes un archivo inicial y solución disponibles. Si vas a trabajar en el mismo archivo a lo largo de todos los laboratorios, recomiendo empezar a partir de este starter.
 - [Archivo inicial (Starter)](https://github.com/quizeth/Labs/blob/main/Explotaci%C3%B3n%20y%20Procesamiento%20de%20Datos%20con%20Power%20BI/Avanzado/Lab%2002/Files/02-A%20Starter%20ParcelCraft.pbix)
-- [Archivo final (Solución)](https://github.com/quizeth/Labs/blob/main/Explotaci%C3%B3n%20y%20Procesamiento%20de%20Datos%20con%20Power%20BI/Avanzado/Lab%2002/Files/02-A%20Soluci%C3%B3n%20-%20ParcelCraft.pbix)
+- [Archivo final (Solución)](https://github.com/quizeth/Labs/blob/main/Explotaci%C3%B3n%20y%20Procesamiento%20de%20Datos%20con%20Power%20BI/Avanzado/Lab%2002/Files/02-A%20Soluci%C3%B3n%20ParcelCraft.pbix)
 
-#### Convenciones usadas en el laboratorio
+### Convenciones usadas en el laboratorio
 - Cuando se indique seleccionar una vista, usa el panel izquierdo de Power BI Desktop:
   - **Vista Informe**
   - **Vista Tabla**
@@ -45,11 +47,11 @@ Tienes un archivo inicial y solución disponibles. Si vas a trabajar en el mismo
 
 ---
 
-### Ejercicio 1: Revisar el modelo cargado y confirmar el diseño en estrella
+## Ejercicio 1: Revisar el modelo cargado y confirmar el diseño en estrella
 
 En este ejercicio revisarás las tablas cargadas desde Power Query e identificarás qué tabla actuará como hecho y cuáles actuarán como dimensiones.
 
-#### Tarea 1: Abrir el archivo de trabajo
+### Tarea 1: Abrir el archivo de trabajo
 - Abre **Power BI Desktop**.
 - Abre el archivo `.pbix` generado al final del laboratorio anterior.
 - Si Power BI solicita aplicar cambios pendientes de Power Query, selecciona **Aplicar cambios**.
@@ -62,7 +64,7 @@ En este ejercicio revisarás las tablas cargadas desde Power Query e identificar
   - `Ruta`
   - `Servicio`
 
-#### Tarea 2: Identificar hechos y dimensiones
+### Tarea 2: Identificar hechos y dimensiones
 - Localiza la tabla `Envíos`.
 - Confirma que contiene columnas transaccionales, métricas y claves, por ejemplo:
   - `EnvíoID`
@@ -87,7 +89,7 @@ En este ejercicio revisarás las tablas cargadas desde Power Query e identificar
 
 ---
 
-### Ejercicio 2: Crear layouts útiles en la vista Modelo
+## Ejercicio 2: Crear layouts útiles en la vista Modelo
 
 En este ejercicio crearás pocos layouts, pero con un propósito claro. La idea es facilitar la lectura, explicación y mantenimiento del modelo.
 
@@ -97,14 +99,14 @@ Trabajarás con dos layouts:
 
 > Buena práctica: en modelos reales, demasiados layouts pueden generar ruido. Es preferible tener pocos layouts bien diseñados y con un objetivo claro.
 
-#### Tarea 1: Crear el layout principal del modelo estrella
+### Tarea 1: Crear el layout principal del modelo estrella
 - En la **vista Modelo**, localiza las pestañas de layouts en la parte inferior.
 - Crea un nuevo layout y nómbralo `01 - Modelo estrella`.
 - Arrastra `Envíos` al centro del lienzo.
 - Coloca las cinco tablas de dimensiones alrededor.
 - Ajusta el ancho de las tablas para que se vean las claves y columnas principales.
 
-#### Tarea 2: Crear el layout de servicio y SLA
+### Tarea 2: Crear el layout de servicio y SLA
 - Crea un segundo layout y nómbralo `02 - Servicio y SLA`.
 - Añade solo las tablas necesarias para revisar la lógica de servicio:
   - `Envíos`
@@ -115,7 +117,7 @@ Trabajarás con dos layouts:
 
 > Nota: en el **Laboratorio 3** añadirás la tabla `Fecha` y podrás ampliar este layout si quieres revisar relaciones temporales.
 
-#### Tarea 3: Revisar la utilidad de los layouts
+### Tarea 3: Revisar la utilidad de los layouts
 - Vuelve al layout `01 - Modelo estrella`.
 - Comprueba que el modelo se entiende de un vistazo.
 - Verifica que `Envíos` queda claramente identificada como tabla central.
@@ -127,11 +129,11 @@ Trabajarás con dos layouts:
 
 ---
 
-### Ejercicio 3: Crear y administrar relaciones en Power BI
+## Ejercicio 3: Crear y administrar relaciones en Power BI
 
 En este ejercicio crearás manualmente las relaciones principales del modelo. En este archivo, la creación automática de relaciones está intencionalmente deshabilitada, por lo que Power BI no habrá generado relaciones al cargar las tablas.
 
-#### Tarea 1: Confirmar que el modelo no tiene relaciones automáticas
+### Tarea 1: Confirmar que el modelo no tiene relaciones automáticas
 - En la **vista Modelo**, observa el lienzo del modelo.
 - Comprueba que las tablas aparecen sin líneas de relación entre ellas.
 
@@ -142,7 +144,7 @@ En este ejercicio crearás manualmente las relaciones principales del modelo. En
 - Confirma que no hay relaciones creadas o que no hay relaciones relevantes para el modelo.
 - Si encuentras alguna relación no esperada, selecciónala y pulsa **Eliminar**.
 
-#### Tarea 2: Crear la relación Cliente-Envíos
+### Tarea 2: Crear la relación Cliente-Envíos
 - En la ventana **Administrar relaciones**, selecciona **Nuevo**.
 - Configura la relación:
   - **Tabla 1:** `Cliente`
@@ -154,7 +156,7 @@ En este ejercicio crearás manualmente las relaciones principales del modelo. En
   - **Hacer esta relación activa:** Activado
 - Selecciona **Aceptar**.
 
-#### Tarea 3: Crear la relación Servicio-Envíos
+### Tarea 3: Crear la relación Servicio-Envíos
 - Selecciona **Nuevo**.
 - Configura la relación:
   - **Tabla 1:** `Servicio`
@@ -166,7 +168,7 @@ En este ejercicio crearás manualmente las relaciones principales del modelo. En
   - **Hacer esta relación activa:** Activado
 - Selecciona **Aceptar**.
 
-#### Tarea 4: Crear la relación Oficina-Envíos
+### Tarea 4: Crear la relación Oficina-Envíos
 - Selecciona **Nuevo**.
 - Configura la relación:
   - **Tabla 1:** `Oficina`
@@ -178,7 +180,7 @@ En este ejercicio crearás manualmente las relaciones principales del modelo. En
   - **Hacer esta relación activa:** Activado
 - Selecciona **Aceptar**.
 
-#### Tarea 5: Crear la relación Ruta-Envíos
+### Tarea 5: Crear la relación Ruta-Envíos
 - Selecciona **Nuevo**.
 - Configura la relación:
   - **Tabla 1:** `Ruta`
@@ -190,7 +192,7 @@ En este ejercicio crearás manualmente las relaciones principales del modelo. En
   - **Hacer esta relación activa:** Activado
 - Selecciona **Aceptar**.
 
-#### Tarea 6: Crear la relación Destino-Envíos
+### Tarea 6: Crear la relación Destino-Envíos
 - Selecciona **Nuevo**.
 - Configura la relación:
   - **Tabla 1:** `Destino`
@@ -204,7 +206,7 @@ En este ejercicio crearás manualmente las relaciones principales del modelo. En
 
 > Nota: en un modelo productivo suele ser preferible relacionar tablas mediante claves numéricas o claves sustitutas estables cuando estén disponibles.
 
-#### Tarea 7: Validar las relaciones creadas
+### Tarea 7: Validar las relaciones creadas
 - Cierra la ventana **Administrar relaciones**.
 - Vuelve a la **vista Modelo**.
 - Comprueba que ahora aparecen líneas de relación entre las dimensiones y `Envíos`.
@@ -216,7 +218,7 @@ En este ejercicio crearás manualmente las relaciones principales del modelo. En
 
 ---
 
-### Ejercicio 4: Resolver una relación varios a varios con una tabla puente
+## Ejercicio 4: Resolver una relación varios a varios con una tabla puente
 
 En este ejercicio explorarás una relación conceptual de varios a varios entre `Cliente` y `Servicio` sin usar DAX.
 
@@ -226,7 +228,7 @@ Este patrón permite representar la relación `Cliente` ↔ `Servicio` mediante 
 - `Cliente` → `ClienteServicio`
 - `Servicio` → `ClienteServicio`
 
-#### Tarea 1: Comprobar el escenario varios a varios
+### Tarea 1: Comprobar el escenario varios a varios
 - Ve a la **vista Informe**.
 - Añade una visualización de tabla.
 - Agrega los campos `Cliente[Cliente]` y `Servicio[Servicio]`.
@@ -236,7 +238,7 @@ La visualización no representa correctamente qué servicios están realmente as
 
 > Observación: esto no significa que el modelo esté mal. En un modelo en estrella, las dimensiones normalmente filtran a la tabla de hechos, pero no se filtran directamente entre sí.
 
-#### Tarea 2: Crear la tabla puente en Power Query
+### Tarea 2: Crear la tabla puente en Power Query
 - En la cinta **Inicio**, selecciona **Transformar datos**.
 - En el Editor de Power Query, localiza la consulta `stg_ParcelCraft_Clean`.
 - Haz clic derecho sobre `stg_ParcelCraft_Clean` y selecciona **Referencia**.
@@ -255,7 +257,7 @@ La visualización no representa correctamente qué servicios están realmente as
 
 **Resultado esperado:** el modelo contiene una nueva tabla cargada llamada `ClienteServicio`, con las columnas `ClienteID` y `ServicioID`.
 
-#### Tarea 3: Crear un layout para la tabla puente
+### Tarea 3: Crear un layout para la tabla puente
 - Ve a la **vista Modelo**.
 - Crea un nuevo layout llamado `03 - Puente Cliente Servicio`.
 - Añade al layout las tablas:
@@ -266,7 +268,7 @@ La visualización no representa correctamente qué servicios están realmente as
 - Coloca `Cliente` a la izquierda.
 - Coloca `Servicio` a la derecha.
 
-#### Tarea 4: Crear relaciones con la tabla puente
+### Tarea 4: Crear relaciones con la tabla puente
 - En la cinta, selecciona **Modelado > Administrar relaciones**.
 - Selecciona **Detección automática**.
 - Si tu modelo está bien configurado, se habrán detectado estas dos nuevas relaciones:
@@ -281,7 +283,7 @@ La visualización no representa correctamente qué servicios están realmente as
 
 > Importante: no crees una relación directa entre `Cliente` y `Servicio`. Tampoco conectes `ClienteServicio` con `Envíos` en este ejercicio.
 
-#### Tarea 5: Validar la tabla puente
+### Tarea 5: Validar la tabla puente
 - Vuelve a la vista de informe.
 - Añade una nueva visualización de tabla.
 - Agrega los campos:
@@ -306,11 +308,11 @@ La visualización no representa correctamente qué servicios están realmente as
 
 ---
 
-### Ejercicio 5: Crear jerarquías de negocio
+## Ejercicio 5: Crear jerarquías de negocio
 
 En este ejercicio crearás jerarquías para mejorar la navegación y el autoservicio en los informes.
 
-#### Tarea 1: Crear jerarquía geográfica de destino
+### Tarea 1: Crear jerarquía geográfica de destino
 - Ve a la **vista Modelo**.
 - Expande la tabla `Destino`.
 - Haz clic derecho sobre `Región (Destino)`.
@@ -321,7 +323,7 @@ En este ejercicio crearás jerarquías para mejorar la navegación y el autoserv
   - `Ciudad (Destino)`
   - `Código Postal (Destino)`
 
-#### Tarea 2: Crear jerarquía operativa de oficina
+### Tarea 2: Crear jerarquía operativa de oficina
 - Expande la tabla `Oficina`.
 - Crea una jerarquía llamada `Oficinas`.
 - Añade las columnas en este orden:
@@ -329,7 +331,7 @@ En este ejercicio crearás jerarquías para mejorar la navegación y el autoserv
   - `Ciudad`
   - `Oficina`
 
-#### Tarea 3: Crear jerarquía de servicio
+### Tarea 3: Crear jerarquía de servicio
 - Expande la tabla `Servicio`.
 - Crea una jerarquía llamada `Servicios`.
 - Añade las columnas en este orden:
@@ -340,11 +342,11 @@ En este ejercicio crearás jerarquías para mejorar la navegación y el autoserv
 
 ---
 
-### Ejercicio 6: Configurar propiedades de tablas y columnas
+## Ejercicio 6: Configurar propiedades de tablas y columnas
 
 En este ejercicio mejorarás la experiencia de usuario del modelo ocultando columnas técnicas, configurando formatos y añadiendo metadatos.
 
-#### Tarea 1: Ocultar columnas de claves técnicas
+### Tarea 1: Ocultar columnas de claves técnicas
 - En la **vista Modelo**, haz clic en el panel de Datos y selecciona **Expandir todo**.
 - Oculta las columnas que no deberían usarse directamente en visualizaciones:
   - `ClienteID` en todas las tablas.
@@ -359,7 +361,7 @@ Para ocultar una columna:
 
 > Buena práctica: las claves técnicas son esenciales para relaciones, pero generalmente no deben exponerse al usuario final.
 
-#### Tarea 2: Configurar formatos numéricos
+### Tarea 2: Configurar formatos numéricos
 - Selecciona `Envíos[Precio total]`.
 - En **Herramientas de columna**, configura:
   - **Formato:** Moneda
@@ -369,7 +371,7 @@ Para ocultar una columna:
   - `Precio base`
   - `Surplus fuel`
 
-#### Tarea 3: Configurar categorías de datos
+### Tarea 3: Configurar categorías de datos
 - Selecciona `Destino[Ciudad (Destino)]`.
 - En **Propiedades > Avanzado > Categoría de datos**, selecciona `Ciudad`.
 - Selecciona `Destino[Código Postal (Destino)]`.
@@ -378,14 +380,14 @@ Para ocultar una columna:
 - Configura la categoría como `País o región` si aplica a tu modelo.
 - Repite los pasos para las columnas `Ciudad` y `Región` de la tabla `Oficina`.
 
-#### Tarea 4: Configurar resumen predeterminado
+### Tarea 4: Configurar resumen predeterminado
 - Selecciona las columnas `Precio total`, `Peso (KG)` o `Intentos`.
 - En **Propiedades > Avanzado > Resumir por**, configúralas:
   - `Precio total`: Suma
   - `Peso (KG)`: Suma o Promedio, según criterio analítico
   - `Intentos`: Suma o Promedio, según el análisis esperado
 
-#### Tarea 5: Añadir descripciones
+### Tarea 5: Añadir descripciones
 - En la tabla `Envíos`, selecciona la columna `EntregaTardia`.
 - En el panel **Propiedades**, localiza **Descripción**.
 - Escribe: `Indica si la entrega se realizó después de la fecha y hora comprometida por SLA.`
@@ -398,7 +400,7 @@ Para ocultar una columna:
 
 ---
 
-### Entregables
+## Entregables
 
 Al finalizar, debes tener un archivo `.pbix` con:
 - Modelo en estrella con `Envíos` como tabla de hechos.
@@ -417,7 +419,9 @@ Al finalizar, debes tener un archivo `.pbix` con:
 - Formatos, categorías de datos y resúmenes predeterminados configurados.
 - Descripciones añadidas a columnas clave.
 
-### Resumen
+---
+
+# Resumen
 
 En este laboratorio has convertido las tablas preparadas en Power Query en un **modelo semántico profesional**. Has revisado el diseño en estrella, creado layouts en la vista Modelo, configurado relaciones principales, creado una tabla puente para resolver una relación conceptual varios a varios, creado jerarquías de negocio y ajustado propiedades de tablas, columnas y relaciones.
 
