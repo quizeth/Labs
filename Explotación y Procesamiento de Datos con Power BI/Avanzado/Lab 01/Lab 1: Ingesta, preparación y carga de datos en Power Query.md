@@ -250,6 +250,7 @@ En la columna de Intentos se ha añadido un 0 al final. Como resultado, el núme
 2. Selecciona **Transformar** > **Extraer** > **Primeros caracteres**.
 3. En **Recuento**, escribe 1 y selecciona **Aceptar**.
 4. Renombra el paso aplicado como `Eliminado 0 final en intentos`.
+5. Cambia el tipo de datos de **Intentos** a **Número entero**.
 
 ### Tarea 5: Crear columnas personalizadas
 
@@ -585,22 +586,27 @@ En este ejercicio usarás consultas auxiliares para practicar combinaciones (mer
 8. Expande la columna resultante y conserva solo `FactorTarifa`. Desmarca la opción **Usar el nombre de columna original como prefijo**.
 9. Crea una columna personalizada llamada `ImporteAjustado`:
 
-### Tarea 3: Crear consultas para anexar
+### Tarea 3: Importar el archivo de duplicados para anexar
 
-En esta tarea dividirás la tabla `Envíos` en dos consultas auxiliares según si el envío fue entregado tarde o no. Después, volverás a anexarlas para reconstruir el conjunto original.
+En esta tarea anexarás el archivo `ParcelCraft_50_dups.csv` a la consulta `stg_ParcelCraft_Raw` para simular una nueva carga operativa con registros duplicados. El archivo tiene la misma estructura técnica original del CSV de ParcelCraft. Al anexar los nuevos datos antes de aplicar la limpieza, las transformaciones de `stg_ParcelCraft_Clean` se aplicarán una sola vez sobre el conjunto combinado.
 
-1. Crea una referencia de `Envíos`.
-2. Cambia el nombre a `aux_Envios_Tardios`.
-3. Crea otra referencia de `Envíos`.
-4. Cambia el nombre a `aux_Envios_Puntuales`.
-5. En la consulta `aux_Envios_Tardios`, filtra la columna `Entrega tardía` para ver solo los valores `TRUE`.
-6. En la consulta `aux_Envios_Puntuales`, filtra la columna `Entrega tardía` para ver solo los valores `FALSE`.
-7. Desde `aux_Envios_Tardios`, selecciona **Inicio > Anexar consultas**.
-8. En la ventana de anexado, `aux_Envios_Puntuales`.
-9. Comprueba que el número de filas de aux_Envios_Reconstruidos coincide con el número de filas de Envíos (menos los valores `NULL` en la columna `Entrega tardía`).
-10. Elimina las consultas.
+1. En Power Query, selecciona **Inicio > Nuevo origen > Web**.
+2. Configura la conexión:
+  - **Dirección URL:** `https://raw.githubusercontent.com/quizeth/Labs/refs/heads/main/Explotaci%C3%B3n%20y%20Procesamiento%20de%20Datos%20con%20Power%20BI/Avanzado/Lab%2001/Files/ParcelCraft_50_dups.csv`
+  - **Tipo de autenticación:** Anónima
+3. Selecciona **Siguiente**, revisa que la tabla se esté importando correctamente, y selecciona **Transform**.
+4. Renombra la consulta a `stg_ParcelCraft_dups_Raw`.
+5. Mueve la consulta al grupo **Staging**.
+6. Selecciona `stg_ParcelCraft_dups_Raw` como la tabla para anexar y haz clic en **Aceptar**.
 
-> Este ejercicio permite practicar el uso de anexar consultas. En un escenario real, esta técnica es útil cuando recibes datos separados por estado, periodo, región, canal o condición operativa y necesitas consolidarlos en una única tabla.
+### Tarea 4: Anexa las consultas raw y valida el resultado
+
+1. Selecciona la consulta `stg_ParcelCraft_Raw`.
+2. Selecciona **Inicio > Anexar consultas**.
+3. Renombra el paso aplicado como `Raw con duplicados anexados`.
+4. Para validar que las consultas se han anexado correctamente, examina la distribución de columnas de `EnvíoID` en la tabla `stg_ParcelCraft_Clean` y observa como ha cambiado.
+
+<img width="1173" height="276" alt="image" src="https://github.com/user-attachments/assets/9c93d180-4047-4749-a596-c6e5dcf95d4e" />
 
 ---
 
@@ -612,10 +618,12 @@ En este ejercicio organizarás las consultas según su propósito y deshabilitar
 
 1. Haz clic derecho en cada consulta staging y auxiliar. desactiva **Habilitar carga**.:
    - `stg_ParcelCraft_Raw`
+   - `stg_ParcelCraft_dups_Raw`
    - `stg_ParcelCraft_Clean`
    - `aux_MetricasPorServicio`
    - `aux_MetricasPivot`
    - `map_TarifasServicio`
+   - `qa_DuplicadosNegocio`
      
 2. Si Power BI advierte que otras consultas dependen de ella, acepta mantener las dependencias.
 3. Guarda el archivo y aplica los cambios. Verás que las tablas con la carga deshabilitada no aparecen en el panel de datos en Power BI.
@@ -624,138 +632,237 @@ En este ejercicio organizarás las consultas según su propósito y deshabilitar
 
 ---
 
-## Ejercicio 7 (Opcional, avanzado): Identificar y filtrar duplicados por múltiples columnas
+## Ejercicio 7 (Opcional, recomendado): Identificar y filtrar duplicados por múltiples columnas
 
-En este ejercicio detectarás duplicados de negocio basados en una combinación de columnas.
+En este ejercicio detectarás duplicados de negocio basados en una combinación de columnas relevantes del conjunto de datos de ParcelCraft.
+
+El objetivo no es eliminar filas vacías ni errores, sino identificar posibles registros repetidos del mismo envío y, si procede, conservar una versión única para análisis.
 
 ### Tarea 1: Crear consulta de auditoría de duplicados
 
 1. Haz clic derecho en `stg_ParcelCraft_Clean`.
 2. Selecciona **Referencia**.
 3. Cambia el nombre a `qa_DuplicadosNegocio`.
-4. Conserva las columnas que definen la unicidad de una transacción, por ejemplo:
-   - identificador de pedido o envío;
-   - línea de pedido;
-   - cliente;
-   - fecha;
-   - producto o servicio.
+4. Conserva las columnas que definen la unicidad lógica de un envío:
+   - `EnvíoID`
+   - `FechaEnvío`
+   - `FechaCreación`
+   - `OficinaID`
+   - `ClienteID`
+   - `ServicioID`
+   - `Código Postal (Destino)`
 
-### Tarea 2: Agrupar para detectar duplicados
+5. Conserva también la columna `ÚltimaExtracción`.
+> La columna `ÚltimaExtracción` no se usa para identificar duplicados, pero sí puede usarse después para conservar el registro más reciente.
 
+6. Renombra el paso aplicado como `Columnas de auditoría seleccionadas`.
+
+### Tarea 3: Agrupar para detectar duplicados
 1. Selecciona **Transformar > Agrupar por**.
-2. Selecciona **Avanzado**.
-3. Agrega las columnas de negocio que definen la unicidad.
-4. Crea una nueva columna:
-   - Nombre: `ConteoFilas`
-   - Operación: **Contar filas**
-5. Selecciona **Aceptar**.
-6. Filtra `ConteoFilas` para conservar valores mayores que 1.
+2. En la ventana **Agrupar por**, selecciona **Avanzado**.
+3. Agrega agrupaciones para las todas las columnas, excepto `ÚltimaExtracción`.
+4. Crea una nueva columna con esta configuración:
+  - **Nombre de nueva columna**: `ConteoFilas`
+  - **Operación**: Recuento de filas
 
-### Tarea 3: Crear una consulta sin duplicados
+5. Agrega las siguientes columnas de agrupación (todas excepto `ÚltimaExtracción`) y selecciona **Aceptar**:.
+   - `EnvíoID`
+   - `FechaEnvío`
+   - `FechaCreación`
+   - `OficinaID`
+   - `ClienteID`
+   - `ServicioID`
+   - `Código Postal (Destino)`
 
-1. Crea otra referencia a `stg_ParcelCraft_Clean`.
-2. Cambia el nombre a `stg_ParcelCraft_SinDuplicados`.
-3. Selecciona las columnas de negocio que definen la unicidad.
-4. En la cinta, selecciona **Inicio > Quitar filas > Quitar duplicados**.
-5. Compara el número de filas con `stg_ParcelCraft_Clean`.
+6. Selecciona el menú desplegable de filtros (icono de la flecha hacia abajo) en el encabezado de la columna **ConteoFilas**.
+7. Haz clic en **Filtro de número > **Mayor que**
+8. Configura el filtro para conservar filas en las que "ConteoFilas" **es mayor que 1** y selecciona Aceptar.
+9. Renombra el paso aplicado como `Duplicados filtrados`.
 
-### Tarea 4: Alternativa avanzada en M
+> Si esta consulta devuelve filas, significa que existen registros repetidos para la misma combinación lógica de envío, cliente, servicio, oficina y destino.
 
-Puedes crear una consulta de duplicados usando `Table.Group`.
+### Tarea 4: Eliminar duplicados en la tabla limpia
 
-```powerquery
-let
-    Source = stg_ParcelCraft_Clean,
+En esta tarea eliminarás los duplicados directamente sobre la consulta `stg_ParcelCraft_Clean`, sin crear una consulta adicional. El objetivo es conservar únicamente el registro más reciente de cada envío lógico.
 
-    // Agrupa por la clave natural del negocio.
-    // Sustituye estos nombres por las columnas reales del archivo.
-    GroupedRows = Table.Group(
-        Source,
-        {"PedidoID", "LineaPedido", "ClienteID", "FechaPedido", "ProductoID"},
-        {
-            {"ConteoFilas", each Table.RowCount(_), Int64.Type},
-            {"Filas", each _, type table}
-        }
-    ),
+> Importante: este enfoque modifica directamente la consulta limpia que usarás como base para el modelo. Si quieres conservar una versión de auditoría, crea antes una referencia o duplica la consulta.
 
-    // Conserva solo combinaciones repetidas
-    OnlyDuplicates = Table.SelectRows(GroupedRows, each [ConteoFilas] > 1)
-in
-    OnlyDuplicates
-```
+1. Selecciona la consulta `stg_ParcelCraft_Clean`
+2. Ordena la columna `ÚltimaExtracción` en orden descendente.
 
-> Este enfoque permite conservar una tabla anidada con las filas duplicadas originales para auditoría.
+> Esto coloca primero el registro más reciente de cada posible duplicado.
+
+3. Renombra el paso aplicado como `Filas ordenadas por última extracción`.
+4. Selecciona las columnas que definen la unicidad lógica de un envío:
+   - `EnvíoID`
+   - `FechaEnvío`
+   - `FechaCreación`
+   - `OficinaID`
+   - `ClienteID`
+   - `ServicioID`
+   - `Código Postal (Destino)`
+
+5. Con esas columnas seleccionadas, ve a la cinta y selecciona **Inicio > Quitar filas > Quitar duplicados**
+6. Actualiza la  vista previa de la consulta.
+7. Vuelve a `qa_DuplicadosNegocio` y pulsa **Actualizar vista previa**.
+8. Si los duplicados se han eliminado correctamente, la consulta debería estar vacía. Si quitas el filtro de `ConteoFilas`, verás que ahora el único valor de la columna es **1**.
+
+> Al ordenar primero por ÚltimaExtracción descendente, Power Query conserva la primera aparición de cada combinación duplicada. Como la primera aparición es la más reciente, se mantiene el registro más actualizado.
 
 ---
 
 ## Ejercicio 8: (Opcional, avanzado) Sección avanzada de M y comentarios en pasos aplicados
 
-En este ejercicio revisarás el código M generado por Power Query y añadirás comentarios para documentar la lógica.
+En este ejercicio revisarás el código M generado por Power Query y añadirás comentarios para documentar la lógica de transformación aplicada sobre el conjunto de datos de ParcelCraft.
 
 ### Tarea 1: Abrir el Editor avanzado
 
 1. Selecciona `stg_ParcelCraft_Clean`.
 2. En la cinta, selecciona **Inicio > Editor avanzado**.
-3. Revisa la estructura general:
+3. Revisa la estructura general del código M. Observa que cada transformación aplicada desde la interfaz de Power Query se convierte en un paso dentro del bloque `let`:
 
 ```powerquery
 let
-    Source = ...,
-    #"Promoted Headers" = ...,
-    #"Changed Type" = ...
+    Origen = ...,
+    #"Tipos definidos" = ...,
+    #"Columnas renombradas" = ...
 in
-    #"Changed Type"
+    #"Duplicados quitados"
 ```
+4. Identifica los pasos principales de la consulta, por ejemplo:
+   - origen de datos;
+   - cambio de tipos;
+   - creación de columna condicional;
+   - creación de columnas personalizadas;
+   - renombrado de columnas;
+   - ordenación por ÚltimaExtracción;
+   - eliminación de duplicados. 
 
-### Tarea 2: Añadir comentarios
 
-Modifica el script para incluir comentarios de una línea y de bloque.
+### Tarea 2: Añadir comentarios en M
 
-```powerquery
-let
-    // Paso 1: lectura del archivo CSV desde la URL parametrizada
-    Source = Csv.Document(
-        Web.Contents(pRutaArchivo),
-        [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]
-    ),
+En esta tarea añadirás comentarios al código M para documentar qué hace cada bloque de transformación.
+
+1. Dentro del **Editor avanzado**, localiza los pasos principales.
+2. Añade comentarios a cada paso describiendo qué hacen.
+   - Añade comentarios de una línea usando `//`.
+   - Añade comentarios de bloque (múltiples líneas) usando `/* . . . */`.
+
+<details>
+  <summary>Ejemplo de código comentado</summary>
+  
+   ```
+   let
+    // Paso 1: origen de datos ya anexado con el archivo principal y el archivo de duplicados
+    Source = stg_ParcelCraft_Raw_Anexada,
 
     /*
-       Paso 2: promoción de encabezados.
-       Mantener este paso cerca del origen facilita interpretar las columnas.
+       Paso 2: definición explícita de tipos de datos.
+       Este paso es importante antes de crear columnas calculadas,
+       especialmente para fechas, horas SLA, importes y pesos.
     */
-    #"Encabezados promovidos" = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+    #"Tipos definidos" =
+        Table.TransformColumnTypes(
+            Source,
+            {
+                {"SHIPMENT_ID", type text},
+                {"SHIPMENT_DATE", type date},
+                {"ORDER_CREATED_TS_UTC", type datetimezone},
+                {"LAST_EVENT_TS_UTC", type datetimezone},
+                {"DELIVERED_TS_UTC", type datetimezone},
+                {"OFFICE_CODE", type text},
+                {"CUSTOMER_CODE", type text},
+                {"SERVICE_CODE", type text},
+                {"SLA_HOURS", Int64.Type},
+                {"DEST_POSTAL_CODE", Int64.Type},
+                {"WEIGHT_KG", type number},
+                {"BASE_PRICE_EUR", type number},
+                {"FUEL_SURCHARGE_EUR", type number},
+                {"TOTAL_PRICE_EUR", type number},
+                {"ATTEMPT_COUNT", Int64.Type},
+                {"EXTRACT_TS_UTC", type datetimezone}
+            }
+        ),
 
-    // Paso 3: definición explícita de tipos de datos
-    #"Tipos definidos" = Table.TransformColumnTypes(#"Encabezados promovidos", {
-        {"FechaPedido", type date},
-        {"ClienteID", type text},
-        {"ImporteLinea", type number}
-    })
+    // Paso 3: cálculo de la fecha compromiso según la fecha de creación y las horas SLA
+    #"Fecha compromiso SLA agregada" =
+        Table.AddColumn(
+            #"Tipos definidos",
+            "FechaCompromisoSLA",
+            each [ORDER_CREATED_TS_UTC] + #duration(0, [SLA_HOURS], 0, 0),
+            type datetimezone
+        ),
+
+    // Paso 4: indicador lógico para identificar entregas fuera del SLA
+    #"Entrega tardía agregada" =
+        Table.AddColumn(
+            #"Fecha compromiso SLA agregada",
+            "EntregaTardia",
+            each
+                if [DELIVERED_TS_UTC] = null then null
+                else if [DELIVERED_TS_UTC] > [FechaCompromisoSLA] then true
+                else false,
+            type logical
+        ),
+
+    /*
+       Paso 5: renombrado de columnas técnicas.
+       Este paso convierte nombres de sistema en nombres comprensibles
+       para usuarios de negocio.
+    */
+    #"Columnas renombradas" =
+        Table.RenameColumns(
+            #"Entrega tardía agregada",
+            {
+                {"SHIPMENT_ID", "EnvíoID"},
+                {"SHIPMENT_DATE", "FechaEnvío"},
+                {"ORDER_CREATED_TS_UTC", "FechaCreación"},
+                {"LAST_EVENT_TS_UTC", "FechaActualización"},
+                {"DELIVERED_TS_UTC", "FechaEntrega"},
+                {"OFFICE_CODE", "OficinaID"},
+                {"OFFICE_NAME", "Oficina"},
+                {"CITY", "Ciudad"},
+                {"REGION", "Región"},
+                {"HUB_TYPE", "Tipo de hub"},
+                {"CUSTOMER_CODE", "ClienteID"},
+                {"CUSTOMER_NAME", "Cliente"},
+                {"CUSTOMER_SEGMENT", "Segmento"},
+                {"CUSTOMER_TYPE", "Tipo de cliente"},
+                {"PREFERRED_SERVICE_CODE", "Servicio preferido"},
+                {"SERVICE_CODE", "ServicioID"},
+                {"SERVICE_NAME", "Nombre del servicio"},
+                {"PRIORITY_LEVEL", "Prioridad"},
+                {"SLA_HOURS", "Horas SLA"},
+                {"TEMPERATURE_CONTROL_FLAG", "ControlTemperatura"},
+                {"DEST_POSTAL_CODE", "Código Postal (Destino)"},
+                {"DEST_CITY", "Ciudad (Destino)"},
+                {"DEST_REGION", "Región (Destino)"},
+                {"ROUTE_CODE", "RutaID"},
+                {"CARRIER_MODE", "Modo de transporte"},
+                {"WEIGHT_KG", "Peso (KG)"},
+                {"WEIGHT_BAND_RAW", "BandaPesoRaw"},
+                {"BASE_PRICE_EUR", "Precio base"},
+                {"FUEL_SURCHARGE_EUR", "Surplus fuel"},
+                {"TOTAL_PRICE_EUR", "Precio total"},
+                {"DELIVERY_STATUS", "Estado"},
+                {"ATTEMPT_COUNT", "Intentos"},
+                {"EXTRACT_TS_UTC", "ÚltimaExtracción"}
+            }
+        )
 in
-    #"Tipos definidos"
-```
+    #"Columnas renombradas"
+   ```
+</details>
 
-4. Selecciona **Listo**.
+> Nota: no es necesario que tu consulta tenga exactamente los mismos pasos. El objetivo es entender cómo se documentan las transformaciones y cómo Power Query traduce las acciones de la interfaz a lenguaje M.
 
-> Nota: Ajusta la lista de columnas y tipos al esquema real de tu CSV. Si una columna no existe, Power Query devolverá error.
+3. Vuelve al panel de Pasos Aplicados y observa como puedes ver los comentarios como descripciones tipo tooltip (al pasar el cursor por encima).
 
-### Tarea 3: Crear un paso manual en M
+### Tarea 3: Crear una función M para auditar duplicados
 
-1. En `FactEnvios`, abre el **Editor avanzado**.
-2. Antes de la línea `in`, agrega un paso para reemplazar valores nulos en una columna categórica:
+En esta tarea crearás una función reutilizable en M que reciba una tabla y una lista de columnas clave, y devuelva únicamente las combinaciones duplicadas.
 
-```powerquery
-#"Segmento sin nulos" = Table.ReplaceValue(
-    #"Paso anterior",
-    null,
-    "Sin clasificar",
-    Replacer.ReplaceValue,
-    {"SegmentoServicio"}
-)
-```
-
-3. Cambia `#"Paso anterior"` por el nombre real del paso inmediatamente anterior.
-4. Cambia la línea después de `in` para que devuelva `#"Segmento sin nulos"`.
+Esta función permitirá auditar duplicados en cualquier consulta sin tener que repetir manualmente los pasos de agrupación.
 
 ---
 
