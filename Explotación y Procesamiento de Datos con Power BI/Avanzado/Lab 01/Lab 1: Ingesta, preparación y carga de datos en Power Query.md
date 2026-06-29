@@ -173,7 +173,7 @@ Los nombres originales proceden del sistema operativo de envíos y usan una conv
       - CUSTOMER_CODE → ClienteID
       - CUSTOMER_NAME → Cliente
       - SERVICE_CODE → ServicioID
-      - SERVICE_NAME → Nombre del servicio
+      - SERVICE_NAME → Servicio
       - TOTAL_PRICE_EUR → Precio total
       - DELIVERY_STATUS → Estado
       - ATTEMPT_COUNT → Intentos
@@ -210,7 +210,7 @@ También puedes renombrar todas las columnas en un único paso usando el Editor 
             {"CUSTOMER_TYPE", "Tipo de cliente"},
             {"PREFERRED_SERVICE_CODE", "Servicio preferido"},
             {"SERVICE_CODE", "ServicioID"},
-            {"SERVICE_NAME", "Nombre del servicio"},
+            {"SERVICE_NAME", "Servicio"},
             {"PRIORITY_LEVEL", "Prioridad"},
             {"SLA_HOURS", "Horas SLA"},
             {"TEMPERATURE_CONTROL_FLAG", "ControlTemperatura"},
@@ -245,7 +245,7 @@ En la columna de Intentos se ha añadido un 0 al final. Como resultado, el núme
 3. En **Recuento**, escribe 1 y selecciona **Aceptar**.
 4. Renombra el paso aplicado como `Eliminado 0 final en intentos`.
 
-### Tarea 4: Crear columnas personalizadas
+### Tarea 5: Crear columnas personalizadas
 
 Crea indicadores de negocio que se usarán después en la tabla de hechos.
 
@@ -282,7 +282,7 @@ Crea indicadores de negocio que se usarán después en la tabla de hechos.
 **Resultado esperado**: la columna FechaCompromisoSLA representa la fecha y hora máxima esperada de entrega según el SLA, y EntregaTardia indica si el envío fue entregado fuera de plazo.
 
 
-### Tarea 5: Crear una columna desde ejemplos
+### Tarea 6: Crear una columna desde ejemplos
 
 1. Selecciona **Agregar columna > Columna a partir de ejemplos > A partir de todas las columnas**.
 2. Crea una columna llamada `Segmento de servicio`.
@@ -296,7 +296,7 @@ Crea indicadores de negocio que se usarán después en la tabla de hechos.
 
 **Resultado esperado:** tendrás una consulta limpia, tipada y enriquecida con columnas calculadas.
 
-### Tarea 5: Crear una columna para limpiar datos
+### Tarea 7: Crear una columna para limpiar datos
 
 1. Selecciona **Agregar columna > Columna condicional**.
 2. Crea una segunda columna llamada `Rango de peso`.
@@ -384,7 +384,7 @@ El modelo resultante tendrá esta estructura lógica:
 2. Cambia el nombre a `Servicio`.
 3. Conserva las columnas relacionadas con servicios:
    - `ServicioID`
-   - `Nombre del servicio`
+   - `Servicio`
    - `Prioridad`
    - `Horas SLA`
 
@@ -468,6 +468,7 @@ El modelo resultante tendrá esta estructura lógica:
      - `Staging`: `pRutaArchivo`, `stg_ParcelCraft_Raw`, `stg_ParcelCraft_Clean`
      - `Hechos`: `Envíos`
      - `Dimensiones`: `Cliente`, `Servicio`, `Ubicación`, `Destino`, `Ruta`
+     - `Auxiliares`: vacía por ahora
 
 **Resultado esperado:** tendrás una consulta de hechos y varias dimensiones listas para cargar al modelo.
 
@@ -486,7 +487,7 @@ Vamos a crear una consulta auxiliar que se usará para practicar transformacione
 4. Mueve la consulta al grupo `Auxiliares`.
 5. Conserva columnas categóricas relacionadas con el servicio, por ejemplo:
    - `ServicioID`
-   - `Nombre del servicio`
+   - `Servicio`
    - `Prioridad`
 
 6. Conserva varias columnas numéricas que puedan analizarse como métricas:
@@ -533,13 +534,15 @@ En esta tarea convertirás varias columnas numéricas en pares atributo-valor. E
 1. Crea una referencia de `aux_MetricasPorServicio`.
 2. Cambia el nombre a `aux_MetricasPivot`.
 3. Selecciona la columna `Metrica`.
-4. Selecciona **Transformar > Columna dinámica**.
-5. En **Columna de valores**, selecciona `ValorMetrica`.
-6. En **Opciones avanzadas**, elige **Suma**.
-7. Revisa el resultado: cada métrica debe convertirse en una columna.
-8. Ajusta el tipo de datos de las nuevas columnas:
-   - `Horas SLA`, `Peso (KG)`, `Intentos`: Número entero
-   - `Precio base`, `Surplus fuel`, `Precio total`: Número decimal fijo
+4. Filtra la columna y quédate solo con el `Peso (KG)` y `Precio total`.
+5. Selecciona **Transformar > Columna dinámica**.
+6. En **Columna de valores**, selecciona `ValorMetrica`.
+7. En **Opciones avanzadas**, elige **Suma**.
+8. Revisa el resultado: cada métrica debe convertirse en una columna.
+9. 5. Renombra el paso aplicado como: `Métricas dinamizadas`
+10. Ajusta el tipo de datos de las nuevas columnas:
+   - `Peso (KG)`: Número entero
+   - `Precio total`: Número decimal fijo
 
 > Este patrón es útil para pasar de formatos anchos a largos y de formatos largos a anchos según las necesidades de visualización y modelado.
 
@@ -547,51 +550,51 @@ En esta tarea convertirás varias columnas numéricas en pares atributo-valor. E
 
 ## Ejercicio 5: Combinar y anexar tablas
 
-En este ejercicio usarás consultas auxiliares para practicar merges y appends.
+En este ejercicio usarás consultas auxiliares para practicar combinaciones (merges) y anexos (appends).
 
 ### Tarea 1: Crear una tabla de tarifas por segmento
 
-1. Selecciona **Inicio > Introducir datos**.
+1. Selecciona **Inicio > Especificar datos**.
 2. Crea una tabla llamada `map_TarifasServicio` con dos columnas:
 
-| SegmentoServicio | FactorTarifa |
+| Servicio | FactorTarifa |
 |---|---:|
-| Urgente | 1.25 |
-| Estándar | 1.00 |
-| Económico | 0.85 |
-| Sin clasificar | 1.00 |
+| Same Day | 1,50 |
+| Express | 1,25 |
+| Standard | 1,00 |
+| Economy | 0,85 |
 
 3. Selecciona **Aceptar**.
-4. Comprueba que `FactorTarifa` es número decimal.
+4. Mueve la consulta al grupo **Auxiliares**.
+5. Comprueba que `FactorTarifa` es número decimal.
 
 ### Tarea 2: Combinar consultas
 
-1. Selecciona `FactEnvios`.
-2. Selecciona **Inicio > Combinar consultas > Combinar consultas como nuevas**.
-3. Tabla principal: `FactEnvios`.
-4. Tabla secundaria: `map_TarifasServicio`.
-5. Selecciona la columna `SegmentoServicio` en ambas tablas.
-6. Tipo de combinación: **Externa izquierda**.
-7. Nombra la nueva consulta `FactEnvios_ConTarifa`.
-8. Expande la columna resultante y conserva solo `FactorTarifa`.
+1. Selecciona `Servicio`.
+2. Selecciona **Inicio > Combinar consultas**.
+   - Tabla principal: `Servicio`.
+   - Tabla secundaria: `map_TarifasServicio`.
+   - Selecciona la columna `Prioridad` en ambas tablas.
+   - Tipo de combinación: **Externa izquierda**.
+8. Expande la columna resultante y conserva solo `FactorTarifa`. Desmarca la opción **Usar el nombre de columna original como prefijo**.
 9. Crea una columna personalizada llamada `ImporteAjustado`:
-
-```powerquery
-[ImporteLinea] * [FactorTarifa]
-```
 
 ### Tarea 3: Crear consultas para anexar
 
-1. Crea una referencia de `FactEnvios`.
-2. Cambia el nombre a `aux_Envios_Urgentes`.
-3. Filtra `SegmentoServicio` = `Urgente`.
-4. Crea otra referencia de `FactEnvios`.
-5. Cambia el nombre a `aux_Envios_NoUrgentes`.
-6. Filtra `SegmentoServicio` diferente de `Urgente`.
-7. Selecciona **Inicio > Anexar consultas > Anexar consultas como nuevas**.
-8. Anexa `aux_Envios_Urgentes` y `aux_Envios_NoUrgentes`.
-9. Nombra el resultado `aux_Envios_Reconstruidos`.
-10. Comprueba que el número de filas coincide con `FactEnvios`.
+En esta tarea dividirás la tabla `Envíos` en dos consultas auxiliares según si el envío fue entregado tarde o no. Después, volverás a anexarlas para reconstruir el conjunto original.
+
+1. Crea una referencia de `Envíos`.
+2. Cambia el nombre a `aux_Envios_Tardios`.
+3. Crea otra referencia de `Envíos`.
+4. Cambia el nombre a `aux_Envios_Puntuales`.
+5. En la consulta `aux_Envios_Tardios`, filtra la columna `Entrega tardía` para ver solo los valores `TRUE`.
+6. En la consulta `aux_Envios_Puntuales`, filtra la columna `Entrega tardía` para ver solo los valores `FALSE`.
+7. Desde `aux_Envios_Tardios`, selecciona **Inicio > Anexar consultas**.
+8. En la ventana de anexado, `aux_Envios_Puntuales`.
+9. Comprueba que el número de filas de aux_Envios_Reconstruidos coincide con el número de filas de Envíos (menos los valores `NULL` en la columna `Entrega tardía`).
+10. Elimina las consultas.
+
+> Este ejercicio permite practicar el uso de anexar consultas. En un escenario real, esta técnica es útil cuando recibes datos separados por estado, periodo, región, canal o condición operativa y necesitas consolidarlos en una única tabla.
 
 ---
 
@@ -599,24 +602,7 @@ En este ejercicio usarás consultas auxiliares para practicar merges y appends.
 
 En este ejercicio organizarás las consultas según su propósito y deshabilitarás la carga de consultas auxiliares.
 
-### Tarea 1: Crear grupos de consultas
-
-1. En el panel **Consultas**, haz clic derecho en un espacio vacío.
-2. Selecciona **Nuevo grupo**.
-3. Crea estos grupos:
-   - `00 Parámetros`;
-   - `01 Staging`;
-   - `02 Modelo`;
-   - `03 Auxiliares`;
-   - `04 Mapeos`.
-4. Arrastra las consultas a sus grupos:
-   - `pRutaArchivo` a `00 Parámetros`;
-   - `stg_ParcelCraft_Raw` y `stg_ParcelCraft_Clean` a `01 Staging`;
-   - `FactEnvios`, `DimFecha`, `DimCliente`, `DimProductoServicio`, `DimUbicacion`, `DimTransportista`, `DimEstado` a `02 Modelo`;
-   - `aux_*` a `03 Auxiliares`;
-   - `map_TarifasServicio` a `04 Mapeos`.
-
-### Tarea 2: Deshabilitar carga de consultas
+### Tarea 1: Deshabilitar carga de consultas
 
 1. Haz clic derecho en cada consulta staging y auxiliar:
    - `stg_ParcelCraft_Raw`;
