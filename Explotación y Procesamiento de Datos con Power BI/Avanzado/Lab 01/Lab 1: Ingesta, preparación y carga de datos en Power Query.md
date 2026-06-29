@@ -575,7 +575,7 @@ En este ejercicio usarás consultas auxiliares para practicar combinaciones (mer
 4. Mueve la consulta al grupo **Auxiliares**.
 5. Comprueba que `FactorTarifa` es número decimal.
 
-### Tarea 2: Combinar consultas
+### Tarea 2: Combinar consultas de servicio y tarifa
 
 1. Selecciona `Servicio`.
 2. Selecciona **Inicio > Combinar consultas**.
@@ -586,7 +586,17 @@ En este ejercicio usarás consultas auxiliares para practicar combinaciones (mer
 8. Expande la columna resultante y conserva solo `FactorTarifa`. Desmarca la opción **Usar el nombre de columna original como prefijo**.
 9. Crea una columna personalizada llamada `ImporteAjustado`:
 
-### Tarea 3: Importar el archivo de duplicados para anexar
+### Tarea 3: Añadir DestinoID a tabla de hechos
+
+1. Selecciona `Envíos`
+2. Selecciona **Inicio > Combinar consultas**.
+   - Tabla principal: `Servicio`.
+   - Tabla secundaria: `Destino`.
+   - Selecciona la columna `Código Postal (Destino)` en ambas tablas.
+   - Tipo de combinación: **Externa izquierda**.
+8. Expande la columna resultante y conserva solo `DestinoID`. Desmarca la opción **Usar el nombre de columna original como prefijo**.
+
+### Tarea 4: Importar el archivo de duplicados para anexar
 
 En esta tarea anexarás el archivo `ParcelCraft_50_dups.csv` a la consulta `stg_ParcelCraft_Raw` para simular una nueva carga operativa con registros duplicados. El archivo tiene la misma estructura técnica original del CSV de ParcelCraft. Al anexar los nuevos datos antes de aplicar la limpieza, las transformaciones de `stg_ParcelCraft_Clean` se aplicarán una sola vez sobre el conjunto combinado.
 
@@ -599,7 +609,7 @@ En esta tarea anexarás el archivo `ParcelCraft_50_dups.csv` a la consulta `stg_
 5. Mueve la consulta al grupo **Staging**.
 6. Selecciona `stg_ParcelCraft_dups_Raw` como la tabla para anexar y haz clic en **Aceptar**.
 
-### Tarea 4: Anexa las consultas raw y valida el resultado
+### Tarea 5: Anexa las consultas raw y valida el resultado
 
 1. Selecciona la consulta `stg_ParcelCraft_Raw`.
 2. Selecciona **Inicio > Anexar consultas**.
