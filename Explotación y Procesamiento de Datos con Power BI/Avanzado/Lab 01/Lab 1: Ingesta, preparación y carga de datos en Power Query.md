@@ -612,6 +612,7 @@ En este ejercicio organizarás las consultas según su propósito y deshabilitar
    - `aux_Envios_Urgentes`;
    - `aux_Envios_NoUrgentes`;
    - `aux_Envios_Reconstruidos`.
+     
 2. Desactiva **Habilitar carga**.
 3. Si Power BI advierte que otras consultas dependen de ella, acepta mantener las dependencias.
 
@@ -619,7 +620,7 @@ En este ejercicio organizarás las consultas según su propósito y deshabilitar
 
 ---
 
-## Ejercicio 7: Identificar y filtrar duplicados por múltiples columnas
+## Ejercicio 7 (Opcional, avanzado): Identificar y filtrar duplicados por múltiples columnas
 
 En este ejercicio detectarás duplicados de negocio basados en una combinación de columnas.
 
@@ -788,50 +789,6 @@ Aplica estas recomendaciones:
 - Evita pasos que rompan el plegado cuando trabajes con orígenes que sí lo soportan.
 - Usa parámetros para facilitar cambios entre desarrollo, pruebas y producción.
 - Revisa **Ver consulta nativa** cuando el origen sea SQL u otro motor compatible.
-
----
-
-## Ejercicio 10: Cargar el modelo y validar relaciones
-
-En este ejercicio cargarás únicamente las consultas finales y validarás el modelo.
-
-### Tarea 1: Cerrar y aplicar
-
-1. Revisa que solo estén habilitadas para carga:
-   - `FactEnvios` o `FactEnvios_ConTarifa`;
-   - `DimFecha`;
-   - `DimCliente`;
-   - `DimProductoServicio`;
-   - `DimUbicacion`;
-   - `DimTransportista`;
-   - `DimEstado`;
-   - opcionalmente `map_TarifasServicio` si será usada como dimensión de mapeo.
-2. Selecciona **Inicio > Cerrar y aplicar**.
-3. Espera a que el modelo se cargue.
-
-### Tarea 2: Crear relaciones
-
-1. Ve a la vista **Modelo**.
-2. Crea relaciones de uno a varios desde dimensiones hacia la tabla de hechos:
-   - `DimCliente` 1 → * `FactEnvios`;
-   - `DimProductoServicio` 1 → * `FactEnvios`;
-   - `DimUbicacion` 1 → * `FactEnvios`;
-   - `DimTransportista` 1 → * `FactEnvios`;
-   - `DimEstado` 1 → * `FactEnvios`;
-   - `DimFecha` 1 → * `FactEnvios` usando la fecha principal.
-3. Asegura que la dirección de filtro sea **Única** desde dimensión hacia hecho, salvo que exista una razón clara para usar bidireccional.
-
-### Tarea 3: Validación rápida
-
-1. Crea una página de informe llamada `Validación`.
-2. Agrega una tarjeta con el conteo de filas de `FactEnvios`.
-3. Agrega una matriz con:
-   - filas: `DimFecha[Año]`, `DimFecha[Mes]`;
-   - valores: suma de `FactEnvios[ImporteLinea]` o métrica equivalente.
-4. Agrega un gráfico de barras con:
-   - eje: `DimTransportista[Transportista]` o equivalente;
-   - valores: conteo de envíos.
-5. Comprueba que los filtros funcionan desde las dimensiones.
 
 ---
 
