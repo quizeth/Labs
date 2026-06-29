@@ -240,13 +240,21 @@ También puedes renombrar todas las columnas en un único paso usando el Editor 
 
 
 ### Tarea 4: Corregir errores de calidad
-En la columna de Intentos se ha añadido un 0 al final. Como resultado, el número de intentos que se muestra no es real.
+En la columna `Intentos` se ha añadido un 0 al final. Como resultado, el número de intentos que se muestra no es real.
 
-1. Ve a la columna **Intentos**.
+1. Ve a la columna `Intentos`.
 2. Selecciona **Transformar** > **Extraer** > **Primeros caracteres**.
 3. En **Recuento**, escribe 1 y selecciona **Aceptar**.
 4. Renombra el paso aplicado como `Eliminado 0 final en intentos`.
 5. Cambia el tipo de datos de **Intentos** a **Número entero**.
+
+En la columna `WEIGHT_BAND_RAW`faltan valores. En vez de estar en blanco, vamos a marcarlos como `null`.
+1. Ve a la columna `WEIGHT_BAND_RAW`.
+2. Selecciona **Transformar > Reemplazar los valores**.
+3. En **Valor que buscar**, déjalo en blanco.
+4. En **Reemplazar con**, escribe `null`.
+5. Renombra el paso aplicado como `Rangos de peso vacíos a null`.
+
 
 ### Tarea 5: Crear columnas personalizadas
 
@@ -289,12 +297,12 @@ Crea indicadores de negocio que se usarán después en la tabla de hechos.
 
 1. Selecciona **Agregar columna > Columna a partir de ejemplos > A partir de todas las columnas**.
 2. Crea una columna llamada `Segmento de servicio`.
-3. Escribe ejemplos basados en el contenido de columnas como tipo de servicio, prioridad o método de envío. Por ejemplo:
+3. Escribe ejemplos basados en la columna `Servicio`:
    - si el servicio contiene `Express` o `Urgente`, escribe `Premium`;
    - si contiene `Standard` o `Economy`, escribe `Estándar`;
 4. Revisa la fórmula que Power Query genera automáticamente.
 5. Selecciona **Aceptar**.
-6. 5. Renombra el paso aplicado a `Segmento de servicio agregada`.
+6. Renombra el paso aplicado a `Segmento de servicio agregada`.
 
 
 **Resultado esperado:** tendrás una consulta limpia, tipada y enriquecida con columnas calculadas.
@@ -304,7 +312,7 @@ Crea indicadores de negocio que se usarán después en la tabla de hechos.
 1. Selecciona **Agregar columna > Columna condicional**.
 2. Crea una segunda columna llamada `Rango de peso`.
 3. Configura la nueva columna con estos valores:
-      - Si `WEIGHT_BAND_RAW` no está vacío, devolver WEIGHT_BAND_RAW.
+      - Si `WEIGHT_BAND_RAW` no es igual a `null`, devolver WEIGHT_BAND_RAW.
       - Si `Peso (KG)` es menor o igual que 1, entonces `0-1 kg`.
       - Si `Peso (KG)` es menor o igual que 5, entonces `1-5 kg`.
       - Si `Peso (KG)` es menor o igual que 10, entonces `5-10 kg`.
@@ -313,6 +321,18 @@ Crea indicadores de negocio que se usarán después en la tabla de hechos.
 4. Selecciona **Aceptar**.
 5. Renombra el paso aplicado a `Rango de peso agregada`.
 6. Cambia el tipo de datos de `Rango de peso`a **Texto**.
+
+### Tarea 7: Filtra las columnas no utilizadas
+4. Ve a **Inicio > Administrar columnas > Elegir columnas**.
+5. En la ventana **Elegir columnas**, desactiva las siguientes columnas que no se utilizarán en el modelo:
+   - `WEIGHT_BAND_ROW`
+   - `SOURCE_SYSTEM`
+   - `SOURCE_PLATFORM`
+   - `SAP_DOCUMENT_NO`
+   - `SNOWFLAKE_BATCH_ID`
+   - `ZONE`
+   - `LAT`
+   - `LON`
 
 ---
 
@@ -360,6 +380,7 @@ El modelo resultante tendrá esta estructura lógica:
    - `Precio total`
    - `Intentos`
    - `EntregaTardia`
+   - `Código Postal (Destino)`
 
 6. Comprueba que los tipos de datos son correctos.
 7. Renombra el paso aplicado como `Columnas de hechos seleccionadas`.
@@ -373,7 +394,6 @@ El modelo resultante tendrá esta estructura lógica:
    - `ClienteID`;
    - `Cliente`;
    - `Segmento`;
-   - `Industria`;
    - `Servicio preferido`.
 5. Renombra el paso aplicado como `Columnas de cliente seleccionadas`.
 6. Selecciona la columna que identifica de forma única a un cliente, `ClienteID`
@@ -412,7 +432,7 @@ El modelo resultante tendrá esta estructura lógica:
 5. Selecciona la columna que identifica de forma única a una oficina, `OficinaID`
 6. En la cinta, selecciona **Inicio > Quitar filas > Quitar duplicados**.
 7. Selecciona la columna `Región`.
-8. En la cinta, selecciona **Inicio > Ordenar ascendente**.
+8. En el encabezado de la columna, selecciona **Ordenar ascendente**.
 9. Después, selecciona la columna `OficinaID`.
 10. Mantén pulsada la tecla **Ctrl** y selecciona **Ordenar ascendente**.
 11. Comprueba que los datos quedan ordenados primero por `Región` y, dentro de cada región, por `OficinaID`.
@@ -577,20 +597,22 @@ En este ejercicio usarás consultas auxiliares para practicar combinaciones (mer
 2. Selecciona **Inicio > Combinar consultas**.
    - Tabla principal: `Servicio`.
    - Tabla secundaria: `map_TarifasServicio`.
-   - Selecciona la columna `Prioridad` en ambas tablas.
+   - Selecciona la columna `Servicio` en ambas tablas.
    - Tipo de combinación: **Externa izquierda**.
 8. Expande la columna resultante y conserva solo `FactorTarifa`. Desmarca la opción **Usar el nombre de columna original como prefijo**.
-9. Crea una columna personalizada llamada `ImporteAjustado`:
 
 ### Tarea 3: Añadir DestinoID a tabla de hechos
 
 1. Selecciona `Envíos`
 2. Selecciona **Inicio > Combinar consultas**.
-   - Tabla principal: `Servicio`.
+   - Tabla principal: `Envíos`.
    - Tabla secundaria: `Destino`.
    - Selecciona la columna `Código Postal (Destino)` en ambas tablas.
    - Tipo de combinación: **Externa izquierda**.
 8. Expande la columna resultante y conserva solo `DestinoID`. Desmarca la opción **Usar el nombre de columna original como prefijo**.
+9. Renombra el paso como `DestinoID agregada`.
+10. Elimina la columna **Código postal (Destino)** de la tabla `Envíos`. Ya ha cumplido su función.
+11. Renombra el paso como `CP destino eliminado`.
 
 ### Tarea 4: Importar el archivo de duplicados para anexar
 
@@ -649,7 +671,8 @@ El objetivo no es eliminar filas vacías ni errores, sino identificar posibles r
 1. Haz clic derecho en `stg_ParcelCraft_Clean`.
 2. Selecciona **Referencia**.
 3. Cambia el nombre a `qa_DuplicadosNegocio`.
-4. Conserva las columnas que definen la unicidad lógica de un envío:
+4. Mueve la consulta al grupo **Auxiliares** y deshabilita su carga.
+5. Conserva las columnas que definen la unicidad lógica de un envío:
    - `EnvíoID`
    - `FechaEnvío`
    - `FechaCreación`
@@ -658,14 +681,14 @@ El objetivo no es eliminar filas vacías ni errores, sino identificar posibles r
    - `ServicioID`
    - `Código Postal (Destino)`
 
-5. Conserva también la columna `ÚltimaExtracción`.
+6. Conserva también la columna `ÚltimaExtracción`.
 > La columna `ÚltimaExtracción` no se usa para identificar duplicados, pero sí puede usarse después para conservar el registro más reciente.
 
 6. Renombra el paso aplicado como `Columnas de auditoría seleccionadas`.
 
 ### Tarea 3: Agrupar para detectar duplicados
 1. Selecciona **Transformar > Agrupar por**.
-2. En la ventana **Agrupar por**, selecciona **Avanzado**.
+2. En la ventana **Agrupar por**, selecciona **Uso avanzado**.
 3. Agrega agrupaciones para las todas las columnas, excepto `ÚltimaExtracción`.
 4. Crea una nueva columna con esta configuración:
   - **Nombre de nueva columna**: `ConteoFilas`
@@ -759,66 +782,27 @@ En esta tarea añadirás comentarios al código M para documentar qué hace cada
   
    ```
    let
-    // Paso 1: origen de datos ya anexado con el archivo principal y el archivo de duplicados
-    Source = stg_ParcelCraft_Raw_Anexada,
+    // Consulta de origen.
+    // Se parte de una consulta staging previamente creada llamada stg_ParcelCraft_Raw.
+    Origen = stg_ParcelCraft_Raw,
 
-    /*
-       Paso 2: definición explícita de tipos de datos.
-       Este paso es importante antes de crear columnas calculadas,
-       especialmente para fechas, horas SLA, importes y pesos.
-    */
+    // Definición explícita de tipos de datos para columnas monetarias.
+    // Esto garantiza que los importes se traten como valores de moneda en Power BI.
     #"Tipos definidos" =
         Table.TransformColumnTypes(
-            Source,
+            Origen,
             {
-                {"SHIPMENT_ID", type text},
-                {"SHIPMENT_DATE", type date},
-                {"ORDER_CREATED_TS_UTC", type datetimezone},
-                {"LAST_EVENT_TS_UTC", type datetimezone},
-                {"DELIVERED_TS_UTC", type datetimezone},
-                {"OFFICE_CODE", type text},
-                {"CUSTOMER_CODE", type text},
-                {"SERVICE_CODE", type text},
-                {"SLA_HOURS", Int64.Type},
-                {"DEST_POSTAL_CODE", Int64.Type},
-                {"WEIGHT_KG", type number},
-                {"BASE_PRICE_EUR", type number},
-                {"FUEL_SURCHARGE_EUR", type number},
-                {"TOTAL_PRICE_EUR", type number},
-                {"ATTEMPT_COUNT", Int64.Type},
-                {"EXTRACT_TS_UTC", type datetimezone}
+                {"BASE_PRICE_EUR", Currency.Type},
+                {"FUEL_SURCHARGE_EUR", Currency.Type},
+                {"TOTAL_PRICE_EUR", Currency.Type}
             }
         ),
 
-    // Paso 3: cálculo de la fecha compromiso según la fecha de creación y las horas SLA
-    #"Fecha compromiso SLA agregada" =
-        Table.AddColumn(
-            #"Tipos definidos",
-            "FechaCompromisoSLA",
-            each [ORDER_CREATED_TS_UTC] + #duration(0, [SLA_HOURS], 0, 0),
-            type datetimezone
-        ),
-
-    // Paso 4: indicador lógico para identificar entregas fuera del SLA
-    #"Entrega tardía agregada" =
-        Table.AddColumn(
-            #"Fecha compromiso SLA agregada",
-            "EntregaTardia",
-            each
-                if [DELIVERED_TS_UTC] = null then null
-                else if [DELIVERED_TS_UTC] > [FechaCompromisoSLA] then true
-                else false,
-            type logical
-        ),
-
-    /*
-       Paso 5: renombrado de columnas técnicas.
-       Este paso convierte nombres de sistema en nombres comprensibles
-       para usuarios de negocio.
-    */
+    // Renombrado de columnas técnicas/originales a nombres más legibles para negocio.
+    // También se traducen nombres al español para facilitar el análisis posterior.
     #"Columnas renombradas" =
         Table.RenameColumns(
-            #"Entrega tardía agregada",
+            #"Tipos definidos",
             {
                 {"SHIPMENT_ID", "EnvíoID"},
                 {"SHIPMENT_DATE", "FechaEnvío"},
@@ -836,7 +820,7 @@ En esta tarea añadirás comentarios al código M para documentar qué hace cada
                 {"CUSTOMER_TYPE", "Tipo de cliente"},
                 {"PREFERRED_SERVICE_CODE", "Servicio preferido"},
                 {"SERVICE_CODE", "ServicioID"},
-                {"SERVICE_NAME", "Nombre del servicio"},
+                {"SERVICE_NAME", "Servicio"},
                 {"PRIORITY_LEVEL", "Prioridad"},
                 {"SLA_HOURS", "Horas SLA"},
                 {"TEMPERATURE_CONTROL_FLAG", "ControlTemperatura"},
@@ -846,7 +830,6 @@ En esta tarea añadirás comentarios al código M para documentar qué hace cada
                 {"ROUTE_CODE", "RutaID"},
                 {"CARRIER_MODE", "Modo de transporte"},
                 {"WEIGHT_KG", "Peso (KG)"},
-                {"WEIGHT_BAND_RAW", "BandaPesoRaw"},
                 {"BASE_PRICE_EUR", "Precio base"},
                 {"FUEL_SURCHARGE_EUR", "Surplus fuel"},
                 {"TOTAL_PRICE_EUR", "Precio total"},
@@ -854,21 +837,218 @@ En esta tarea añadirás comentarios al código M para documentar qué hace cada
                 {"ATTEMPT_COUNT", "Intentos"},
                 {"EXTRACT_TS_UTC", "ÚltimaExtracción"}
             }
+        ),
+
+    // Limpieza de la columna Intentos.
+    // Convierte el valor a texto y conserva solo el primer carácter.
+    // Esto parece corregir casos donde los intentos vienen con un 0 adicional o formato no deseado.
+    // Ejemplo: "20" pasaría a "2".
+    #"Eliminado 0 final en intentos" =
+        Table.TransformColumns(
+            #"Columnas renombradas",
+            {
+                {
+                    "Intentos",
+                    each Text.Start(Text.From(_, "es-ES"), 1),
+                    type text
+                }
+            }
+        ),
+
+    // Conversión de la columna Intentos desde texto a número entero.
+    #"Intentos as número entero" =
+        Table.TransformColumnTypes(
+            #"Eliminado 0 final en intentos",
+            {
+                {"Intentos", Int64.Type}
+            }
+        ),
+
+    // Sustituye cadenas vacías por null en la columna WEIGHT_BAND_RAW.
+    // Esto permite tratar correctamente valores faltantes en pasos posteriores.
+    #"Rangos de peso vacíos a null" =
+        Table.ReplaceValue(
+            #"Intentos as número entero",
+            "",
+            null,
+            Replacer.ReplaceValue,
+            {"WEIGHT_BAND_RAW"}
+        ),
+
+    // Crea una nueva columna con la fecha/hora límite de cumplimiento del SLA.
+    // La fecha compromiso se calcula sumando las horas SLA a la fecha de creación del pedido.
+    #"FechaCompromisoSLA agregada" =
+        Table.AddColumn(
+            #"Rangos de peso vacíos a null",
+            "FechaCompromisoSLA",
+            each [FechaCreación] + #duration(0, [Horas SLA], 0, 0)
+        ),
+
+    // Define la nueva columna FechaCompromisoSLA como tipo datetime.
+    #"FechaCompromisoSLA as datetime" =
+        Table.TransformColumnTypes(
+            #"FechaCompromisoSLA agregada",
+            {
+                {"FechaCompromisoSLA", type datetime}
+            }
+        ),
+
+    // Crea una columna lógica para identificar si la entrega fue tardía.
+    // Si no existe FechaEntrega, devuelve null.
+    // Si FechaEntrega es posterior a FechaCompromisoSLA, devuelve true.
+    // En caso contrario, devuelve false.
+    #"Entrega tardía agregada" =
+        Table.AddColumn(
+            #"FechaCompromisoSLA as datetime",
+            "Entrega tardía",
+            each
+                if [FechaEntrega] = null then
+                    null
+                else if [FechaEntrega] > [FechaCompromisoSLA] then
+                    true
+                else
+                    false
+        ),
+
+    // Convierte la columna Entrega tardía al tipo lógico booleano.
+    #"Entrega tardía as bool" =
+        Table.TransformColumnTypes(
+            #"Entrega tardía agregada",
+            {
+                {"Entrega tardía", type logical}
+            }
+        ),
+
+    // Crea una columna de clasificación del servicio en función del segmento de cliente.
+    // SMB se clasifica como Estándar.
+    // Enterprise se clasifica como Premium.
+    // Otros segmentos quedan como null.
+    #"Segmento de servicio agregada" =
+        Table.AddColumn(
+            #"Entrega tardía as bool",
+            "Segmento de servicio",
+            each
+                if [Segmento] = "SMB" then
+                    "Estándar"
+                else if [Segmento] = "Enterprise" then
+                    "Premium"
+                else
+                    null,
+            type text
+        ),
+
+    // Crea una columna de rango de peso.
+    // Primero intenta usar el valor original de WEIGHT_BAND_RAW si existe.
+    // Si está vacío/null, calcula el rango en función de Peso (KG).
+    #"Rango de peso agregada" =
+        Table.AddColumn(
+            #"Segmento de servicio agregada",
+            "Rango de peso",
+            each
+                if [WEIGHT_BAND_RAW] <> null then
+                    [WEIGHT_BAND_RAW]
+                else if [#"Peso (KG)"] <= 1 then
+                    "0-1 kg"
+                else if [#"Peso (KG)"] <= 5 then
+                    "1-5 kg"
+                else if [#"Peso (KG)"] <= 10 then
+                    "5-10 kg"
+                else
+                    "10+ kg"
+        ),
+
+    // Convierte la columna Rango de peso a texto.
+    #"Rango de peso as text" =
+        Table.TransformColumnTypes(
+            #"Rango de peso agregada",
+            {
+                {"Rango de peso", type text}
+            }
+        ),
+
+    // Selecciona únicamente las columnas necesarias para el modelo final.
+    // Este paso elimina columnas auxiliares o técnicas que ya no son necesarias,
+    // como WEIGHT_BAND_RAW, después de haber sido utilizada.
+    #"Otras columnas quitadas" =
+        Table.SelectColumns(
+            #"Rango de peso as text",
+            {
+                "EnvíoID",
+                "FechaEnvío",
+                "FechaCreación",
+                "FechaActualización",
+                "FechaEntrega",
+                "OficinaID",
+                "Oficina",
+                "Ciudad",
+                "Región",
+                "Tipo de hub",
+                "ClienteID",
+                "Cliente",
+                "Segmento",
+                "Tipo de cliente",
+                "Servicio preferido",
+                "ServicioID",
+                "Servicio",
+                "Prioridad",
+                "Horas SLA",
+                "ControlTemperatura",
+                "Código Postal (Destino)",
+                "Ciudad (Destino)",
+                "Región (Destino)",
+                "RutaID",
+                "Modo de transporte",
+                "Peso (KG)",
+                "Precio base",
+                "Surplus fuel",
+                "Precio total",
+                "Estado",
+                "Intentos",
+                "ÚltimaExtracción",
+                "FechaCompromisoSLA",
+                "Entrega tardía",
+                "Segmento de servicio",
+                "Rango de peso"
+            }
+        ),
+
+    // Ordena las filas por ÚltimaExtracción de forma descendente.
+    // Esto permite que, si existen duplicados, quede primero el registro más reciente.
+    #"Filas ordenadas por última extracción" =
+        Table.Sort(
+            #"Otras columnas quitadas",
+            {
+                {"ÚltimaExtracción", Order.Descending}
+            }
+        ),
+
+    // Elimina duplicados usando una combinación de múltiples columnas clave.
+    // Al haberse ordenado previamente por ÚltimaExtracción descendente,
+    // Power Query conservará la primera aparición, es decir, el registro más reciente.
+    #"Duplicados quitados" =
+        Table.Distinct(
+            #"Filas ordenadas por última extracción",
+            {
+                "Código Postal (Destino)",
+                "EnvíoID",
+                "FechaEnvío",
+                "FechaCreación",
+                "OficinaID",
+                "ClienteID",
+                "ServicioID"
+            }
         )
+
+// Devuelve como resultado final la tabla ya tipada, renombrada, enriquecida,
+// depurada y sin duplicados.
 in
-    #"Columnas renombradas"
+    #"Duplicados quitados"
    ```
 </details>
 
 > Nota: no es necesario que tu consulta tenga exactamente los mismos pasos. El objetivo es entender cómo se documentan las transformaciones y cómo Power Query traduce las acciones de la interfaz a lenguaje M.
 
 3. Vuelve al panel de Pasos Aplicados y observa como puedes ver los comentarios como descripciones tipo tooltip (al pasar el cursor por encima).
-
-### Tarea 3: Crear una función M para auditar duplicados
-
-En esta tarea crearás una función reutilizable en M que reciba una tabla y una lista de columnas clave, y devuelva únicamente las combinaciones duplicadas.
-
-Esta función permitirá auditar duplicados en cualquier consulta sin tener que repetir manualmente los pasos de agrupación.
 
 ---
 
