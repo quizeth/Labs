@@ -28,7 +28,7 @@ Al finalizar este laboratorio serás capaz de:
 - Aplicar operaciones de **dinamización** y **anulación de dinamización**.
 - Combinar y anexar consultas para enriquecer o reconstruir datos.
 - Organizar consultas, deshabilitar cargas auxiliares y aplicar buenas prácticas.
-- Revisar código **M**, comentar pasos y comprender el impacto del **plegado de consultas**.
+- Revisar código **M** y comentar pasos.
 
 ---
 ## Antes de empezar
@@ -684,7 +684,7 @@ in
 
 ---
 
-## Ejercicio 8: Sección avanzada de M y comentarios en pasos aplicados
+## Ejercicio 8: (Opcional, avanzado) Sección avanzada de M y comentarios en pasos aplicados
 
 En este ejercicio revisarás el código M generado por Power Query y añadirás comentarios para documentar la lógica.
 
@@ -755,60 +755,6 @@ in
 
 ---
 
-## Ejercicio 9: Plegado de consultas
-
-En este ejercicio analizarás el plegado de consultas y por qué no todas las operaciones pueden plegarse.
-
-### Concepto
-
-El plegado de consultas ocurre cuando Power Query traduce pasos de transformación al lenguaje del origen, por ejemplo SQL, para que el procesamiento ocurra en el sistema de origen en lugar de en Power BI Desktop.
-
-Con archivos CSV, como en este laboratorio, normalmente no hay un motor remoto capaz de ejecutar filtros, agrupaciones o joins. Por ello, muchas transformaciones no tendrán la opción **Ver consulta nativa**.
-
-### Tarea 1: Comprobar consulta nativa
-
-1. Selecciona `stg_ParcelCraft_Clean`.
-2. En **Pasos aplicados**, haz clic derecho sobre un paso intermedio, por ejemplo `Filas filtradas`.
-3. Busca la opción **Ver consulta nativa**.
-4. Observa que probablemente aparece deshabilitada.
-
-### Tarea 2: Interpretar el resultado
-
-1. Documenta en una nota del informe:
-   - el origen es CSV/web;
-   - no hay motor SQL subyacente;
-   - Power Query procesa las transformaciones después de descargar el archivo;
-   - en orígenes como SQL Server, Dataverse o algunos conectores OData, el plegado puede mejorar rendimiento.
-
-### Tarea 3: Buenas prácticas relacionadas con plegado
-
-Aplica estas recomendaciones:
-
-- Filtra filas lo antes posible.
-- Elimina columnas innecesarias al inicio.
-- Evita pasos que rompan el plegado cuando trabajes con orígenes que sí lo soportan.
-- Usa parámetros para facilitar cambios entre desarrollo, pruebas y producción.
-- Revisa **Ver consulta nativa** cuando el origen sea SQL u otro motor compatible.
-
----
-
-## Buenas prácticas aplicadas en el laboratorio
-
-- Usar parámetros para rutas y conexiones.
-- Separar consultas staging, auxiliares y de modelo.
-- Usar referencias para reutilizar lógica común.
-- Deshabilitar la carga de staging y auxiliares.
-- Definir tipos de datos explícitamente.
-- Filtrar filas y columnas tempranamente.
-- Nombrar consultas y pasos de forma clara.
-- Evitar columnas innecesarias en la tabla de hechos.
-- Crear dimensiones sin duplicados.
-- Documentar código M con comentarios.
-- Auditar duplicados antes de cargar el modelo final.
-- Revisar plegado de consultas cuando el origen lo permita.
-
----
-
 ## Entregables
 
 Al finalizar, debes tener un archivo `.pbix` con:
@@ -825,22 +771,6 @@ Al finalizar, debes tener un archivo `.pbix` con:
 10. Al menos una columna personalizada y una columna desde ejemplos.
 11. Código M documentado.
 12. Página de validación con visuales básicos.
-
----
-
-## Reto opcional avanzado
-
-Si terminas antes de tiempo:
-
-1. Crea un parámetro adicional llamado `pFiltrarAnio` de tipo número entero.
-2. Úsalo para filtrar `FactEnvios` por año.
-3. Crea una función personalizada que reciba una fecha y devuelva una etiqueta:
-   - `Antes de plazo`;
-   - `En plazo`;
-   - `Tarde`.
-4. Aplica la función a la tabla de hechos.
-5. Documenta en M qué pasos podrían plegarse si el origen fuera SQL Server.
-
 
 ---
 
