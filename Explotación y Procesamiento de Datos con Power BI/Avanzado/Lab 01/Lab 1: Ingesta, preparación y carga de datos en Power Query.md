@@ -42,6 +42,12 @@ Para completar el laboratorio necesitas:
 - Conocimientos básicos de Power Query.
 - Comprensión básica de modelos relacionales y modelo de estrella.
 
+> [!NOTE]
+> Tienes un archivo inicial y solución disponibles. Si vas a trabajar en el mismo archivo a lo largo de todos los laboratorios, recomiendo empezar a partir de este starter.
+> - [Archivo inicial (Starter)](https://github.com/quizeth/Labs/blob/main/Explotaci%C3%B3n%20y%20Procesamiento%20de%20Datos%20con%20Power%20BI/Avanzado/Lab%2001/Files/01-A%20Starter%20-%20ParcelCraft.pbix)
+> - [Archivo final (Solución)](https://github.com/quizeth/Labs/blob/main/Explotaci%C3%B3n%20y%20Procesamiento%20de%20Datos%20con%20Power%20BI/Avanzado/Lab%2001/Files/01-A%20Soluci%C3%B3n%20-%20ParcelCraft.pbix)
+> 
+
 ### Convenciones usadas en el laboratorio
 
 - Cuando se indique seleccionar una consulta, hazlo desde el panel **Consultas** del Editor de Power Query.
@@ -604,18 +610,16 @@ En este ejercicio organizarás las consultas según su propósito y deshabilitar
 
 ### Tarea 1: Deshabilitar carga de consultas
 
-1. Haz clic derecho en cada consulta staging y auxiliar:
-   - `stg_ParcelCraft_Raw`;
-   - `stg_ParcelCraft_Clean`;
-   - `aux_MetricasPorServicio`;
-   - `aux_MetricasPivot`;
-   - `aux_Envios_Urgentes`;
-   - `aux_Envios_NoUrgentes`;
-   - `aux_Envios_Reconstruidos`.
+1. Haz clic derecho en cada consulta staging y auxiliar. desactiva **Habilitar carga**.:
+   - `stg_ParcelCraft_Raw`
+   - `stg_ParcelCraft_Clean`
+   - `aux_MetricasPorServicio`
+   - `aux_MetricasPivot`
+   - `map_TarifasServicio`
      
-2. Desactiva **Habilitar carga**.
-3. Si Power BI advierte que otras consultas dependen de ella, acepta mantener las dependencias.
-
+2. Si Power BI advierte que otras consultas dependen de ella, acepta mantener las dependencias.
+3. Guarda el archivo y aplica los cambios. Verás que las tablas con la carga deshabilitada no aparecen en el panel de datos en Power BI.
+   
 > Buena práctica: carga al modelo solo las tablas que necesitas para reportar o relacionar. Las consultas staging y auxiliares deben permanecer como preparación interna.
 
 ---
@@ -769,8 +773,6 @@ Al finalizar, debes tener un archivo `.pbix` con:
 8. Uso de combinación y anexo de consultas.
 9. Uso de dinamización y anulación de dinamización.
 10. Al menos una columna personalizada y una columna desde ejemplos.
-11. Código M documentado.
-12. Página de validación con visuales básicos.
 
 ---
 
