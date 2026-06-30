@@ -1,10 +1,10 @@
-## Ejercicio 7: Identificar y filtrar duplicados por múltiples columnas
+# Ejercicio 7: Identificar y filtrar duplicados por múltiples columnas
 
 En este ejercicio detectarás duplicados de negocio basados en una combinación de columnas relevantes del conjunto de datos de ParcelCraft.
 
 El objetivo no es eliminar filas vacías ni errores, sino identificar posibles registros repetidos del mismo envío y, si procede, conservar una versión única para análisis.
 
-### Tarea 1: Crear consulta de auditoría de duplicados
+## Tarea 1: Crear consulta de auditoría de duplicados
 
 1. Haz clic derecho en `ParcelCraft_CLEAN`.
 2. Selecciona **Referencia**.
@@ -24,7 +24,7 @@ El objetivo no es eliminar filas vacías ni errores, sino identificar posibles r
 
 6. Renombra el paso aplicado como `Columnas de auditoría seleccionadas`.
 
-### Tarea 3: Agrupar para detectar duplicados
+## Tarea 3: Agrupar para detectar duplicados
 1. Selecciona **Transformar > Agrupar por**.
 2. En la ventana **Agrupar por**, selecciona **Uso avanzado**.
 3. Agrega agrupaciones para las todas las columnas, excepto `ÚltimaExtracción`.
@@ -48,9 +48,9 @@ El objetivo no es eliminar filas vacías ni errores, sino identificar posibles r
 
 > Si esta consulta devuelve filas, significa que existen registros repetidos para la misma combinación lógica de envío, cliente, servicio, oficina y destino.
 
-### Tarea 4: Eliminar duplicados en la tabla limpia
+## Tarea 4: Eliminar duplicados en la tabla limpia
 
-En esta tarea eliminarás los duplicados directamente sobre la consulta `stg_ParcelCraft_Clean`, sin crear una consulta adicional. El objetivo es conservar únicamente el registro más reciente de cada envío lógico.
+En esta tarea eliminarás los duplicados directamente sobre la consulta `ParcelCraft_CLEAN`, sin crear una consulta adicional. El objetivo es conservar únicamente el registro más reciente de cada envío lógico.
 
 > Importante: este enfoque modifica directamente la consulta limpia que usarás como base para el modelo. Si quieres conservar una versión de auditoría, crea antes una referencia o duplica la consulta.
 
