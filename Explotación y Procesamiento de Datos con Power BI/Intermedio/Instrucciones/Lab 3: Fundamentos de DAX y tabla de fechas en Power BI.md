@@ -3,6 +3,8 @@
 **ParcelCraft** necesita empezar a construir cálculos analíticos reutilizables sobre el modelo semántico creado en los laboratorios anteriores.  
 En este laboratorio crearás tablas calculadas, columnas calculadas y medidas con DAX. También crearás y configurarás la tabla **Fecha**, sus calendarios y sus relaciones con **Envíos**, de forma que el modelo quede preparado para cálculos temporales y análisis operativo.
 
+---
+
 ### Objetivos de aprendizaje
   
 **Tiempo estimado total: 30-45 minutos**  
@@ -15,6 +17,8 @@ Al finalizar este laboratorio serás capaz de:
 - Crear calendarios sobre la tabla Fecha.
 - Crear relaciones activas e inactivas entre Fecha y Envíos.
 - Validar cálculos DAX en visualizaciones.
+
+---
 
 ### Antes de empezar
 
@@ -34,6 +38,8 @@ Tienes un archivo inicial y solución disponibles. Si vas a trabajar en el mismo
 - Cuando se indique una opción de cinta, se mostrará como **pestaña > grupo > comando**.
 - Los nombres de tablas, columnas y medidas deben escribirse exactamente como se indican.
 - Las expresiones DAX se escriben en la barra de fórmulas de Power BI Desktop.
+
+---
 
 ### Ejercicio 1: Crear y configurar la tabla Fecha
   
@@ -607,6 +613,8 @@ Al finalizar, debes tener un archivo `.pbix` con:
 - Columnas calculadas en la tabla **Fecha**: **Es fin de semana**, **Tipo de día**, **Temporada operativa** y **Día hábil semana**.
 - Medidas organizadas en carpetas de visualización.
 - Página **Validación de medidas** con visualizaciones para comprobar que las medidas responden al contexto de filtro.
+
+---
 
 ### Resumen
   
