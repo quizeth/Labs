@@ -1,6 +1,6 @@
 # Laboratorio 4: DAX avanzado, contexto de evaluación e inteligencia de tiempo en Power BI
 
-**ParcelCraft** ya cuenta con un modelo en estrella, una tabla `Fecha` y medidas base. En este laboratorio profundizarás en DAX avanzado siguiendo una progresión natural: primero analizarás el **contexto de evaluación**, después diseñarás medidas reutilizables, construirás medidas cada vez más complejas con variables, aplicarás funciones iteradoras e inteligencia de tiempo, usarás relaciones inactivas con `USERELATIONSHIP()` y, finalmente, centralizarás lógica de negocio mediante grupos de cálculo.
+**ParcelCraft** ya cuenta con un modelo en estrella, una tabla `Fecha` y medidas base. En este laboratorio profundizarás en DAX avanzado siguiendo una progresión natural: primero analizarás el **contexto de evaluación**, después diseñarás medidas reutilizables, construirás medidas cada vez más complejas con variables, aplicarás funciones iteradoras e inteligencia de tiempo, usarás relaciones inactivas con `USERELATIONSHIP()`, y finalmente validarás tu modelo.
 
 El objetivo no es solo crear medidas, sino aprender a razonar como un desarrollador DAX experimentado: entender qué filtros afectan a una medida, decidir cuándo modificar el contexto, separar la lógica en medidas base y medidas derivadas, validar resultados y reducir complejidad del modelo.
 
