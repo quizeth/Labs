@@ -201,6 +201,7 @@ Como es una medida, responde al contexto de filtro actual: por servicio, cliente
 
 3. Configura la medida `Total envíos`:
    - **Formato**: Número entero
+   - **Separador de miles**: Toggle on
    - **Decimales**: 0
    - **Carpeta para mostrar**: Indicadores operativos
 
