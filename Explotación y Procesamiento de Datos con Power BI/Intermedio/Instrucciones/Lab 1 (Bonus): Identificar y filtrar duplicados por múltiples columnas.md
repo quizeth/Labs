@@ -1,4 +1,4 @@
-# Ejercicio 7: Identificar y filtrar duplicados por múltiples columnas
+# Ejercicio: Identificar y filtrar duplicados por múltiples columnas
 
 En este ejercicio detectarás duplicados de negocio basados en una combinación de columnas relevantes del conjunto de datos de ParcelCraft.
 
