@@ -296,7 +296,7 @@ Ocultar claves técnicas reduce ruido para el usuario de negocio. Las columnas s
 2. En **Herramientas de columna**, revisa que **Resumen predeterminado** sea **Suma**.
 3. Selecciona **Envíos | Peso (KG)** y cambia el resumen predeterminado a **Promedio**.
 4. Selecciona **Envíos | Intentos** y cambia el resumen predeterminado a **Suma** o **Promedio**, según el análisis esperado.
-5. Selecciona columnas como **Estado** o **Rango de peso** y asegúrate de que su resumen predeterminado sea **No resumir**.
+5. Selecciona la columna **Servicio | Horas SLA******y asegúrate de que su resumen predeterminado sea **No resumir**.
 
 ### Tarea 5: Configurar categorías de datos
 
