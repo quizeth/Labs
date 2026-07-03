@@ -192,7 +192,7 @@ Si tu versión de Power BI Desktop muestra **Opciones del calendario**, crea est
 <td>—</td>
 </tr>
 <tr>
-<td>Trimestre</td>
+<td>Trimestre del año</td>
 <td>Trimestre</td>
 <td>—</td>
 </tr>
