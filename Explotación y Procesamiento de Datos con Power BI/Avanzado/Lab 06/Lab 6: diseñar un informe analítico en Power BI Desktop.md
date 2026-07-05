@@ -146,11 +146,13 @@ La página debe resumir volumen, ingresos, margen, cumplimiento y evolución tem
 <img width="1175" height="668" alt="image" src="https://github.com/user-attachments/assets/ce75ed63-9ee6-4ea9-83a7-0c22cd310525" />
 
 
-## Ejercicio 6: Crear la página Detalle operativo
+## Ejercicio 2: Crear la página Detalle operativo
   
 En este ejercicio crearás la segunda página del informe. Esta página debe proporcionar una visión más detallada de un ámbito concreto: el rendimiento operativo por oficina y servicio.  
+Para mantener la página clara y útil, trabajarás con una única matriz como objeto visual principal y con pocas segmentaciones de apoyo.
 
-El objetivo es que el usuario pueda comparar oficinas, detectar diferencias por servicio, revisar ingresos, margen y cumplimiento, y explorar la información con mayor granularidad.
+El objetivo es que el usuario pueda comparar oficinas y servicios sin sobrecargar el informe con demasiados gráficos.
+
 
 ### Tarea 1: Configurar la página de detalle
 1. Duplica la página **Visión global**.
@@ -158,7 +160,7 @@ El objetivo es que el usuario pueda comparar oficinas, detectar diferencias por 
 3. Elimina los objetos visuales, dejando únicamente la sección del encabezado.
 4. Inserta un cuadro de texto como encabezado.
 5. Escribe el título: `Detalle operativo`.
-6. Debajo, añade el subtítulo: `Comparativa de volumen, ingresos, margen y cumplimiento por dimensión operativa.`
+6. Debajo, añade el subtítulo: `Comparativa de volumen, ingresos, margen y cumplimiento.`
 
 <img width="1175" height="666" alt="image" src="https://github.com/user-attachments/assets/ded6b062-699e-427c-bb4a-07747fb5810c" />
 
@@ -170,297 +172,179 @@ El objetivo es que el usuario pueda comparar oficinas, detectar diferencias por 
 - **Columnas:** `'Servicio'[Servicio]`
 - **Valores:** `Total envíos`
 - **Valores:** `Ingresos`
-- **Valores:** `Margen estimado`
 - **Valores:** `% margen estimado`
-- **Valores:** `% envíos entregados`
-3. Activa el ajuste de texto si los nombres son largos.
-4. Aplica formato condicional sobre `% margen estimado`.
-5. Usa un color más favorable para porcentajes altos y uno más intenso para porcentajes bajos.
-6. Aplica formato condicional sobre `% envíos entregados` si quieres destacar oficinas con menor cumplimiento.
-7. Cambia el título del visual a Matriz operativa por oficina y servicio.  
+
+4. Configura los totales:
+   - **Objeto visual** > **Subtotales de fila** > **Valores** > **Color de fondo**: `#ffeb99, color del tema 2, 60% más claro` (el amarillo más claro).
+   - **Objeto visual** > **Total general de columna** > **Valores** > **Color de fondo**: `#ffeb99, color del tema 2, 60% más claro` (el amarillo más claro).
+   - **Objeto visual** > **Total general de fila** > **Valores** > **Color de fondo**: `#ffeb99, color del tema 2, 60% más claro` (el amarillo más claro).
+
 **Resultado esperado:** la matriz permite comparar oficinas y servicios a través de medidas clave del modelo semántico.
 
-#### Tarea 3: Crear visuales comparativos de detalle
-1. Inserta un gráfico de dispersión.
-2. Configura el gráfico:
-- **Eje X:** `% margen estimado`
-- **Eje Y:** `% envíos entregados`
-- **Tamaño:** `Total envíos`
-- **Leyenda:** `'Servicio'[Prioridad]`
-- **Detalles:** `'Oficina'[Oficina]`
-3. Cambia el título a Relación entre margen y cumplimiento.
-4. Inserta un gráfico de columnas apiladas.
-5. Configura el gráfico:
-- **Eje X:** `'Oficina'[Oficina]`
-- **Eje Y:** `Total envíos`
-- **Leyenda:** `'Servicio'[Prioridad]`
-6. Cambia el título a Volumen por oficina y prioridad.
-7. Inserta un gráfico de barras.
-8. Configura el gráfico:
-- **Eje Y:** `'Servicio'[Servicio]`
-- **Eje X:** `Margen estimado`
-9. Cambia el título a Margen por servicio.
-10. Inserta una tarjeta adicional con `Ingresos selección visible`.
-11. Cambia el título de la tarjeta a Ingresos de la selección visible.  
-**Resultado esperado:** la página permite analizar relaciones entre margen, cumplimiento, volumen y prioridad.
+<img width="1039" height="593" alt="image" src="https://github.com/user-attachments/assets/42df8973-9ae0-4d1e-8000-d4e200ecdcaa" />
 
-#### Tarea 4: Configurar interacciones entre visuales
-1. Selecciona el gráfico **Volumen por oficina y prioridad**.
-2. En la cinta, selecciona **Formato > Editar interacciones**.
-3. Configura la interacción sobre la matriz como filtro.
-4. Configura la interacción sobre el gráfico de dispersión como filtro.
-5. Configura la interacción sobre el gráfico de barras como filtro.
-6. Selecciona el gráfico de dispersión **Relación entre margen y cumplimiento**.
-7. Configura su interacción sobre la matriz como filtro.
-8. Configura su interacción sobre la tarjeta de `Ingresos selección visible` como filtro.
-9. Desactiva la interacción sobre segmentaciones, si aparece disponible.
-10. Sal de **Editar interacciones**.
-11. Selecciona una oficina en el gráfico de columnas.
-12. Comprueba que los demás visuales se actualizan con el contexto seleccionado.
-13. Selecciona un punto del gráfico de dispersión.
-14. Comprueba que la matriz y la tarjeta muestran el contexto de ese punto.  
-Nota: una interacción bien configurada ayuda a explorar. Una interacción excesiva puede producir lecturas confusas, especialmente si todos los visuales filtran a todos los demás.
 
-#### Tarea 5: Añadir segmentaciones de detalle
-1. Inserta una segmentación con `'Servicio'[Servicio]`.
-2. Inserta una segmentación con `'Servicio'[Prioridad]`.
-3. Inserta una segmentación con `'Cliente'[Segmento]`.
-4. Inserta una segmentación con la jerarquía **Geografía** de la tabla `'Destino'`, si está disponible.
-5. Coloca las segmentaciones en una zona consistente con la página anterior.
-6. Prueba cada segmentación.
-7. Confirma que la matriz, el gráfico de dispersión y los gráficos comparativos se actualizan correctamente.  
-**Resultado esperado:** la página de detalle permite explorar el rendimiento operativo por oficina, servicio, prioridad, cliente y destino.
-
-### Ejercicio 4: Configurar jerarquías y exploración en profundidad
+## Ejercicio 3: Crear la página KPIs Oficina
   
-En este ejercicio utilizarás jerarquías de negocio para facilitar la navegación desde niveles agregados hasta niveles detallados.  
-La exploración en profundidad es útil cuando el usuario no quiere ver todos los detalles de golpe, sino comenzar por una lectura general y descender gradualmente hasta ciudad, oficina, prioridad, servicio o geografía.
+En este ejercicio crearás la tercera página del informe. Esta página debe mostrar KPIs de una oficina concreta y recrear el resultado que más adelante se verá filtrado mediante RLS.
 
-#### Tarea 1: Validar jerarquías disponibles
-1. Ve a la **vista Modelo**.
-2. Expande la tabla `'Oficina'`.
-3. Comprueba si existe la jerarquía **Oficinas**.
-4. Si no existe, crea una jerarquía llamada Oficinas.
-5. Añade las columnas en este orden:
-- `'Oficina'[Región]`
-- `'Oficina'[Ciudad]`
-- `'Oficina'[Oficina]`
-6. Expande la tabla `'Servicio'`.
-7. Comprueba si existe la jerarquía **Servicios**.
-8. Si no existe, crea una jerarquía llamada Servicios.
-9. Añade las columnas en este orden:
-- `'Servicio'[Prioridad]`
-- `'Servicio'[Servicio]`
-10. Expande la tabla `'Destino'`.
-11. Comprueba si existe la jerarquía **Geografía**.
-12. Si no existe, crea una jerarquía llamada Geografía.
-13. Añade las columnas disponibles en orden de mayor a menor nivel, por ejemplo:
-- `'Destino'[Región (Destino)]`
-- `'Destino'[Ciudad (Destino)]`
-- `'Destino'[Código Postal (Destino)]`
-14. Vuelve a la **vista Informe**.
+No implementarás seguridad a nivel de fila en este laboratorio. En su lugar, aplicarás un filtro de página sobre `'Oficina'[Oficina]` para simular que el usuario solo puede ver la información de una oficina.
 
-#### Tarea 2: Crear visual de exploración por oficinas
-1. Ve a la página **Detalle operativo**.
-2. Inserta un gráfico de columnas agrupadas.
-3. Configura el gráfico:
-- **Eje X:** jerarquía **Oficinas** de la tabla `'Oficina'`
-- **Eje Y:** `Total envíos`
-4. Cambia el título a Exploración por jerarquía de oficinas.
-5. Selecciona el visual.
-6. Activa los controles de exploración en profundidad.
-7. Usa la opción de bajar al siguiente nivel.
-8. Navega desde `'Oficina'[Región]` hasta `'Oficina'[Ciudad]`.
-9. Baja desde `'Oficina'[Ciudad]` hasta `'Oficina'[Oficina]`.
-10. Usa la opción de subir nivel para volver a la vista agregada.
-11. Usa la opción de expandir todo al siguiente nivel para comparar todos los elementos con más detalle.  
-**Resultado esperado:** el usuario puede analizar los envíos desde región hasta oficina de forma interactiva.
+El objetivo es que la página sea sencilla, clara y orientada al seguimiento del cumplimiento SLA de una oficina concreta.
 
-#### Tarea 3: Crear visual de exploración por servicio y geografía
-1. Inserta un gráfico de barras horizontales.
+
+### Tarea 1: Crear la página de oficina
+
+1. Duplica la página **Detalle operativo**.
+2. Renombra la nueva página como **KPIs Oficina**.
+3. Elimina la matriz de la página duplicada.
+4. Mantén únicamente el encabezado con el logo, el título y el subtítulo.
+5. Cambia el título por: `KPIs de oficina`.
+6. Cambia el subtítulo por: `El rendimiento de tu oficina de un vistazo`.
+7. Comprueba que el encabezado mantiene el mismo estilo visual que las páginas anteriores.
+
+> Esta página debe parecer parte del mismo informe. Mantén la misma estructura visual, colores, tipografías y espaciado usados en **Visión global** y **Detalle operativo**.
+
+
+### Tarea 2: Aplicar filtro de página por oficina
+
+1. Abre el panel **Filtros**.
+2. Arrastra `'Oficina'[Oficina]` al área **Filtros de esta página**.
+3. En el filtro de `'Oficina'[Oficina]`, selecciona una oficina concreta.
+> Utiliza una oficina con datos suficientes para que los objetos visuales muestren información.
+
+> **Importante**: este filtro no es RLS. Solo simula el resultado visual de una página limitada a una oficina. En un laboratorio posterior, este comportamiento se controlará desde la seguridad a nivel de fila.
+
+
+### Tarea 3: Crear KPIs de cumplimiento SLA
+
+1. Inserta una visualización de tarjeta.
+2. Asigna las siguientes medidas:
+   - `% envíos entregados`
+   - `% envíos tardíos`
+   - `Días medios hasta entrega`
+   - `Promedio intentos`
+   - `Índice operativo ponderado`
+3. Coloca la tarjeta debajo del encabezado.
+4. Ajusta la tarjeta para que cubra el ancho principal del lienzo.
+5. Configura el formato de la tarjeta siguiendo el mismo estilo usado en la página **Visión global**.
+6. Revisa que `% envíos entregados` y `% envíos tardíos` se muestran con formato de porcentaje.
+7. Revisa que `Días medios hasta entrega`, `Promedio intentos` e `Índice operativo ponderado` se muestran con un formato numérico legible.
+8. Confirma que los valores corresponden únicamente a la oficina seleccionada en el filtro de página.
+9. Usa estos KPIs para evaluar la oficina desde una perspectiva operativa: entregas completadas, retrasos, tiempo medio de entrega, intentos y rendimiento operativo ponderado.
+
+**Resultado esperado:** la parte superior de la página muestra indicadores específicos de cumplimiento SLA para la oficina seleccionada.
+
+
+### Tarea 4: Crear visual de seguimiento de entregas
+
+1. Inserta un gráfico de columnas 100% apiladas.
 2. Configura el gráfico:
-- **Eje Y:** jerarquía **Servicios** de la tabla `'Servicio'`
-- **Eje X:** `Ingresos`
-3. Cambia el título a Exploración por jerarquía de servicio.
-4. Activa los controles de exploración del visual.
-5. Baja desde `'Servicio'[Prioridad]` hasta `'Servicio'[Servicio]`.
-6. Comprueba que el usuario puede identificar qué servicios generan más ingresos dentro de cada prioridad.
-7. Inserta un segundo gráfico de barras o mapa, según los campos disponibles.
-8. Configura el visual:
-- **Eje o ubicación:** jerarquía **Geografía** de la tabla `'Destino'`
-- **Valores:** `Total envíos`
-9. Cambia el título a Exploración geográfica de envíos.
-10. Activa la exploración si el visual lo permite.
-11. Ajusta el tamaño del visual para que los nombres sean legibles.  
-**Resultado esperado:** el usuario puede explorar ingresos por servicio y volumen por geografía usando jerarquías reutilizables del modelo.
+   - **Eje X:** `'Fecha'[Año mes]`
+   - **Eje Y:** `Total no entregados`, `Total entregados`. 
+3. En el panel de formato, ve a **General > Título**.
+4. Cambia el título a `Seguimiento mensual de entregas`.
+5. Ordena el visual por `'Fecha'[Año mes]` de forma ascendente.
+6. Coloca el visual debajo de las tarjetas de KPIs, ocupando la zona izquierda de la página.
 
-### Ejercicio 5: Crear la página KPIs Oficina
-  
-En este ejercicio crearás la tercera página del informe. Esta página debe proporcionar KPIs sobre una oficina concreta y recrear lo que más tarde se verá filtrado mediante RLS.  
-No implementarás seguridad a nivel de fila en este laboratorio. Solo aplicarás un filtro de página para simular que el usuario accede a una vista limitada a su oficina.
+**Resultado esperado:** el usuario puede comparar mensualmente el volumen de entregas y no entregas de la oficina seleccionada.
 
-#### Tarea 1: Configurar la página KPIs Oficina
-1. Ve a la página **KPIs Oficina**.
-2. Inserta un cuadro de texto como encabezado.
-3. Escribe el título: KPIs de oficina.
-4. Debajo, añade el subtítulo: Vista enfocada en el rendimiento de una oficina concreta.
-5. Mantén el mismo estilo de títulos, subtítulos y colores utilizado en las páginas anteriores.
-6. Reserva la zona superior para tarjetas de KPIs.
-7. Reserva la zona central para gráficos de seguimiento.
-8. Reserva la parte inferior para una tabla de detalle.
 
-#### Tarea 2: Aplicar filtro de página por oficina
-1. Inserta una segmentación de datos con `'Oficina'[Oficina]`.
-2. Selecciona una oficina concreta.
-3. En el panel **Filtros**, arrastra `'Oficina'[Oficina]` al área **Filtros de esta página**.
-4. Selecciona la misma oficina elegida en la segmentación.
-5. Comprueba que todos los visuales de la página quedan filtrados por esa oficina.
-6. Si quieres simular una vista fija, oculta la segmentación o reduce su presencia visual.
-7. Si quieres permitir comparación manual, mantén visible la segmentación.
-8. Bloquea el filtro de página si quieres evitar cambios accidentales durante la revisión.  
-Importante: esta página no implementa RLS. Solo recrea el resultado visual esperado cuando el contexto del usuario queda limitado a una oficina.
+### Tarea 5: Crear medidas sobre horas SLA
 
-#### Tarea 3: Crear KPIs de oficina
-1. Inserta cinco visuales de tarjeta en la parte superior de la página.
-2. Configura las tarjetas con estas medidas:
-- `Total envíos`
-- `Ingresos`
-- `Margen estimado`
-- `% margen estimado`
-- `% envíos entregados`
-3. Alinea las tarjetas en una misma fila.
-4. Usa el mismo tamaño, color, borde y estilo que en la página **Visión global**.
-5. Comprueba que los valores corresponden a la oficina seleccionada.
-6. Cambia temporalmente la oficina seleccionada y confirma que los KPIs se recalculan.
-7. Vuelve a seleccionar la oficina que usarás como ejemplo final.
+Como el modelo usa grupos de cálculo, evita usar medidas implícitas arrastrando directamente la columna `'Servicio'[SLAHoras]` a un visual. En su lugar, crea una medida explícita para representar el SLA comprometido en horas. También vas a crear una medida para comparar el SLA establecido con las horas reales de entrega.
 
-#### Tarea 4: Crear visuales de seguimiento de oficina
-1. Inserta un gráfico de líneas.
+1. Ve a la tabla `'Medidas'`.
+
+2. Crea la medida `Horas medias hasta entrega`:
+
+```DAX
+Horas medias hasta entrega =
+[Días medios hasta entrega] * 24
+```
+
+3. Crea la medida `Horas SLA`:
+
+```DAX
+Horas SLA =
+MAX('Servicio'[Horas SLA])
+```
+
+4. Configura la medida `Horas medias hasta entrega`:
+   - **Formato**: Número decimal
+   - **Posiciones decimales**: 2
+   - **Carpeta para mostrar**: Indicadores operativos
+
+6. Configura la medida `Horas SLA`:
+   - **Format**: Número entero
+   - **Carpeta para mostrar**: Indicadores operativos
+
+
+**Resultado esperado:** el modelo contiene dos medidas comparables en la misma unidad: `Horas medias hasta entrega` y `Horas SLA`.
+
+
+### Tarea 6: Comparar SLA comprometido y entrega real por servicio
+
+1. Inserta un gráfico de barras agrupadas.
 2. Configura el gráfico:
-- **Eje X:** `'Fecha'[Año mes]`
-- **Eje Y:** `Total envíos`
-3. Cambia el título a Evolución de envíos de la oficina.
-4. Inserta un gráfico de columnas.
-5. Configura el gráfico:
-- **Eje X:** `'Servicio'[Servicio]`
-- **Eje Y:** `Ingresos`
-6. Cambia el título a Ingresos por servicio.
-7. Inserta un gráfico de barras.
-8. Configura el gráfico:
-- **Eje Y:** `'Servicio'[Servicio]`
-- **Eje X:** `Margen estimado`
-9. Cambia el título a Margen por servicio.
-10. Inserta un gráfico de dona.
-11. Configura el gráfico:
-- **Leyenda:** `'Servicio'[Prioridad]`
-- **Valores:** `Total envíos`
-12. Cambia el título a Distribución por prioridad.
-13. Inserta una tabla de detalle.
-14. Agrega los campos:
-- `'Envíos'[EnvíoID]`
-- `'Fecha'[Fecha]`
-- `'Servicio'[Servicio]`
-- `'Cliente'[Segmento]`
-- `'Destino'[Ciudad (Destino)]`
-- `'Envíos'[Peso (KG)]`
-- `'Envíos'[Precio total]`
-15. Coloca la tabla en la parte inferior de la página.
-16. Aplica formato a columnas numéricas y monetarias.  
-**Resultado esperado:** la página muestra KPIs, tendencia, comparativas y detalle de envíos para una única oficina.
+   - **Eje Y:** `'Servicio'[Servicio]`
+   - **Eje X:** `Horas medias hasta entrega`
+   - **Eje X:** `'Horas SLA`
 
-### Ejercicio 6: Aplicar diseño efectivo, filtros y validación final
-  
-En este ejercicio revisarás el informe completo para asegurar que cumple criterios de diseño, navegación y análisis.  
-También configurarás el panel de filtros y validarás que segmentaciones, interacciones y jerarquías se comportan de forma coherente.
+5. Añade estas medidas a **Información sobre herramientas**:
+   - `Total envíos`
+   - `% envíos entregados`
+   - `% envíos entregados`
+   - `% no entregados`
+   - `Promedio intentos`
+   - `Índice operativo ponderado`
 
-#### Tarea 1: Aplicar principios de diseño efectivo
-1. Ve a la página **Visión global**.
-2. Revisa la ubicación de los elementos.
-3. Comprueba que los KPIs principales están en la parte superior.
-4. Verifica que los visuales de análisis ocupan la zona central.
-5. Comprueba que las segmentaciones están en una zona fácil de localizar.
-6. Revisa el equilibrio visual.
-7. Asegúrate de que no hay zonas saturadas de visuales y otras completamente vacías.
-8. Revisa el contraste.
-9. Usa colores intensos solo para destacar información relevante.
-10. Evita usar demasiados colores distintos en una misma página.
-11. Revisa la proximidad.
-12. Agrupa filtros con filtros, KPIs con KPIs y detalles con detalles.
-13. Revisa la repetición.
-14. Usa el mismo estilo de tarjetas, títulos, subtítulos, bordes, colores y espaciado en las tres páginas.
-15. Repite esta revisión en **Detalle operativo**.
-16. Repite esta revisión en **KPIs Oficina**.
+6. En el panel de formato, ve a **General > Título**.
+7. Cambia el título a `SLA comprometido vs horas reales`.
+8. Ordena el visual de mayor a menor por `Horas medias hasta entrega`.
+9. En el panel de formato, ve a **Objeto visual > Barras**.
+10. Selecciona **Aplica configuración a > Serie >** `Horas SLA`.
+11. Cambia el **Color** a `#FFCC00, color del tema 2`.
+12. Coloca este visual a la derecha del gráfico `Composición mensual de entregas`.
 
-#### Tarea 2: Configurar el panel de filtros
-1. Ve a la página **Visión global**.
-2. Selecciona el gráfico **Distribución por prioridad de servicio**.
-3. En el panel **Filtros**, revisa el área **Filtros de este objeto visual**.
-4. Comprueba que el filtro de `'Servicio'[Prioridad]` está disponible para ese visual.
-5. Selecciona un espacio vacío de la página.
-6. En el área **Filtros de esta página**, agrega `'Cliente'[Segmento]`.
-7. Selecciona un segmento de prueba.
-8. Comprueba que toda la página se actualiza.
-9. Borra la selección para volver a mostrar todos los datos.
-10. En el área **Filtros de todas las páginas**, agrega `'Fecha'[Año]` si quieres probar un rango temporal global.
-11. Selecciona un año de prueba.
-12. Navega por las tres páginas y comprueba que el filtro se aplica a todo el informe.
-13. Borra el filtro global si no quieres dejarlo aplicado.
-14. Ve a la página **KPIs Oficina**.
-15. Comprueba que `'Oficina'[Oficina]` está aplicado en **Filtros de esta página**.  
-Nota: utiliza segmentaciones para filtros frecuentes y visibles. Utiliza el panel de filtros para filtros técnicos, de página o de informe completo.
 
-#### Tarea 3: Validar navegación e interacciones
-1. Ve a la página **Visión global**.
-2. Selecciona un valor en `'Fecha'[Año mes]`.
-3. Comprueba que KPIs y gráficos se actualizan.
-4. Selecciona una región o prioridad.
-5. Verifica que el informe refleja únicamente el contexto seleccionado.
-6. Limpia los filtros de la página.
-7. Ve a la página **Detalle operativo**.
-8. Selecciona una oficina en el gráfico de columnas.
-9. Comprueba que la matriz y el gráfico de dispersión se filtran correctamente.
-10. Usa la jerarquía **Oficinas** para bajar un nivel.
-11. Sube de nuevo al nivel anterior.
-12. Verifica que la exploración en profundidad es comprensible.
-13. Ve a la página **KPIs Oficina**.
-14. Confirma que todos los visuales muestran datos de una única oficina.
-15. Selecciona una prioridad en el gráfico de dona.
-16. Comprueba que la tabla inferior se actualiza según la selección.
-17. Limpia la selección del gráfico de dona.
-18. Guarda el archivo.  
-**Resultado esperado:** el informe permite navegar, filtrar y explorar datos de forma clara, consistente y alineada con el modelo semántico creado en laboratorios anteriores.
+**Resultado esperado:** el usuario puede comparar, por servicio, las horas reales medias hasta entrega frente al SLA comprometido y detectar servicios con mayor riesgo operativo.
+
+<img width="1040" height="593" alt="image" src="https://github.com/user-attachments/assets/c8e0e71f-8980-4869-9a06-0c8457661f4d" />
+
+---
 
 ### Entregables
   
 Al finalizar, debes tener un archivo .pbix con:
-- Informe de tres páginas analíticas:
-- Visión global
-- Detalle operativo
-- KPIs Oficina
-- Página **Visión global** con KPIs principales, tendencia temporal, comparativas por oficina, servicio y prioridad.
-- Página **Detalle operativo** con matriz operativa, gráfico de dispersión, gráficos comparativos, segmentaciones e interacciones configuradas.
-- Página **KPIs Oficina** filtrada por una oficina concreta.
-- Uso de medidas existentes del modelo semántico:
-- `Total envíos`
-- `Ingresos`
-- `Margen estimado`
-- `% margen estimado`
-- `% envíos entregados`
-- `Ingresos selección visible`
-- Segmentaciones configuradas con `'Fecha'`, `'Cliente'`, `'Servicio'` y `'Oficina'`.
-- Panel de filtros revisado con filtros de visual, página e informe.
-- Interacciones entre visuales configuradas mediante **Editar interacciones**.
-- Jerarquías utilizadas para exploración en profundidad:
-- Oficinas
-- Servicios
-- Geografía
-- Diseño visual consistente aplicando ubicación, equilibrio, contraste, proximidad y repetición.
-- Página de KPIs preparada para explicar posteriormente el efecto de seguridad a nivel de fila.
 
-### Resumen
+- Tres páginas de informe:
+  - **Visión global**
+  - **Detalle operativo**
+  - **KPIs Oficina**
+
+- Visuales principales para analizar:
+  - KPIs del negocio.
+  - Comparativa por oficina y servicio.
+  - Cumplimiento SLA de una oficina concreta.
+
+- Filtros y segmentaciones configurados para año, servicio y oficina.
+
+- Medidas explícitas creadas:
+  - `Horas medias hasta entrega`
+  - `Horas SLA`
+
+- Diseño visual consistente con el tema y logo de ParcelCraft.
+
+## Resumen
   
-En este laboratorio has transformado el modelo semántico empresarial de ParcelCraft en un **informe analítico de negocio**. Has creado una página de visión global, una página de detalle operativo y una página de KPIs filtrada por una oficina concreta. También has aplicado principios de diseño efectivo, seleccionado objetos visuales adecuados, configurado segmentaciones, usado el panel de filtros, ajustado interacciones entre visuales y utilizado jerarquías para exploración en profundidad.  
-La idea principal es que un buen informe no solo muestra métricas correctas, sino que organiza la información para que el usuario pueda entender, filtrar, comparar y actuar con confianza.
+En este laboratorio has creado un informe analítico de tres páginas para ParcelCraft, partiendo del modelo semántico construido en los laboratorios anteriores.
+
+Has diseñado una página de **Visión global** para el análisis ejecutivo, una página de **Detalle operativo** centrada en la comparación por oficina y servicio, y una página **KPIs Oficina** filtrada por una oficina concreta.
+
+También has aplicado principios de diseño efectivo, usado segmentaciones y filtros, y creado medidas explícitas para comparar el SLA comprometido con las horas reales de entrega.
+
+El resultado es un informe claro, consistente y preparado para ampliarse posteriormente con marcadores y seguridad a nivel de fila.
 
 ### Recursos útiles
 - Tipos de visualizaciones en Power BI: [https://learn.microsoft.com/power-bi/visuals/power-bi-visualization-types-for-reports-and-q-and-a](https://learn.microsoft.com/power-bi/visuals/power-bi-visualization-types-for-reports-and-q-and-a)
@@ -469,6 +353,8 @@ La idea principal es que un buen informe no solo muestra métricas correctas, si
 - Segmentaciones en Power BI: [https://learn.microsoft.com/power-bi/visuals/power-bi-visualization-slicers](https://learn.microsoft.com/power-bi/visuals/power-bi-visualization-slicers)
 - Exploración en profundidad en Power BI: [https://learn.microsoft.com/power-bi/consumer/end-user-drill](https://learn.microsoft.com/power-bi/consumer/end-user-drill)
 - Guía de diseño de informes en Power BI: [https://learn.microsoft.com/power-bi/create-reports/desktop-report-design](https://learn.microsoft.com/power-bi/create-reports/desktop-report-design)
+
+---
 
 ### 🎉 Fin del laboratorio
   
