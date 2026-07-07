@@ -381,6 +381,7 @@ El modelo resultante tendrá esta estructura lógica:
    - `Intentos`
    - `EntregaTardia`
    - `Código Postal (Destino)`
+   - `ÚltimaExtracción`
 
 6. Comprueba que los tipos de datos son correctos.
 7. Renombra el paso aplicado como `Columnas de hechos seleccionadas`.
@@ -394,6 +395,7 @@ El modelo resultante tendrá esta estructura lógica:
    - `ClienteID`;
    - `Cliente`;
    - `Segmento`;
+   - `Tipo de cliente`
    - `Servicio preferido`.
 5. Renombra el paso aplicado como `Columnas de cliente seleccionadas`.
 6. Selecciona la columna que identifica de forma única a un cliente, `ClienteID`
@@ -410,9 +412,10 @@ El modelo resultante tendrá esta estructura lógica:
    - `Servicio`
    - `Prioridad`
    - `Horas SLA`
+   - `Segmento de servicio`
 
 5. Renombra el paso aplicado como `Columnas de servicio seleccionadas`.
-6. Selecciona la columna que identifica de forma única a un cliente, `ServicioID`
+6. Selecciona la columna que identifica de forma única a un servicio, `ServicioID`
 7. En la cinta, selecciona **Inicio > Quitar filas > Quitar duplicados**.
 8. Ordena de forma ascendente por `Horas SLA`.
 9. Renombra el paso aplicado como `Filas ordenadas por SLA`.
@@ -453,7 +456,7 @@ El modelo resultante tendrá esta estructura lógica:
    2. En la cinta, selecciona **Inicio** > **Ordenar ascendente**.
    3. Selecciona la columna `Ciudad (Destino)`.
    4. Mantén pulsada la tecla **Ctrl** y selecciona **Ordenar ascendente**.
-8. Renombra el paso aplicado como `Filas ordenadas por región y CP`.
+8. Renombra el paso aplicado como `Filas ordenadas por región y ciudad`.
 9. Añade una clave artificial para la dimensión. En la cinta, selecciona **Agregar columna **> **Columna de índice** > **Desde 1**.
     
 > La columna `DestinoID` funcionará como clave sustituta de la dimensión. Esto evita relacionar la tabla de hechos usando varias columnas de texto como ciudad, región y código postal. Aunque ahora mismo cada código postal es único, esto lo hace más sostenible ya que `DestinoID` se mantiene única incluso si más adelante se añaden múltiples valores por código postal, como direcciones concretas.
@@ -509,6 +512,7 @@ Vamos a crear una consulta auxiliar que se usará para practicar transformacione
 3. Cambia el nombre a `aux_MetricasPorServicio`.
 4. Mueve la consulta al grupo `Auxiliares`.
 5. Conserva columnas categóricas relacionadas con el servicio, por ejemplo:
+   - `EnvíoID`
    - `ServicioID`
    - `Servicio`
    - `Prioridad`
@@ -668,7 +672,7 @@ El objetivo no es eliminar filas vacías ni errores, sino identificar posibles r
 
 ### Tarea 1: Crear consulta de auditoría de duplicados
 
-1. Haz clic derecho en `stg_ParcelCraft_Clean`.
+1. Haz clic derecho en `Envíos`.
 2. Selecciona **Referencia**.
 3. Cambia el nombre a `qa_DuplicadosNegocio`.
 4. Mueve la consulta al grupo **Auxiliares** y deshabilita su carga.
@@ -677,12 +681,9 @@ El objetivo no es eliminar filas vacías ni errores, sino identificar posibles r
    - `FechaEnvío`
    - `FechaCreación`
    - `OficinaID`
-   - `ClienteID`
    - `ServicioID`
-   - `Código Postal (Destino)`
-
-6. Conserva también la columna `ÚltimaExtracción`.
-> La columna `ÚltimaExtracción` no se usa para identificar duplicados, pero sí puede usarse después para conservar el registro más reciente.
+   - `ClienteID`
+   - `DestinoID`
 
 6. Renombra el paso aplicado como `Columnas de auditoría seleccionadas`.
 
@@ -699,9 +700,9 @@ El objetivo no es eliminar filas vacías ni errores, sino identificar posibles r
    - `FechaEnvío`
    - `FechaCreación`
    - `OficinaID`
-   - `ClienteID`
    - `ServicioID`
-   - `Código Postal (Destino)`
+   - `ClienteID`
+   - `DestinoID`
 
 6. Selecciona el menú desplegable de filtros (icono de la flecha hacia abajo) en el encabezado de la columna **ConteoFilas**.
 7. Haz clic en **Filtro de número > **Mayor que**
@@ -729,7 +730,7 @@ En esta tarea eliminarás los duplicados directamente sobre la consulta `stg_Par
    - `OficinaID`
    - `ClienteID`
    - `ServicioID`
-   - `Código Postal (Destino)`
+   - `DestinoID`
 
 5. Con esas columnas seleccionadas, ve a la cinta y selecciona **Inicio > Quitar filas > Quitar duplicados**
 6. Actualiza la  vista previa de la consulta.
