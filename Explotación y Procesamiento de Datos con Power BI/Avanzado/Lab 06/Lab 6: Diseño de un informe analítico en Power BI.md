@@ -1,4 +1,4 @@
-# Laboratorio 6: Diseño de informes analíticos e interacción con filtros en Power BI
+# Laboratorio 6: Diseño de un informe analítico en Power BI
   
 **ParcelCraft** ya cuenta con un modelo en estrella, una tabla `'Fecha'`, jerarquías de negocio, medidas DAX empresariales y un grupo de cálculo de inteligencia de tiempo. En este laboratorio trabajarás como diseñador de informes analíticos: crearás un informe de tres páginas, aplicarás principios de diseño visual, seleccionarás objetos visuales adecuados, configurarás segmentaciones, filtros e interacciones, y prepararás una página de KPIs enfocada en una oficina concreta.  
 El objetivo es pasar de un modelo semántico validado a una experiencia de análisis clara, navegable y preparada para usuarios de negocio.
