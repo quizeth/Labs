@@ -443,7 +443,7 @@ Esta medida cuenta únicamente los envíos que tienen fecha de entrega informada
 ```DAX
 % envíos entregados =
 DIVIDE (
-    [Envíos con entrega],
+    [Total envíos entregados],
     [Total envíos]
 )
 ```
