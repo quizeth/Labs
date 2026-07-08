@@ -173,17 +173,9 @@ Si tu versión de Power BI Desktop muestra **Opciones del calendario**, crea est
 
 > Nota: no asignes la misma columna a varias categorías dentro del mismo calendario.
 
-### Tarea 7: Ordenar columnas temporales
-
-1. Selecciona **Fecha[Mes]**.
-2. Selecciona **Herramientas de columna > Ordenar por columna**.
-3. Elige **Número de mes**.
-4. Selecciona **Fecha[Día de la semana]**.
-5. Ordénala por **Número día semana**.
-
-### Tarea 8: Crear relaciones con Envíos
+### Tarea 7: Crear relaciones con Envíos
   
-Crea estas relaciones entre **Fecha** y **Envíos**:
+1. Crea estas relaciones entre **Fecha** y **Envíos**:
 
 <table>
 <tr>
@@ -242,10 +234,12 @@ Crea estas relaciones entre **Fecha** y **Envíos**:
 </tr>
 </table>
 
+2. Oculta todas las columnas de fecha fuera de la tabla **Fecha**.
+   
 **Resultado esperado:** **FechaEnvío** queda como fecha principal del modelo y el resto de fechas queda disponible mediante relaciones inactivas.
 
 
-### Tarea 9: Validar la tabla de fechas
+### Tarea 8: Validar la tabla de fechas
 1. Ve a la vista de **Informe**.
 2. Para agregar un visual de matriz a la nueva página del informe, en el panel **Visualizaciones**, seleccione el tipo de visual **Matriz**.
 > Puedes colocar el cursor sobre cada icono para mostrar una información sobre herramientas que describa el tipo de visual.
@@ -253,13 +247,18 @@ Crea estas relaciones entre **Fecha** y **Envíos**:
 4. Arrastra el campo **Mes año** al área **Filas**, justo debajo de **Año**.
 5. En la esquina superior derecha del visual de matriz (o en la parte inferior, según la ubicación del visual), selecciona el icono de doble flecha bifurcada, que expandirá todos los años un nivel hacia abajo.
 <img width="590" height="193" alt="image" src="https://github.com/user-attachments/assets/30ea39ea-2942-41eb-821a-565efb87f70a" />
+
+
 6. Observa que los años se expanden para mostrar los meses y que estos aparecen ordenados alfabéticamente en lugar de cronológicamente.
 > De forma predeterminada, los valores de texto se ordenan alfabéticamente, los números se ordenan de menor a mayor y las fechas se ordenan de la más antigua a la más reciente.
+
 7. Para personalizar el orden de clasificación del campo **Año mes**, cambia a la vista **Tabla**.
 8. Agrega la columna **MesClave** a la tabla **Fecha**:
+   
 ```DAX
 MesClave = (YEAR('Fecha'[Fecha]) * 100) + MONTH(Fecha[Fecha])
 ```
+
 > Esta fórmula calcula un valor numérico para cada combinación de año y mes.
 
 9. En la vista **Tabla**, comprueba que la nueva columna contenga valores numéricos (por ejemplo, 201707 para julio de 2017, y así sucesivamente).
