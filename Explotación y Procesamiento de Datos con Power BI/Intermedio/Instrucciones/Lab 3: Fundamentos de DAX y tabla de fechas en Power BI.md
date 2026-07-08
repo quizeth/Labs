@@ -424,7 +424,7 @@ Esta medida identifica el mayor tiempo de entrega dentro del contexto selecciona
 13. En la tabla **Medidas**, crea la siguiente medida:
 
 ```DAX
-Envíos con entrega =
+Total envíos entregados =
 CALCULATE (
     [Total envíos],
     NOT ISBLANK ( 'Envíos'[FechaEntrega] )
@@ -453,6 +453,126 @@ Esta medida muestra qué porcentaje de envíos tiene fecha de entrega registrada
 16. Configura la medida:
    - **Formato**: Porcentaje
    - **Decimales**: 2
+   - **Carpeta para mostrar**: Indicadores operativos
+
+17. En la tabla **Medidas**, crea la siguiente medida:
+
+```DAX
+Total no entregados = 
+[Total envíos] - [Total envíos entregados]
+```
+
+Esta medida cuenta únicamente los envíos que no tienen fecha de entrega informada.
+
+18. Configura la medida:
+   - **Formato**: Número entero
+   - **Decimales**: 0
+   - **Carpeta para mostrar**: Indicadores operativos
+
+19. En la tabla **Medidas**, crea la siguiente medida:
+
+```DAX
+% envíos no entregados = 
+DIVIDE(
+    [Total no entregados],
+    [Total envíos]
+)
+```
+
+Esta medida muestra qué porcentaje de envíos no tiene una fecha de entrega registrada.
+
+20. Configura la medida:
+   - **Formato**: Porcentaje
+   - **Decimales**: 2
+   - **Carpeta para mostrar**: Indicadores operativos
+
+21. En la tabla **Medidas**, crea la siguiente medida:
+
+```DAX
+Total envíos tardíos = 
+CALCULATE(
+    [Total envíos],
+    'Envíos'[Entrega tardía] = TRUE()
+)
+```
+
+Esta medida muestra el total de envíos con fecha de entrega tardía.
+
+22. Configura la medida:
+   - **Formato**: Número entero
+   - **Decimales**: 0
+   - **Carpeta para mostrar**: Indicadores operativos
+
+23. En la tabla **Medidas**, crea la siguiente medida:
+
+```DAX
+% envíos tardíos = 
+DIVIDE(
+    [Total envíos tardíos],
+    [Total envíos]
+)
+```
+
+Esta medida muestra qué porcentaje de envíos tiene fecha de entrega tardía.
+
+24. Configura la medida:
+   - **Formato**: Porcentaje
+   - **Decimales**: 2
+   - **Carpeta para mostrar**: Indicadores operativos
+
+21. En la tabla **Medidas**, crea la siguiente medida:
+
+```DAX
+Total envíos tardíos = 
+CALCULATE(
+    [Total envíos],
+    'Envíos'[Entrega tardía] = TRUE()
+)
+```
+
+Esta medida muestra el total de envíos con fecha de entrega tardía.
+
+22. Configura la medida:
+   - **Formato**: Número entero
+   - **Decimales**: 0
+   - **Carpeta para mostrar**: Indicadores operativos
+
+23. En la tabla **Medidas**, crea la siguiente medida:
+
+```DAX
+Promedio intentos = 
+AVERAGE('Envíos'[Intentos])
+```
+
+Esta medida muestra el promedio de intentos de entrega.
+
+24. Configura la medida:
+   - **Formato**: Número decimal
+   - **Decimales**: 2
+   - **Carpeta para mostrar**: Indicadores operativos
+
+25. En la tabla **Medidas**, crea la siguiente medida:
+
+```DAX
+Horas medias hasta entrega =
+[Días medios hasta entrega] * 24
+```
+
+26. Configura la medida:
+   - **Formato**: Número decimal
+   - **Decimales**: 2
+   - **Carpeta para mostrar**: Indicadores operativos
+
+27. En la tabla **Medidas**, crea la siguiente medida:
+
+```DAX
+Horas SLA =
+MAX('Servicio'[Horas SLA])
+```
+
+28. Configura la medida:
+   - **Formato**: Número entero
+   - **Decimales**: 0
    - **Carpeta para mostrar**: Indicadores operativos
 
 ### Ejercicio 3: Crear columnas calculadas adicionales con DAX 
