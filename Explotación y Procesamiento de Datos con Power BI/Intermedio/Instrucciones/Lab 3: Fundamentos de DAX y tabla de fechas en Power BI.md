@@ -7,16 +7,11 @@ En este laboratorio crearás tablas calculadas, columnas calculadas y medidas co
 
 ## Objetivos de aprendizaje
   
-**Tiempo estimado total: 30-45 minutos**  
+**Tiempo estimado total: 45 minutos**  
 Al finalizar este laboratorio serás capaz de:
-- Crear tablas calculadas con DAX.
-- Crear columnas calculadas con DAX.
+- Crear tablas y columnas calculadas con DAX.
 - Crear y formatear medidas básicas.
 - Crear y configurar una tabla de fechas.
-- Marcar una tabla como tabla de fechas.
-- Crear calendarios sobre la tabla Fecha.
-- Crear relaciones activas e inactivas entre Fecha y Envíos.
-- Validar cálculos DAX en visualizaciones.
 
 ---
 
@@ -27,7 +22,6 @@ Al finalizar este laboratorio serás capaz de:
 Para completar este laboratorio necesitas:
 - Power BI Desktop instalado.
 - Haber completado el **Laboratorio 2: Modelado de datos y esquema en estrella en Power BI**.
-- Un modelo con las tablas **Envíos**, **Cliente**, **Servicio**, **Oficina**, **Destino** y **Ruta**.
 - Conocimientos básicos de relaciones en Power BI.
 
 Tienes un archivo inicial y solución disponibles. Si vas a trabajar en el mismo archivo a lo largo de todos los laboratorios, recomiendo empezar a partir de este starter.
@@ -123,49 +117,12 @@ Día de la semana = FORMAT ( Fecha[Fecha], "dddd" )
 Número día semana = WEEKDAY ( Fecha[Fecha], 2 )
 ```
 
-Estas columnas permiten analizar los envíos por año, trimestre, mes, día y día de la semana.
-
-### Tarea 4: Crear columnas de calendario ISO
-
-1. En la tabla **Fecha**, crea la columna:
-
+11. Crea la columna:
 ```DAX
-Semana ISO = WEEKNUM ( Fecha[Fecha], 21 )
+Mes año = FORMAT(Fecha[Fecha], "mmm YYYY")
 ```
 
-2. Crea la columna:
-
-```DAX
-Año ISO =
-YEAR ( Fecha[Fecha] - WEEKDAY ( Fecha[Fecha], 2 ) + 4 )
-```
-
-3. Crea la columna:
-
-```DAX
-Año semana ISO =
-FORMAT ( Fecha[Año ISO], "0000" )
-    & "-S"
-    & FORMAT ( Fecha[Semana ISO], "00" )
-```
-
-4. Crea la columna:
-
-```DAX
-Inicio semana =
-Fecha[Fecha] - WEEKDAY ( Fecha[Fecha], 2 ) + 1
-```
-
-5. Crea la columna:
-
-```DAX
-Fin semana =
-Fecha[Fecha] - WEEKDAY ( Fecha[Fecha], 2 ) + 7
-```
-
-Estas columnas permiten analizar la operación logística por semanas ISO, una estructura habitual en reporting operativo.
-
-### Tarea 5: Marcar la tabla como tabla de fechas
+### Tarea 4: Marcar la tabla como tabla de fechas
 
 1. Selecciona la tabla **Fecha**.
 2. Selecciona **Herramientas de tabla > Marcar como tabla de fechas**.
@@ -174,9 +131,10 @@ Estas columnas permiten analizar la operación logística por semanas ISO, una e
 
 Importante: **Marcar como tabla de fechas** no crea una tabla nueva. Solo indica a Power BI que la tabla **Fecha** debe usarse como referencia temporal principal del modelo.
 
-### Tarea 6: Crear calendarios basados en la tabla Fecha
+### Tarea 6 (Opcional): Crear calendarios basados en la tabla Fecha
   
 Si tu versión de Power BI Desktop muestra **Opciones del calendario**, crea estos calendarios sobre la tabla **Fecha**.
+> Si no ves la opción, puedes activarla en **Archivo > Opciones y configuración > Opciones > Global > Características de versión preliminar** y activando la **Inteligencia de tiempo DAX mejorada**.
 
 #### Calendario Gregoriano
 
@@ -205,31 +163,6 @@ Si tu versión de Power BI Desktop muestra **Opciones del calendario**, crea est
 <td>Mes del año</td>
 <td>Mes</td>
 <td>Número de mes</td>
-</tr>
-<tr>
-<td>Fecha</td>
-<td>Fecha</td>
-<td>—</td>
-</tr>
-</table>
-
-#### Calendario ISO
-
-<table>
-<tr>
-<th>Categoría</th>
-<th>Columna principal</th>
-<th>Columnas asociadas</th>
-</tr>
-<tr>
-<td>Año</td>
-<td>Año ISO</td>
-<td>—</td>
-</tr>
-<tr>
-<td>Semana</td>
-<td>Año semana ISO</td>
-<td>Semana ISO, Inicio semana, Fin semana</td>
 </tr>
 <tr>
 <td>Fecha</td>
@@ -311,7 +244,35 @@ Crea estas relaciones entre **Fecha** y **Envíos**:
 
 **Resultado esperado:** **FechaEnvío** queda como fecha principal del modelo y el resto de fechas queda disponible mediante relaciones inactivas.
 
-## Ejercicio 2: Crear tablas calculadas con DAX
+
+### Tarea 9: Validar la tabla de fechas
+1. Ve a la vista de **Informe**.
+2. Para agregar un visual de matriz a la nueva página del informe, en el panel **Visualizaciones**, seleccione el tipo de visual **Matriz**.
+> Puedes colocar el cursor sobre cada icono para mostrar una información sobre herramientas que describa el tipo de visual.
+3. En el panel **Datos**, dentro de la tabla **Fecha**, arrastre el campo **Año** al área **Filas**.
+4. Arrastra el campo **Mes año** al área **Filas**, justo debajo de **Año**.
+5. En la esquina superior derecha del visual de matriz (o en la parte inferior, según la ubicación del visual), selecciona el icono de doble flecha bifurcada, que expandirá todos los años un nivel hacia abajo.
+<img width="590" height="193" alt="image" src="https://github.com/user-attachments/assets/30ea39ea-2942-41eb-821a-565efb87f70a" />
+6. Observa que los años se expanden para mostrar los meses y que estos aparecen ordenados alfabéticamente en lugar de cronológicamente.
+> De forma predeterminada, los valores de texto se ordenan alfabéticamente, los números se ordenan de menor a mayor y las fechas se ordenan de la más antigua a la más reciente.
+7. Para personalizar el orden de clasificación del campo **Año mes**, cambia a la vista **Tabla**.
+8. Agrega la columna **MesClave** a la tabla **Fecha**:
+```DAX
+MesClave = (YEAR('Fecha'[Fecha]) * 100) + MONTH(Fecha[Fecha])
+```
+> Esta fórmula calcula un valor numérico para cada combinación de año y mes.
+
+9. En la vista **Tabla**, comprueba que la nueva columna contenga valores numéricos (por ejemplo, 201707 para julio de 2017, y así sucesivamente).
+10. Vuelve a la vista **Informe**.
+11. En el panel **Datos**, selecciona el campo **Año mes**.
+12. En la cinta contextual **Herramientas de columna**, dentro del grupo **Ordenar**, selecciona **Ordenar por columna** y, a continuación, selecciona MonthKey.
+12. En el visual de matriz, observa que los meses ahora aparecen ordenados cronológicamente.
+
+
+## Ejercicio 2: Crear medidas calculadas con DAX
+En este ejercicio crearás medidas derivadas para analizar margen, entregas y duración media. También crearás columnas calculadas en la tabla **Fecha**, donde sí tiene sentido almacenar atributos temporales que se usarán como filtros, segmentadores o agrupaciones.  
+
+Buena práctica: usa **medidas** para cálculos agregados que deben responder al contexto de filtro. Usa **columnas calculadas** cuando necesites atributos persistidos para segmentar, clasificar, ordenar o crear jerarquías.
 
 ### Tarea 1: Crear una tabla de medidas
 
@@ -327,12 +288,7 @@ ROW ( "Ocultar", 1 )
 
 **Resultado esperado:** tienes una tabla para organizar medidas.
 
-## Ejercicio 3: Crear medidas derivadas y columnas calculadas en la tabla Fecha
-  
-En este ejercicio crearás medidas derivadas para analizar margen, entregas y duración media. También crearás columnas calculadas en la tabla **Fecha**, donde sí tiene sentido almacenar atributos temporales que se usarán como filtros, segmentadores o agrupaciones.  
-Buena práctica: usa **medidas** para cálculos agregados que deben responder al contexto de filtro. Usa **columnas calculadas** cuando necesites atributos persistidos para segmentar, clasificar, ordenar o crear jerarquías.
-
-### Tarea 1: Crear medidas base de envíos e ingresos
+### Tarea 2: Crear medidas derivadas y columnas calculadas en la tabla Fecha
   
 Antes de crear medidas derivadas, necesitas algunas medidas base que serán reutilizadas por otros cálculos.
 
@@ -358,15 +314,13 @@ Esta medida suma el importe total de los envíos y responde al contexto de filtr
    - **Formato**: Número entero
    - **Separador de miles**: Activado
    - **Decimales**: 0
-   - **Carpeta para mostrar**: Indicadores operativos
+   - **Carpeta para mostrar**: Medidas base
 4. Configura la medida **Ingresos**:
    - **Formato**: Moneda
    - **Decimales**: 2
-   - **Carpeta para mostrar**: Indicadores económicos
+   - **Carpeta para mostrar**: Medidas base
 
-### Tarea 2: Crear una medida de margen estimado
-
-1. En la tabla **Medidas**, crea la siguiente medida:
+5. En la tabla **Medidas**, crea la siguiente medida:
 
 ```DAX
 Margen estimado =
@@ -380,14 +334,12 @@ SUMX (
 
 Esta medida calcula el margen estimado fila a fila y después suma el resultado. La clave es que no usamos `SUM('Envíos'[Precio total] - ...)`, porque **SUM** solo agrega una columna. Como el cálculo combina varias columnas por fila, usamos **SUMX**.
 
-2. Configura la medida:
+6. Configura la medida:
    - **Formato**: Moneda
    - **Decimales**: 2
    - **Carpeta para mostrar**: Indicadores económicos
 
-### Tarea 3: Crear una medida de margen medio por envío
-
-1. En la tabla **Medidas**, crea la siguiente medida:
+7. En la tabla **Medidas**, crea la siguiente medida:
 
 ```DAX
 Margen medio por envío =
@@ -399,14 +351,12 @@ DIVIDE (
 
 Esta medida calcula el margen medio por envío. Se usa **DIVIDE** en lugar del operador `/` porque gestiona de forma segura divisiones entre cero o valores en blanco.
 
-2. Configura la medida:
+8. Configura la medida:
    - **Formato**: Moneda
    - **Decimales**: 2
    - **Carpeta para mostrar**: Indicadores económicos
 
-### Tarea 4: Crear una medida de porcentaje de margen
-
-1. En la tabla **Medidas**, crea la siguiente medida:
+9. En la tabla **Medidas**, crea la siguiente medida:
 
 ```DAX
 % margen estimado =
@@ -418,14 +368,12 @@ DIVIDE (
 
 Esta medida calcula qué proporción de los ingresos queda como margen estimado.
 
-2. Configura la medida:
+8. Configura la medida:
    - **Formato**: Porcentaje
    - **Decimales**: 2
    - **Carpeta para mostrar**: Indicadores económicos
 
-### Tarea 5: Crear una medida de días medios hasta entrega
-
-1. En la tabla **Medidas**, crea la siguiente medida:
+9. En la tabla **Medidas**, crea la siguiente medida:
 
 ```DAX
 Días medios hasta entrega =
@@ -444,14 +392,12 @@ AVERAGEX (
 
 Esta medida calcula el número medio de días transcurridos entre la fecha de envío y la fecha de entrega. Se excluyen los envíos sin fecha de entrega para evitar que los registros pendientes distorsionen el promedio.
 
-2. Configura la medida:
+10. Configura la medida:
    - **Formato**: Número decimal
    - **Decimales**: 2
    - **Carpeta para mostrar**: Indicadores operativos
 
-### Tarea 6: Crear una medida de días máximos hasta entrega
-
-1. En la tabla **Medidas**, crea la siguiente medida:
+11. En la tabla **Medidas**, crea la siguiente medida:
 
 ```DAX
 Días máximos hasta entrega =
@@ -470,14 +416,12 @@ MAXX (
 
 Esta medida identifica el mayor tiempo de entrega dentro del contexto seleccionado.
 
-2. Configura la medida:
+12. Configura la medida:
    - **Formato**: Número entero
    - **Decimales**: 0
    - **Carpeta para mostrar**: Indicadores operativos
 
-### Tarea 7: Crear una medida de envíos con entrega
-
-1. En la tabla **Medidas**, crea la siguiente medida:
+13. En la tabla **Medidas**, crea la siguiente medida:
 
 ```DAX
 Envíos con entrega =
@@ -489,14 +433,12 @@ CALCULATE (
 
 Esta medida cuenta únicamente los envíos que tienen fecha de entrega informada.
 
-2. Configura la medida:
+14. Configura la medida:
    - **Formato**: Número entero
    - **Decimales**: 0
    - **Carpeta para mostrar**: Indicadores operativos
 
-### Tarea 8: Crear una medida de porcentaje de envíos entregados
-
-1. En la tabla **Medidas**, crea la siguiente medida:
+15. En la tabla **Medidas**, crea la siguiente medida:
 
 ```DAX
 % envíos entregados =
@@ -508,16 +450,14 @@ DIVIDE (
 
 Esta medida muestra qué porcentaje de envíos tiene fecha de entrega registrada.
 
-2. Configura la medida:
+16. Configura la medida:
    - **Formato**: Porcentaje
    - **Decimales**: 2
    - **Carpeta para mostrar**: Indicadores operativos
 
-### Ejercicio 4: Crear columnas calculadas con DAX
+### Ejercicio 3: Crear columnas calculadas adicionales con DAX 
   
 Ahora crearás columnas calculadas en la tabla **Fecha**. Estas columnas se almacenan en el modelo y son útiles como atributos temporales.
-
-### Tarea 1: Crear una columna calculada de fin de semana en Fecha
 
 1. Selecciona la tabla **Fecha** y crea una nueva columna:
 
@@ -531,9 +471,7 @@ WEEKDAY (
 
 Esta columna devuelve **TRUE** para sábados y domingos, y **FALSE** para el resto de días.
 
-### Tarea 2: Crear una columna calculada de tipo de día
-
-1. En la tabla **Fecha**, crea esta columna:
+2. En la tabla **Fecha**, crea esta columna:
 
 ```DAX
 Tipo de día =
@@ -546,9 +484,7 @@ IF (
 
 Esta columna clasifica cada fecha como **Fin de semana** o **Laborable**. No se están teniendo en cuenta festivos nacionales, autonómicos ni locales.
 
-### Tarea 3: Crear una columna calculada de temporada operativa
-
-1. En la tabla **Fecha**, crea esta columna:
+3. En la tabla **Fecha**, crea esta columna:
 
 ```DAX
 Temporada operativa =
@@ -563,9 +499,7 @@ SWITCH (
 
 Esta columna permite segmentar el análisis por periodos operativos aproximados.
 
-### Tarea 4: Crear una columna calculada de día hábil de semana
-
-1. En la tabla **Fecha**, crea esta columna:
+4. En la tabla **Fecha**, crea esta columna:
 
 ```DAX
 Día hábil semana =
