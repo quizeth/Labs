@@ -266,6 +266,7 @@ MesClave = (YEAR('Fecha'[Fecha]) * 100) + MONTH(Fecha[Fecha])
 11. En el panel **Datos**, selecciona el campo **Año mes**.
 12. En la cinta contextual **Herramientas de columna**, dentro del grupo **Ordenar**, selecciona **Ordenar por columna** y, a continuación, selecciona MonthKey.
 12. En el visual de matriz, observa que los meses ahora aparecen ordenados cronológicamente.
+13. Oculta el campo `MesClave`.
 
 
 ## Ejercicio 2: Crear medidas calculadas con DAX
