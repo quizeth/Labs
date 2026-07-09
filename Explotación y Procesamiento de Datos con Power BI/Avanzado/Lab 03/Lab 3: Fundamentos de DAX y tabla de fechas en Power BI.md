@@ -6,7 +6,7 @@ En este laboratorio crearás tablas calculadas, columnas calculadas y medidas co
 
 ## Objetivos de aprendizaje
 
-**Tiempo estimado total: 30-45 minutos**
+**Tiempo estimado total: 45 minutos**
 
 Al finalizar este laboratorio serás capaz de:
 
