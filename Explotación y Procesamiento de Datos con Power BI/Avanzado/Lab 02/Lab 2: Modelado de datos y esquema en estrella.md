@@ -52,11 +52,11 @@ Tienes un archivo inicial y solución disponibles. Si vas a trabajar en el mismo
 En este ejercicio revisarás las tablas cargadas desde Power Query e identificarás qué tabla actuará como hecho y cuáles actuarán como dimensiones.
 
 ### Tarea 1: Abrir el archivo de trabajo
-- Abre **Power BI Desktop**.
-- Abre el archivo `.pbix` generado al final del laboratorio anterior.
-- Si Power BI solicita aplicar cambios pendientes de Power Query, selecciona **Aplicar cambios**.
-- Ve a la **vista Modelo**.
-- Revisa que aparecen las siguientes tablas:
+1. Abre **Power BI Desktop**.
+2. Abre el archivo `.pbix` generado al final del laboratorio anterior.
+3. Si Power BI solicita aplicar cambios pendientes de Power Query, selecciona **Aplicar cambios**.
+4. Ve a la **vista Modelo**.
+    Revisa que aparecen las siguientes tablas:
   - `Cliente`
   - `Destino`
   - `Envíos`
@@ -65,8 +65,8 @@ En este ejercicio revisarás las tablas cargadas desde Power Query e identificar
   - `Servicio`
 
 ### Tarea 2: Identificar hechos y dimensiones
-- Localiza la tabla `Envíos`.
-- Confirma que contiene columnas transaccionales, métricas y claves, por ejemplo:
+1. Localiza la tabla `Envíos`.
+2. Confirma que contiene columnas transaccionales, métricas y claves, por ejemplo:
   - `EnvíoID`
   - `FechaEnvío`
   - `ClienteID`
@@ -77,13 +77,13 @@ En este ejercicio revisarás las tablas cargadas desde Power Query e identificar
   - `Precio total`
   - `Intentos`
   - `EntregaTardia`
-- Localiza las tablas de dimensión:
+3. Localiza las tablas de dimensión:
   - `Cliente`: atributos del cliente.
   - `Servicio`: atributos del servicio contratado.
   - `Oficina`: atributos de la oficina o hub operativo.
   - `Destino`: atributos geográficos del destino.
   - `Ruta`: atributos de la ruta o modo de transporte.
-- Comprueba que estas tablas contienen campos descriptivos que permitirán analizar, filtrar o agrupar los envíos.
+4. Comprueba que estas tablas contienen campos descriptivos que permitirán analizar, filtrar o agrupar los envíos.
 
 **Resultado esperado:** identificas `Envíos` como tabla de hechos y el resto de tablas como dimensiones. El modelo objetivo debe tener una estructura en estrella, con relaciones de uno a varios desde dimensiones hacia la tabla de hechos.
 
@@ -100,30 +100,30 @@ Trabajarás con dos layouts:
 > Buena práctica: en modelos reales, demasiados layouts pueden generar ruido. Es preferible tener pocos layouts bien diseñados y con un objetivo claro.
 
 ### Tarea 1: Crear el layout principal del modelo estrella
-- En la **vista Modelo**, localiza las pestañas de layouts en la parte inferior.
-- Crea un nuevo layout y nómbralo `01 - Modelo estrella`.
-- Arrastra `Envíos` al centro del lienzo.
-- Coloca las cinco tablas de dimensiones alrededor.
-- Ajusta el ancho de las tablas para que se vean las claves y columnas principales.
+1. En la **vista Modelo**, localiza las pestañas de layouts en la parte inferior.
+2. Crea un nuevo layout y nómbralo `01 - Modelo estrella`.
+3. Arrastra `Envíos` al centro del lienzo.
+4. Coloca las cinco tablas de dimensiones alrededor.
+5. Ajusta el ancho de las tablas para que se vean las claves y columnas principales.
 
 ### Tarea 2: Crear el layout de servicio y SLA
-- Crea un segundo layout y nómbralo `02 - Servicio y SLA`.
-- Añade solo las tablas necesarias para revisar la lógica de servicio:
+1. Crea un segundo layout y nómbralo `02 - Servicio y SLA`.
+2. Añade solo las tablas necesarias para revisar la lógica de servicio:
   - `Envíos`
   - `Servicio`
-- Coloca `Envíos` en el centro del lienzo.
-- Coloca `Servicio` debajo o a un lado de `Envíos`.
-- Ajusta el ancho de las tablas para que se vean las columnas relacionadas con servicio, prioridad y SLA.
+3. Coloca `Envíos` en el centro del lienzo.
+4. Coloca `Servicio` debajo o a un lado de `Envíos`.
+5. Ajusta el ancho de las tablas para que se vean las columnas relacionadas con servicio, prioridad y SLA.
 
 > Nota: en el **Laboratorio 3** añadirás la tabla `Fecha` y podrás ampliar este layout si quieres revisar relaciones temporales.
 
 ### Tarea 3: Revisar la utilidad de los layouts
-- Vuelve al layout `01 - Modelo estrella`.
-- Comprueba que el modelo se entiende de un vistazo.
-- Verifica que `Envíos` queda claramente identificada como tabla central.
-- Cambia al layout `02 - Servicio y SLA`.
-- Comprueba que contiene solo las tablas necesarias para revisar la lógica de servicio.
-- Si una tabla no aporta valor a un layout, elimínala del layout, no necesariamente del modelo.
+1. Vuelve al layout `01 - Modelo estrella`.
+2. Comprueba que el modelo se entiende de un vistazo.
+3. Verifica que `Envíos` queda claramente identificada como tabla central.
+4. Cambia al layout `02 - Servicio y SLA`.
+5. Comprueba que contiene solo las tablas necesarias para revisar la lógica de servicio.
+6. Si una tabla no aporta valor a un layout, elimínala del layout, no necesariamente del modelo.
 
 **Resultado esperado:** el modelo queda organizado en dos layouts útiles: uno para explicar el modelo estrella y otro para revisar atributos de servicio y SLA.
 
@@ -134,19 +134,19 @@ Trabajarás con dos layouts:
 En este ejercicio crearás manualmente las relaciones principales del modelo. En este archivo, la creación automática de relaciones está intencionalmente deshabilitada, por lo que Power BI no habrá generado relaciones al cargar las tablas.
 
 ### Tarea 1: Confirmar que el modelo no tiene relaciones automáticas
-- En la **vista Modelo**, observa el lienzo del modelo.
-- Comprueba que las tablas aparecen sin líneas de relación entre ellas.
+1. En la **vista Modelo**, observa el lienzo del modelo.
+2. Comprueba que las tablas aparecen sin líneas de relación entre ellas.
 
 > Nota: esto es esperado. En este archivo, la creación automática de relaciones está intencionalmente deshabilitada para que las relaciones se creen manualmente durante el laboratorio.
 
-- En la cinta, selecciona **Modelado > Administrar relaciones**.
-- Revisa la ventana **Administrar relaciones**.
-- Confirma que no hay relaciones creadas o que no hay relaciones relevantes para el modelo.
-- Si encuentras alguna relación no esperada, selecciónala y pulsa **Eliminar**.
+3. En la cinta, selecciona **Modelado > Administrar relaciones**.
+4. Revisa la ventana **Administrar relaciones**.
+5. Confirma que no hay relaciones creadas o que no hay relaciones relevantes para el modelo.
+6. Si encuentras alguna relación no esperada, selecciónala y pulsa **Eliminar**.
 
 ### Tarea 2: Crear la relación Cliente-Envíos
-- En la ventana **Administrar relaciones**, selecciona **Nuevo**.
-- Configura la relación:
+1. En la ventana **Administrar relaciones**, selecciona **Nuevo**.
+2. Configura la relación:
   - **Tabla 1:** `Cliente`
   - **Columna:** `ClienteID`
   - **Tabla 2:** `Envíos`
@@ -154,11 +154,11 @@ En este ejercicio crearás manualmente las relaciones principales del modelo. En
   - **Cardinalidad:** Uno a varios (`1:*`)
   - **Dirección de filtro cruzado:** Simple
   - **Hacer esta relación activa:** Activado
-- Selecciona **Aceptar**.
+3. Selecciona **Aceptar**.
 
 ### Tarea 3: Crear la relación Servicio-Envíos
-- Selecciona **Nuevo**.
-- Configura la relación:
+4. Selecciona **Nuevo**.
+5. Configura la relación:
   - **Tabla 1:** `Servicio`
   - **Columna:** `ServicioID`
   - **Tabla 2:** `Envíos`
@@ -166,11 +166,11 @@ En este ejercicio crearás manualmente las relaciones principales del modelo. En
   - **Cardinalidad:** Uno a varios (`1:*`)
   - **Dirección de filtro cruzado:** Simple
   - **Hacer esta relación activa:** Activado
-- Selecciona **Aceptar**.
+6. Selecciona **Aceptar**.
 
 ### Tarea 4: Crear la relación Oficina-Envíos
-- Selecciona **Nuevo**.
-- Configura la relación:
+1. Selecciona **Nuevo**.
+2. Configura la relación:
   - **Tabla 1:** `Oficina`
   - **Columna:** `OficinaID`
   - **Tabla 2:** `Envíos`
@@ -178,11 +178,11 @@ En este ejercicio crearás manualmente las relaciones principales del modelo. En
   - **Cardinalidad:** Uno a varios (`1:*`)
   - **Dirección de filtro cruzado:** Simple
   - **Hacer esta relación activa:** Activado
-- Selecciona **Aceptar**.
+3. Selecciona **Aceptar**.
 
 ### Tarea 5: Crear la relación Ruta-Envíos
-- Selecciona **Nuevo**.
-- Configura la relación:
+1. Selecciona **Nuevo**.
+2. Configura la relación:
   - **Tabla 1:** `Ruta`
   - **Columna:** `RutaID`
   - **Tabla 2:** `Envíos`
@@ -190,11 +190,11 @@ En este ejercicio crearás manualmente las relaciones principales del modelo. En
   - **Cardinalidad:** Uno a varios (`1:*`)
   - **Dirección de filtro cruzado:** Simple
   - **Hacer esta relación activa:** Activado
-- Selecciona **Aceptar**.
+3. Selecciona **Aceptar**.
 
 ### Tarea 6: Crear la relación Destino-Envíos
-- Selecciona **Nuevo**.
-- Configura la relación:
+1. Selecciona **Nuevo**.
+2. Configura la relación:
   - **Tabla 1:** `Destino`
   - **Columna:** `DestinoID`
   - **Tabla 2:** `Envíos`
@@ -202,17 +202,17 @@ En este ejercicio crearás manualmente las relaciones principales del modelo. En
   - **Cardinalidad:** Uno a varios (`1:*`)
   - **Dirección de filtro cruzado:** Simple
   - **Hacer esta relación activa:** Activado
-- Selecciona **Aceptar**.
+3. Selecciona **Aceptar**.
 
 > Nota: en un modelo productivo suele ser preferible relacionar tablas mediante claves numéricas o claves sustitutas estables cuando estén disponibles.
 
 ### Tarea 7: Validar las relaciones creadas
-- Cierra la ventana **Administrar relaciones**.
-- Vuelve a la **vista Modelo**.
-- Comprueba que ahora aparecen líneas de relación entre las dimensiones y `Envíos`.
-- Verifica que `Envíos` queda en el lado varios (`*`) de cada relación.
-- Verifica que las dimensiones quedan en el lado uno (`1`) de cada relación.
-- Comprueba que la dirección de filtro va desde las dimensiones hacia `Envíos`.
+1. Cierra la ventana **Administrar relaciones**.
+2. Vuelve a la **vista Modelo**.
+3. Comprueba que ahora aparecen líneas de relación entre las dimensiones y `Envíos`.
+4. Verifica que `Envíos` queda en el lado varios (`*`) de cada relación.
+5. Verifica que las dimensiones quedan en el lado uno (`1`) de cada relación.
+5. Comprueba que la dirección de filtro va desde las dimensiones hacia `Envíos`.
 
 **Resultado esperado:** el modelo tiene relaciones activas desde cada dimensión hacia `Envíos`, con cardinalidad uno a varios y dirección de filtro cruzado simple.
 
@@ -229,49 +229,49 @@ Este patrón permite representar la relación `Cliente` ↔ `Servicio` mediante 
 - `Servicio` → `ClienteServicio`
 
 ### Tarea 1: Comprobar el escenario varios a varios
-- Ve a la **vista Informe**.
-- Añade una visualización de tabla.
-- Agrega los campos `Cliente[Cliente]` y `Servicio[Servicio]`.
-- Revisa el resultado.
+1. Ve a la **vista Informe**.
+2. Añade una visualización de tabla.
+3. Agrega los campos `Cliente[Cliente]` y `Servicio[Servicio]`.
+4. Revisa el resultado.
 
 La visualización no representa correctamente qué servicios están realmente asociados a cada cliente, porque `Cliente` y `Servicio` son dos dimensiones independientes.
 
 > Observación: esto no significa que el modelo esté mal. En un modelo en estrella, las dimensiones normalmente filtran a la tabla de hechos, pero no se filtran directamente entre sí.
 
 ### Tarea 2: Crear la tabla puente en Power Query
-- En la cinta **Inicio**, selecciona **Transformar datos**.
-- En el Editor de Power Query, localiza la consulta `stg_ParcelCraft_Clean`.
-- Haz clic derecho sobre `stg_ParcelCraft_Clean` y selecciona **Referencia**.
-- Cambia el nombre de la nueva consulta a `ClienteServicio`.
-- Mueve la tabla a la sección **Auxiliares**. **No** deshabilites la carga.
-- Con la consulta `ClienteServicio` seleccionada, ve a **Inicio > Administrar columnas > Elegir columnas**.
-- Selecciona únicamente estas columnas:
+1. En la cinta **Inicio**, selecciona **Transformar datos**.
+2. En el Editor de Power Query, localiza la consulta `Envíos`.
+3. Haz clic derecho sobre `Envíos` y selecciona **Referencia**.
+4. Cambia el nombre de la nueva consulta a `ClienteServicio`.
+5. Mueve la tabla a la sección **Auxiliares**. **No** deshabilites la carga.
+6. Con la consulta `ClienteServicio` seleccionada, ve a **Inicio > Administrar columnas > Elegir columnas**.
+7. Selecciona únicamente estas columnas:
   - `ClienteID`
   - `ServicioID`
-- Selecciona **Aceptar**.
-- Selecciona ambas columnas: `ClienteID` y `ServicioID`.
-- En la cinta, selecciona **Inicio > Quitar filas > Quitar duplicados**.
-- Revisa que la consulta contiene una fila por cada combinación única de cliente y servicio.
-- Ordena la columna `ClienteID` en orden ascendente.
-- Selecciona **Cerrar y aplicar**.
+8. Selecciona **Aceptar**.
+9. Selecciona ambas columnas: `ClienteID` y `ServicioID`.
+10. En la cinta, selecciona **Inicio > Quitar filas > Quitar duplicados**.
+11. Revisa que la consulta contiene una fila por cada combinación única de cliente y servicio.
+12. Ordena la columna `ClienteID` en orden ascendente.
+13. Selecciona **Cerrar y aplicar**.
 
 **Resultado esperado:** el modelo contiene una nueva tabla cargada llamada `ClienteServicio`, con las columnas `ClienteID` y `ServicioID`.
 
 ### Tarea 3: Crear un layout para la tabla puente
-- Ve a la **vista Modelo**.
-- Crea un nuevo layout llamado `03 - Puente Cliente Servicio`.
-- Añade al layout las tablas:
+1. Ve a la **vista Modelo**.
+2. Crea un nuevo layout llamado `03 - Puente Cliente Servicio`.
+3. Añade al layout las tablas:
   - `Cliente`
   - `ClienteServicio`
   - `Servicio`
-- Coloca `ClienteServicio` en el centro.
-- Coloca `Cliente` a la izquierda.
-- Coloca `Servicio` a la derecha.
+4. Coloca `ClienteServicio` en el centro.
+5. Coloca `Cliente` a la izquierda.
+6. Coloca `Servicio` a la derecha.
 
 ### Tarea 4: Crear relaciones con la tabla puente
-- En la cinta, selecciona **Modelado > Administrar relaciones**.
-- Selecciona **Detección automática**.
-- Si tu modelo está bien configurado, se habrán detectado estas dos nuevas relaciones:
+1. En la cinta, selecciona **Modelado > Administrar relaciones**.
+2. Selecciona **Detección automática**.
+3. Si tu modelo está bien configurado, se habrán detectado estas dos nuevas relaciones:
 
 | Tabla desde | Columna desde | Cardinalidad | Dirección de filtro cruzado | Tabla hasta | Columna hasta | Estado |
 |---|---|---:|---|---|---|---|
@@ -284,23 +284,23 @@ La visualización no representa correctamente qué servicios están realmente as
 > Importante: no crees una relación directa entre `Cliente` y `Servicio`. Tampoco conectes `ClienteServicio` con `Envíos` en este ejercicio.
 
 ### Tarea 5: Validar la tabla puente
-- Vuelve a la vista de informe.
-- Añade una nueva visualización de tabla.
-- Agrega los campos:
+1. Vuelve a la vista de informe.
+2. Añade una nueva visualización de tabla.
+3. Agrega los campos:
   - `Cliente[Cliente]`
   - `ClienteServicio[ServicioID]`
-- En el área de campos de la visualización, abre el menú desplegable de `ServicioID`.
-- Cambia la agregación a **Recuento distintivo**.
-- Revisa el resultado. Cada cliente debe mostrar el número de servicios realmente asociados en la tabla puente.
+4. En el área de campos de la visualización, abre el menú desplegable de `ServicioID`.
+5. Cambia la agregación a **Recuento distintivo**.
+6. Revisa el resultado. Cada cliente debe mostrar el número de servicios realmente asociados en la tabla puente.
 
 > Nota: en el conjunto de datos de prueba, es posible que siga habiendo 4 servicios por cliente.
 
-- Añade otra visualización de tabla.
-- Agrega los campos:
+1. Añade otra visualización de tabla.
+2. Agrega los campos:
   - `Servicio[Servicio]`
   - `ClienteServicio[ClienteID]`
-- En el menú desplegable de `ClienteID`, cambia la agregación a **Recuento distintivo**.
-- Revisa el resultado. Cada servicio debe mostrar el número de clientes asociados en la tabla puente.
+3. En el menú desplegable de `ClienteID`, cambia la agregación a **Recuento distintivo**.
+4. Revisa el resultado. Cada servicio debe mostrar el número de clientes asociados en la tabla puente.
 
 > Nota: en el conjunto de datos de prueba, es posible que siga habiendo 200 clientes por servicio.
 
@@ -313,29 +313,29 @@ La visualización no representa correctamente qué servicios están realmente as
 En este ejercicio crearás jerarquías para mejorar la navegación y el autoservicio en los informes.
 
 ### Tarea 1: Crear jerarquía geográfica de destino
-- Ve a la **vista Modelo**.
-- Expande la tabla `Destino`.
-- Haz clic derecho sobre `Región (Destino)`.
-- Selecciona **Crear jerarquía**.
-- Cambia el nombre a `Geografía`.
-- Añade las columnas en este orden:
+1. Ve a la **vista Modelo**.
+2. Expande la tabla `Destino`.
+3. Haz clic derecho sobre `Región (Destino)`.
+4. Selecciona **Crear jerarquía**.
+5. Cambia el nombre a `Geografía`.
+6. Añade las columnas en este orden:
   - `Región (Destino)`
   - `Ciudad (Destino)`
   - `Código Postal (Destino)`
 
 ### Tarea 2: Crear jerarquía operativa de oficina
-- Expande la tabla `Oficina`.
-- Crea una jerarquía llamada `Oficinas`.
-- Añade las columnas en este orden:
+1. Expande la tabla `Oficina`.
+2. Crea una jerarquía llamada `Oficinas`.
+3. Añade las columnas en este orden:
   - `Región`
   - `Ciudad`
   - `Oficina`
 
 ### Tarea 3: Crear jerarquía de servicio
-- Expande la tabla `Servicio`.
-- Crea una jerarquía llamada `Servicios`.
-- Añade las columnas en este orden:
-  - `Prioridad`
+1. Expande la tabla `Servicio`.
+2. Crea una jerarquía llamada `Servicios`.
+3. Añade las columnas en este orden:
+  - `Segmento de servicio`
   - `Servicio`
 
 **Resultado esperado:** el modelo contiene jerarquías reutilizables para análisis geográfico, operativo y de servicio.
@@ -347,8 +347,8 @@ En este ejercicio crearás jerarquías para mejorar la navegación y el autoserv
 En este ejercicio mejorarás la experiencia de usuario del modelo ocultando columnas técnicas, configurando formatos y añadiendo metadatos.
 
 ### Tarea 1: Ocultar columnas de claves técnicas
-- En la **vista Modelo**, haz clic en el panel de Datos y selecciona **Expandir todo**.
-- Oculta las columnas que no deberían usarse directamente en visualizaciones:
+1. En la **vista Modelo**, haz clic en el panel de Datos y selecciona **Expandir todo**.
+2. Oculta las columnas que no deberían usarse directamente en visualizaciones:
   - `ClienteID` en todas las tablas.
   - `DestinoID` en todas las tablas.
   - `OficinaID` en todas las tablas.
@@ -356,42 +356,41 @@ En este ejercicio mejorarás la experiencia de usuario del modelo ocultando colu
   - `ServicioID` en todas las tablas.
 
 Para ocultar una columna:
-- Haz clic derecho sobre la columna.
-- Selecciona **Ocultar en la vista de informe**.
+3. Haz clic derecho sobre la columna.
+4. Selecciona **Ocultar en la vista de informe**.
 
 > Buena práctica: las claves técnicas son esenciales para relaciones, pero generalmente no deben exponerse al usuario final.
 
 ### Tarea 2: Configurar formatos numéricos
-- Selecciona `Envíos[Precio total]`.
-- En **Herramientas de columna**, configura:
+1. Selecciona `Envíos[Precio total]`.
+2. En **Herramientas de columna**, configura:
   - **Formato:** Moneda
   - **Decimales:** 2
   - **Símbolo:** € Español (España)
-- Repite para:
+3. Repite para:
   - `Precio base`
   - `Surplus fuel`
 
 ### Tarea 3: Configurar categorías de datos
-- Selecciona `Destino[Ciudad (Destino)]`.
-- En **Propiedades > Avanzado > Categoría de datos**, selecciona `Ciudad`.
-- Selecciona `Destino[Código Postal (Destino)]`.
-- Configura la categoría como `Código postal`.
-- Selecciona `Destino[Región (Destino)]`.
-- Configura la categoría como `País o región` si aplica a tu modelo.
-- Repite los pasos para las columnas `Ciudad` y `Región` de la tabla `Oficina`.
+1. Selecciona `Destino[Ciudad (Destino)]`.
+2. En **Propiedades > Avanzado > Categoría de datos**, selecciona `Ciudad`.
+3. Selecciona `Destino[Código Postal (Destino)]`.
+4. Configura la categoría como `Código postal`.
+5. Selecciona `Destino[Región (Destino)]`.
+6. Configura la categoría como `País o región` si aplica a tu modelo.
+7. Repite los pasos para las columnas `Ciudad` y `Región` de la tabla `Oficina`.
 
 ### Tarea 4: Configurar resumen predeterminado
-- Selecciona las columnas `Precio total`, `Peso (KG)` o `Intentos`.
-- En **Propiedades > Avanzado > Resumir por**, configúralas:
-  - `Precio total`: Suma
-  - `Peso (KG)`: Suma o Promedio, según criterio analítico
-  - `Intentos`: Suma o Promedio, según el análisis esperado
+1. Selecciona las columnas `Precio total`, `Peso (KG)` o `Intentos`.
+2. En **Propiedades > Avanzado > Resumir por**, configúralas:
+  - `Peso (KG)`: Promedio
+  - `Intentos`: Promedio
 
 ### Tarea 5: Añadir descripciones
-- En la tabla `Envíos`, selecciona la columna `EntregaTardia`.
-- En el panel **Propiedades**, localiza **Descripción**.
-- Escribe: `Indica si la entrega se realizó después de la fecha y hora comprometida por SLA.`
-- Añade descripciones a estas columnas:
+1. En la tabla `Envíos`, selecciona la columna `Entrega tardia`.
+2. En el panel **Propiedades**, localiza **Descripción**.
+3. Escribe: `Indica si la entrega se realizó después de la fecha y hora comprometida por SLA.`
+4. Añade descripciones a estas columnas:
   - `FechaCompromisoSLA`: Fecha y hora máxima esperada de entrega según el SLA.
   - `Precio total`: Importe total del envío en euros.
   - `Intentos`: Número de intentos de entrega registrados.
