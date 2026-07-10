@@ -1,4 +1,4 @@
-# Laboratorio — Lakehouse Ops: Modernización de ETLs con Databricks
+# Laboratorio — Lakehouse Ops Lab: Modernización avanzada de ETLs con Databricks
 
 ## Objetivo del laboratorio
 
