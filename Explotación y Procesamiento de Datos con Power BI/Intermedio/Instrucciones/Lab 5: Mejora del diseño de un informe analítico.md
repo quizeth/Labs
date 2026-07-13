@@ -71,11 +71,11 @@ La obtención de detalles debe usarse cuando el usuario necesita profundizar en 
 
 1. Copia el logo y el título desde la página **KPIs Oficina**.
 2. Pega los elementos copiados en la página **Detalle región**.
-3. Cambia el título por **Detalle de región**.
+3. Cambia el título por `Detalle de región`.
 4. Selecciona el cuadro de texto del título.
 5. En el menú contextual del cuadro de texto, selecciona **+ Valor**.
 6. Busca el campo **Región** y selecciona `'Oficina'[Región]` como valor dinámico.
-7. Cambia el subtítulo por **Análisis operativo filtrado desde la página origen**.
+7. Cambia el subtítulo por `Análisis operativo filtrado desde la página origen`.
 8. Alinea el encabezado con el mismo margen superior usado en las páginas anteriores.
 
 **Resultado esperado:** la página mantiene el estilo visual de ParcelCraft y comunica claramente que el contenido está filtrado por una oficina.
@@ -83,7 +83,7 @@ La obtención de detalles debe usarse cuando el usuario necesita profundizar en 
 ### Tarea 4: Crear visuales de análisis para la oficina seleccionada
 
 1. Inserta una visualización de tarjeta debajo del encabezado.
-2. Asigna a la tarjeta las medidas **Total envíos**, **Ingresos**, **% envíos entregados** y **% envíos tardíos**.
+2. Asigna a la tarjeta las medidas `Total envíos`, `Ingresos`, `% envíos no entregados` y `% envíos tardíos`.
 3. Ajusta la tarjeta para que ocupe el ancho principal del lienzo bajo el encabezado.
 4. Inserta una tabla debajo de la tarjeta
 5. Configura la tabla con los siguientes campos:
@@ -93,6 +93,7 @@ La obtención de detalles debe usarse cuando el usuario necesita profundizar en 
     - `% envíos entregados`
     - `% envíos no entregados`
     - `% envíos tardíos`
+    - `Días medios hasta entrega`
     - `Promedio intentos`
     - `% margen estimado`
 
