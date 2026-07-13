@@ -172,8 +172,6 @@ DIVIDE(
 
 ### Tarea 2: Crear una medida con KEEPFILTERS
 
-### Tarea 2: Crear una medida con KEEPFILTERS
-
 1. Crea esta medida:
 
 ```DAX
