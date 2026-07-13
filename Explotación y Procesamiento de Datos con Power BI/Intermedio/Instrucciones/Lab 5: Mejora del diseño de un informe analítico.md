@@ -176,7 +176,7 @@ La información sobre herramientas debe aportar contexto relevante y breve. No d
 1. Asegúrate de estar en la página **Tooltip envíos**.
 2. Haz clic en una zona vacía del lienzo para no tener ningún visual seleccionado.
 3. En el panel **Visualizaciones**, localiza la sección **Información sobre erramientas**.
-4. Arrastra el campo `'Oficina'[Región]` al área **Agregar campos de obtención de detalles aquí**.
+4. Arrastra el campo `Total envíos` al área **Agregar campos de obtención de detalles aquí**.
 5. Deja activada la opción **Mantener todos los filtros** para conservar el contexto aplicado desde la página origen.
 6. Ve a la página **Visión global**.
 7. Pasa el cursor por encima de una barra del gráfico de barras de **Ingresos por región**.
@@ -339,7 +339,8 @@ El formato condicional debe utilizarse para ayudar a interpretar datos, no para 
 6. Selecciona **Formato condicional**.
 7. Selecciona **Iconos**.
 8. Configura las reglas:
-<img width="948" height="679" alt="image" src="https://github.com/user-attachments/assets/d22ceeb5-1bb8-47cb-978b-38c44572f78a" />
+<img width="949" height="672" alt="image" src="https://github.com/user-attachments/assets/f647cce2-b78b-409d-a18e-c51ab4b2454e" />
+
 
 **Resultado esperado:** la matriz destaca visualmente oficinas y servicios con margen bajo, medio o alto.
 
