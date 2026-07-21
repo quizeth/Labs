@@ -1,4 +1,4 @@
-# Laboratorio 75: Mejora del diseño de un informe analítico
+# Laboratorio 7: Mejora del diseño de un informe analítico
 
 En este laboratorio trabajarás como diseñador de experiencia de usuario aplicada a BI. El objetivo es evolucionar el informe existente para que el usuario final pueda explorar la información con menos esfuerzo, acceder a detalles bajo demanda, interpretar indicadores con mayor rapidez y alternar vistas analíticas sin duplicar páginas innecesarias.
 
