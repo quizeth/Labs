@@ -6,7 +6,7 @@ El objetivo es pasar de un informe correcto desde el punto de vista visual a una
 
 ## Objetivos de aprendizaje
 
-**Tiempo estimado total: 30 minutos**
+**Tiempo estimado total: 45 minutos**
 
 Al finalizar este laboratorio serás capaz de:
 - Configurar una página de obtención de detalles para navegar desde una visualización resumen hacia una vista filtrada automáticamente.
