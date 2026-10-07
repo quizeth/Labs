@@ -1,4 +1,4 @@
-# Lab 4: Ética en la IA
+# Lab: Ética en la IA
 
 La inteligencia artificial generativa puede redactar informes, analizar datos y automatizar flujos de trabajo en segundos. Sin embargo, esa velocidad solo es útil si los resultados son justos, seguros y verificables. Comprender los principios de IA responsable y saber cuándo un ser humano debe intervenir es tan importante como saber escribir un buen prompt.
 
