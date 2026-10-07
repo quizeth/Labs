@@ -1,4 +1,4 @@
-# Lab 3: Crea contenido multimedia con “Create” en Microsoft 365 Copilot Chat
+# Lab: Crea contenido multimedia con “Create” en Microsoft 365 Copilot Chat
 
 Trabajas como consultor en una empresa tecnológica que está acelerando el uso de herramientas de IA generativa en proyectos internos. En las últimas semanas, varios equipos han empezado a utilizar Copilot sin directrices claras, lo que ha generado dudas sobre el uso de datos sensibles, la calidad de los contenidos generados y posibles sesgos.
 
