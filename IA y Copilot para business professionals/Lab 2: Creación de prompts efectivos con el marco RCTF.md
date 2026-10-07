@@ -1,157 +1,305 @@
-# Lab 2: Creación de prompts efectivos con el marco RCTF
+## Lab 2: Técnicas de prompting aplicadas a datos empresariales
 
-La calidad de las respuestas de una IA generativa depende directamente de la calidad de las instrucciones que recibe. Un prompt vago produce resultados genéricos; un prompt estructurado produce resultados utilizables.
+La misma tarea puede producir resultados muy distintos según la cantidad de contexto, los ejemplos y la estructura incorporados al prompt. En este laboratorio compararás cuatro técnicas de prompting utilizando los anexos del dossier proporcionado: **zero-shot**, **few-shot**, **superprompt** y **chain of thought**, reformulada aquí como razonamiento verificable.
 
 En este ejercicio aprenderás a:
-- Aplicar el marco **RCTF** (Role, Context, Task, Format) para construir prompts profesionales.
-- Diferenciar entre **superprompting** y **chain of thought (CoT)** y saber cuándo usar cada técnica.
-- Incorporar buenas prácticas de prompt engineering en tu flujo de trabajo diario.
 
-**Duración estimada:** 20 minutos
+- Utilizar un prompt zero-shot para resolver una tarea sin ejemplos previos.
+- Aplicar few-shot prompting para controlar una clasificación mediante ejemplos.
+- Construir un superprompt con contexto, restricciones y formato de salida.
+- Solicitar fórmulas y cálculos intermedios para verificar un análisis cuantitativo.
+- Comparar las ventajas y limitaciones de cada técnica.
+
+**Duración estimada:** 30 minutos
+
+**Material necesario:**
 
 > [!NOTE]
 > **Nota:** Para completar este laboratorio necesitas una suscripción a Microsoft 365. Estas tareas están diseñadas específicamente para usarse en **modo web** en Microsoft 365 Copilot Chat. Si tienes una licencia de Microsoft 365 Copilot, asegúrate de **cambiar manualmente al modo web** cuando abras Copilot Chat, ya que podría estar en modo trabajo por defecto. Usar el **modo web** garantiza que los prompts funcionen como se espera y obtengan información de contenido web público.
 
----
+- Microsoft 365 Copilot Chat.
+- El archivo **Documentos de Trabajo y Datasets para Cuadernos de Laboratorio.pdf**.
+- Anexo 1: Estado financiero y balance de situación.
+- Anexo 2: Dataset de incidencias de soporte técnico y comercial.
+- Anexo 3: Fichas de evaluación de proveedores TI.
 
-## Tarea 1: El marco RCTF
 
-### ¿Qué es RCTF?
 
-RCTF es un marco de cuatro componentes que estructura cualquier prompt para obtener resultados consistentes y de alta calidad:
+> [!NOTE]
+> **Nota:** Trabaja en una única conversación mientras utilices el mismo anexo. Abre una conversación nueva cuando se indique para evitar que los ejemplos o instrucciones anteriores condicionen la respuesta.
 
-| Componente | Pregunta clave | Ejemplo |
-|---|---|---|
-| **R - Role** (Rol) | ¿Quién debe ser la IA? | "Eres un analista financiero senior con 10 años de experiencia en logística." |
-| **C - Context** (Contexto) | ¿Cuál es la situación? | "Nuestra empresa transporta vehículos entre Europa y América Latina. El margen operativo ha caído un 8% en Q1." |
-| **T - Task** (Tarea) | ¿Qué quieres exactamente? | "Identifica las 3 causas principales de la caída y propone acciones correctivas." |
-| **F - Format** (Formato) | ¿Cómo debe verse la salida? | "Presenta el resultado en una tabla con columnas: Causa, Impacto estimado, Acción propuesta, Prioridad." |
 
-> **Principio clave:** La IA no conoce tu situación. Cuanto más contexto le des, mejor será el resultado. La estructura vence a la creatividad.
 
-### Tarea práctica
-
-- **Abre Microsoft Copilot** (m365.cloud.microsoft o la app de escritorio de Microsoft 365 Copilot).
-
-- **Copia y envía** el siguiente prompt **sin contexto** y observa el resultado:
-
-```
-Ayúdame a preparar una presentación sobre transformación digital.
-```
-
-- Ahora envía este prompt **aplicando el marco RCTF** y compara:
-
-```
-Eres un consultor senior de transformación digital especializado en empresas de logística.
-
-Estoy preparando una presentación para el comité de dirección de una empresa
-de transporte marítimo con 2.000 empleados. Actualmente usamos hojas de cálculo para
-la facturación y el seguimiento de envíos. El presupuesto aprobado es de 500K EUR y el
-plazo es 18 meses.
-
-Crea un esquema de presentación de 10 diapositivas que incluya: diagnóstico actual,
-propuesta de solución, hoja de ruta, análisis de riesgos y ROI estimado.
-
-Muestra el esquema como una lista numerada con el título de cada diapositiva y 3 bullet points con el contenido clave de cada una.
-```
-
-- **Reflexiona:** ¿Que diferencias observas en la profundidad, relevancia y estructura de ambas respuestas?
 
 ---
 
-## Tarea 2: Superprompting vs. Chain of Thought
+### Tarea 1: Zero-shot prompting
 
-### Definiciones
+#### ¿Qué es zero-shot?
 
-| Técnica | Qué es | Cuándo usarla |
-|---|---|---|
-| **Superprompting** | Un prompt extenso y detallado que incluye toda la información necesaria (contexto, objetivos, ejemplos, restricciones, formato) en una sola interacción. | Tareas bien definidas donde puedes anticipar todo lo necesario: generación de contenido, emails, informes. |
-| **Chain of Thought (CoT)** | Una técnica que guía a la IA a "pensar paso a paso" antes de dar una respuesta final, descomponiendo el razonamiento en etapas intermedias. | Tareas que requieren lógica, cálculo, análisis comparativo o resolución de problemas complejos. |
+En un prompt **zero-shot**, Copilot recibe una tarea sin ejemplos de respuesta. La técnica es rápida, pero ofrece menos control sobre los criterios y el formato utilizados.
 
-### Comparativa rápida
+#### Tarea práctica
 
-| Aspecto | Superprompting | Chain of Thought |
-|---|---|---|
-| **Estructura** | Todo en un solo prompt | Razonamiento paso a paso |
-| **Control** | Alto (defines todo desde el inicio) | Alto (puedes validar cada paso) |
-| **Mejor para** | Contenido, redacción, informes | Análisis, decisiones, cálculos |
-| **Riesgo** | Prompt muy largo puede diluir el foco | Requiere más tokens y tiempo |
+1. Abre Microsoft 365 Copilot Chat.
+2. Adjunta el dossier mediante **Agregar y administrar orígenes**.
+3. Copia y envía este prompt:
 
-### Tarea práctica
+```text
+Utiliza el Anexo 2 del documento adjunto.
 
-**Paso A - Superprompting:** Copia y envía este prompt a Copilot:
-
-```
-Eres un director de operaciones de una empresa de logística con sede en Madrid.
-Necesito que redactes un email al CEO proponiendo la automatización del proceso
-de facturación. La empresa procesa 5.000 facturas/mes de forma manual con un
-equipo de 4 personas. El error medio es del 3,2%. Incluye: situación actual,
-propuesta de solución, beneficios esperados (ahorro de tiempo y reducción de
-errores), y una estimación de coste. Tono profesional pero directo. Máximo
-300 palabras. Formato de email corporativo con asunto incluido.
+Clasifica los tickets TCK-105, TCK-106, TCK-107 y TCK-108 por categoría y severidad.
 ```
 
-**Paso B - Chain of Thought:** Abre una nueva conversación y envía este prompt:
+4. Revisa la respuesta y anota:
+   - Las categorías utilizadas.
+   - Los niveles de severidad asignados.
+   - El formato elegido por Copilot.
+   - Cualquier criterio que Copilot haya supuesto sin que estuviera indicado.
 
-```
-Necesito decidir si automatizar nuestro proceso de facturación. Actualmente
-procesamos 5.000 facturas/mes de forma manual con 4 personas y una tasa de
-error del 3,2%.
-
-Piensa paso a paso:
-1. Calcula el coste actual del proceso manual (asume un salario bruto de
-   30.000 EUR/año por persona).
-2. Estima el coste de los errores (asume un coste medio de 45 EUR por
-   factura con error).
-3. Investiga el coste típico de una solución de automatización de facturas.
-4. Compara ambos escenarios y calcula el ROI a 2 años.
-5. Recomienda si debemos proceder o no, justificando tu respuesta.
-```
-
-**Reflexiona:** ¿Qué técnica te ha dado un resultado más ñutil para cada situación? ¿Por qué?
+**Reflexiona:** ¿La clasificación es consistente entre los cuatro tickets? ¿Qué elementos del resultado no estaban definidos en el prompt?
 
 ---
 
-## Ejercicio 3: Buenas prácticas
+### Tarea 2: Few-shot prompting
 
-### Las 8 reglas de oro del prompting
+#### ¿Qué es few-shot?
 
-| # | Buena práctica | Ejemplo |
-|---|---|---|
-| 1 | **Sé específico, no genérico** | Malo: "Haz un informe." Bueno: "Crea un informe ejecutivo de 2 páginas sobre la reducción de costes en el Q1." |
-| 2 | **Asigna un rol experto** | "Eres un analista de datos senior especializado en supply chain." |
-| 3 | **Proporciona contexto suficiente** | Incluye datos, restricciones, audiencia y objetivo. |
-| 4 | **Define el formato de salida** | "Tabla con 4 columnas", "Lista numerada", "Email de 200 palabras". |
-| 5 | **Usa ejemplos cuando sea posible** | "Sigue este estilo: [pega un ejemplo]." |
-| 6 | **Itera y refina** | Si el primer resultado no es perfecto, ajusta el prompt en lugar de empezar de cero. |
-| 7 | **Divide tareas complejas** | En lugar de un mega-prompt, divide en pasos o usa chain of thought. |
-| 8 | **Revisa siempre la salida** | La IA puede generar información incorrecta (alucinaciones). Tú eres el filtro final. |
+El **few-shot prompting** incorpora ejemplos de entrada y salida para mostrar a Copilot el patrón que debe seguir. Los ejemplos ayudan a controlar la estructura y los criterios, pero deben revisarse porque también pueden transmitir errores o sesgos.
 
-### Tarea práctica
+#### Tarea práctica
 
-- **Elige un caso real de tu trabajo** (un email, un informe, un analisis de datos).
+1. Abre una conversación nueva.
+2. Adjunta de nuevo el dossier.
+3. Copia y envía este prompt:
 
-- **Escribe un prompt usando RCTF** y al menos 3 de las buenas practicas anteriores.
+```text
+Eres un clasificador de incidencias de soporte técnico y comercial.
 
-- **Envialo a Copilot** y evalua el resultado.
+Clasifica cada entrada con estos campos:
 
-- **Itera al menos una vez:** ajusta el prompt para mejorar la respuesta.
+- categoria
+- severidad: Crítica, Alta, Media o Baja
+- justificacion
+
+Sigue el patrón de estos ejemplos del Anexo 2:
+
+[EJEMPLO 1]
+Entrada: TCK-101. La API de autenticación devuelve error 500 para todos los usuarios de la región EMEA desde hace 10 minutos.
+Salida: {"categoria":"Autenticación/IAM","severidad":"Crítica","justificacion":"Fallo generalizado de autenticación en producción para una región completa"}
+
+[EJEMPLO 2]
+Entrada: TCK-102. Se solicita acceso de solo lectura al repositorio de auditoría para una nueva incorporación antes del viernes.
+Salida: {"categoria":"Gestión de accesos","severidad":"Baja","justificacion":"Solicitud planificada sin interrupción de servicio"}
+
+[EJEMPLO 3]
+Entrada: TCK-103. El nodo secundario de la base de datos registra un 88 % de ocupación en /data. El nodo primario no presenta degradación.
+Salida: {"categoria":"Almacenamiento/Bases de datos","severidad":"Media","justificacion":"Riesgo de capacidad sin degradación actual del servicio principal"}
+
+[EJEMPLO 4]
+Entrada: TCK-104. Se detectan 4.000 intentos de fuerza bruta contra el servicio SSH perimetral desde un rango IP anómalo.
+Salida: {"categoria":"Seguridad perimetral","severidad":"Alta","justificacion":"Actividad hostil activa contra un servicio expuesto"}
+
+Ahora procesa individualmente los tickets TCK-105, TCK-106, TCK-107 y TCK-108.
+
+Devuelve únicamente un array JSON válido. No añadas introducción ni conclusión.
+```
+
+4. Compara la respuesta con la obtenida mediante zero-shot.
+
+#### Comprobación
+
+- ¿Copilot mantiene los mismos campos en los cuatro objetos?
+- ¿Utiliza únicamente las severidades permitidas?
+- ¿La justificación se basa en el texto de cada ticket?
+- ¿El resultado es JSON válido?
+
+**Reflexiona:** ¿Los ejemplos han mejorado el formato, la clasificación o ambos? Identifica un cambio concreto respecto al resultado zero-shot.
 
 ---
 
-## Resumen
+### Tarea 3: Superprompt
 
-| Concepto | Punto clave |
+#### ¿Qué es un superprompt?
+
+Un **superprompt** reúne en una sola instrucción el rol, el contexto, la tarea, las restricciones, los criterios de evaluación y el formato esperado. Resulta útil cuando la tarea está bien definida y se necesita una salida reutilizable.
+
+#### Tarea práctica
+
+1. Abre una conversación nueva.
+2. Adjunta el dossier.
+3. Copia y envía este prompt:
+
+```text
+[ROL]
+Actúa como consultor de compras tecnológicas especializado en evaluación de servicios cloud.
+
+[CONTEXTO]
+La organización debe comparar los tres proveedores descritos en el Anexo 3 del documento adjunto. La comparación se utilizará como borrador para una revisión interna de compras y cumplimiento.
+
+[TAREA]
+Compara TechCore Solutions, CloudScale Iberia y Nexus Global Operations según estos criterios:
+
+- SLA de disponibilidad.
+- Coste recurrente mensual sin IVA.
+- Tiempo y cobertura de respuesta para incidentes P1.
+- Penalización por incumplimiento.
+- Certificaciones declaradas.
+- Jurisdicción contractual.
+
+[RESTRICCIONES]
+1. Utiliza exclusivamente el Anexo 3.
+2. No emplees adjetivos subjetivos como "excelente", "robusto" o "mejor".
+3. No inventes ni completes datos ausentes.
+4. Si un dato no aparece, escribe "NO DECLARADO EN LA FUENTE".
+5. Separa los datos documentados de la valoración final.
+6. No presentes la valoración como una decisión definitiva de contratación.
+
+[FORMATO]
+1. Tabla Markdown con una fila por proveedor y una columna por criterio.
+2. Después de la tabla, incluye:
+   - Opción de menor coste.
+   - Opción con mayor SLA.
+   - Principal riesgo contractual de cada proveedor.
+3. Finaliza con una comparación de coste-riesgo de un máximo de 80 palabras.
+```
+
+4. Revisa si Copilot respeta todas las instrucciones.
+
+#### Comprobación
+
+- ¿Los importes coinciden con el Anexo 3?
+- ¿Se distingue entre tiempo de respuesta y cobertura horaria?
+- ¿Las certificaciones están copiadas correctamente?
+- ¿La jurisdicción aparece sin interpretaciones añadidas?
+- ¿La comparación final se basa en los criterios anteriores?
+
+**Reflexiona:** ¿Qué parte del superprompt ha ejercido mayor control sobre el resultado: el contexto, las restricciones o el formato?
+
+---
+
+### Tarea 4: Chain of thought y razonamiento verificable
+
+#### ¿Qué se practica en esta tarea?
+
+En tareas de cálculo, pedir simplemente una conclusión dificulta detectar errores. En lugar de solicitar el razonamiento interno ilimitado del modelo, pedirás **fórmulas, operaciones intermedias y resultados verificables**.
+
+#### Tarea práctica
+
+1. Abre una conversación nueva.
+2. Adjunta el dossier.
+3. Copia y envía este prompt:
+
+```text
+Utiliza exclusivamente el Anexo 1 del documento adjunto.
+
+Identifica las partidas de costes cuya desviación porcentual absoluta entre el Presupuesto 2025 y el Real 2025 sea estrictamente superior al 5 %.
+
+Para cada partida:
+
+1. Muestra el presupuesto y el importe real.
+2. Aplica esta fórmula:
+   Desviación porcentual = (Real 2025 - Presupuesto 2025) / Presupuesto 2025 × 100
+3. Muestra la sustitución numérica y el resultado redondeado a dos decimales.
+4. Indica si supera o no el umbral del 5 % en valor absoluto.
+5. Incluye la causa únicamente si aparece expresamente en la Nota de la Dirección Financiera. Si no aparece, escribe "CAUSA NO DECLARADA".
+
+Presenta el resultado final en una tabla con estas columnas:
+
+| Partida | Presupuesto 2025 | Real 2025 | Operación | Desviación (%) | ¿Supera el 5 %? | Causa documentada |
+
+No incluyas partidas de ingresos, EBITDA ni totales agregados. No añadas causas inferidas.
+```
+
+4. Comprueba manualmente al menos uno de los cálculos.
+
+#### Verificación sugerida
+
+Para **Infraestructura Cloud y Datacenters**:
+
+```text
+(3.655.000 - 3.200.000) / 3.200.000 × 100 = 14,22 %
+```
+
+**Reflexiona:** ¿Mostrar la fórmula y la sustitución numérica facilita detectar errores? ¿Copilot ha respetado la diferencia entre causa documentada y causa inferida?
+
+---
+
+### Tarea 5: Crea y mejora tu propio prompt
+
+En esta tarea aplicarás una de las cuatro técnicas sin copiar un prompt completo. El objetivo es que tomes decisiones conscientes sobre el contexto, los ejemplos, las restricciones y el formato.
+
+#### Elige un caso
+
+Selecciona **una** de estas opciones del dossier:
+
+- **Opción A - Anexo 1:** resumir la situación financiera de InnoTech Solutions para una audiencia directiva.
+- **Opción B - Anexo 2:** clasificar uno o varios tickets por categoría, severidad y acción recomendada.
+- **Opción C - Anexo 3:** comparar proveedores según los criterios que consideres relevantes.
+
+#### Redacta tu prompt
+
+1. Elige la técnica más adecuada: **zero-shot**, **few-shot**, **superprompt** o **razonamiento verificable**.
+2. Escribe un prompt propio que incluya, cuando resulte pertinente:
+   - La fuente o el anexo que debe utilizar Copilot.
+   - La tarea concreta.
+   - El destinatario o propósito del resultado.
+   - Las restricciones necesarias.
+   - El formato de salida.
+   - Ejemplos, si has elegido few-shot.
+   - Fórmulas y operaciones comprobables, si has elegido razonamiento verificable.
+3. Envía el prompt a Copilot y revisa la respuesta.
+4. Identifica **un problema concreto** en el resultado.
+5. Modifica el prompt para corregir ese problema y ejecútalo de nuevo.
+
+#### Plantilla opcional
+
+```text
+[TÉCNICA ELEGIDA]
+
+[ANEXO O FUENTE]
+
+[OBJETIVO Y DESTINATARIO]
+
+[TAREA]
+
+[RESTRICCIONES]
+
+[FORMATO DE SALIDA]
+
+[EJEMPLOS O FÓRMULAS, SI SON NECESARIOS]
+```
+
+#### Evaluación
+
+Comprueba si el segundo prompt:
+
+- Reduce la ambigüedad detectada.
+- Se mantiene fiel al anexo.
+- Define un resultado que pueda revisarse.
+- Evita añadir información no documentada.
+- Mejora de forma observable la primera respuesta.
+
+**Reflexiona:** ¿Qué cambio introdujiste en el segundo prompt y qué efecto concreto produjo? No respondas únicamente que el resultado es “mejor”.
+
+---
+
+### Tarea 6: Comparación final
+
+Completa esta tabla a partir de tus resultados:
+
+| Técnica | Ventaja observada | Limitación observada | Mejor uso |
+|---|---|---|---|
+| Zero-shot |  |  |  |
+| Few-shot |  |  |  |
+| Superprompt |  |  |  |
+| Chain of thought / razonamiento verificable |  |  |  |
+
+### Resumen
+
+| Técnica | Punto clave |
 |---|---|
-| **RCTF** | Estructura todo prompt en 4 bloques: Rol, Contexto, Tarea, Formato. |
-| **Superprompting** | Un prompt completo y detallado para tareas bien definidas. |
-| **Chain of Thought** | Razonamiento paso a paso para tareas que requieren lógica o cálculo. |
-| **Buenas prácticas** | Se específico, da contexto, define formato, itera y revisa siempre. |
-
----
-
-## Recursos adicionales
-
-- [Prompt Gallery de Microsoft](https://adoption.microsoft.com/copilot/prompt-gallery/) - Biblioteca de prompts listos para usar.
-- [Prompt Engineering Guide](https://www.promptingguide.ai/) - Guia académica de tecnicas de prompting.
-- [The RCTF Prompt Framework](https://rupertchesman.com/article-rctf-prompt-framework.html) - Explicación detallada del marco RCTF.
+| **Zero-shot** | Resuelve una tarea sin ejemplos; es rápido, pero ofrece menos control. |
+| **Few-shot** | Utiliza ejemplos para enseñar el patrón de entrada y salida esperado. |
+| **Superprompt** | Reúne contexto, tarea, restricciones y formato en una única instrucción detallada. |
+| **Chain of thought / razonamiento verificable** | Descompone una tarea cuantitativa en fórmulas, operaciones y resultados comprobables. |
