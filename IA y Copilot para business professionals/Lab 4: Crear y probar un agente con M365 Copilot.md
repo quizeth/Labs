@@ -36,12 +36,12 @@ Todos los archivos están en la carpeta /Files del curso.
 
 | Archivo | Uso |
 |---|---|
-| `01_Playbook_Juridico_SaaS.docx` | Conocimiento permanente del agente |
-| `02_Politica_Financiera_Aprobaciones_SaaS.docx` | Conocimiento permanente del agente |
-| `03_Contrato_OrionCloud.docx` | Primer caso de prueba |
-| `04_Solicitud_Compra_OrionCloud.docx` | Datos económicos y de negocio del primer caso |
-| `05_Contrato_NovaDesk.docx` | Segundo caso de prueba |
-| `06_Solicitud_Compra_NovaDesk.docx` | Datos económicos y de negocio del segundo caso |
+| [`01_Playbook_Juridico_SaaS.docx`](https://github.com/quizeth/Labs/blob/c0575f96bbd9a821b7cef0330985f8777821140f/IA%20y%20Copilot%20para%20business%20professionals/Files/01_Playbook_Juridico_SaaS.docx) | Conocimiento permanente del agente |
+| [`02_Politica_Financiera_Aprobaciones_SaaS.docx`](https://github.com/quizeth/Labs/blob/c0575f96bbd9a821b7cef0330985f8777821140f/IA%20y%20Copilot%20para%20business%20professionals/Files/02_Politica_Financiera_Aprobaciones_SaaS.docx) | Conocimiento permanente del agente |
+| [`03_Contrato_OrionCloud.docx`](https://github.com/quizeth/Labs/blob/c0575f96bbd9a821b7cef0330985f8777821140f/IA%20y%20Copilot%20para%20business%20professionals/Files/03_Contrato_OrionCloud.docx) | Primer caso de prueba |
+| [`04_Solicitud_Compra_OrionCloud.docx`](https://github.com/quizeth/Labs/blob/c0575f96bbd9a821b7cef0330985f8777821140f/IA%20y%20Copilot%20para%20business%20professionals/Files/04_Solicitud_Compra_OrionCloud.docx) | Datos económicos y de negocio del primer caso |
+| [`05_Contrato_NovaDesk.docx`](https://github.com/quizeth/Labs/blob/c0575f96bbd9a821b7cef0330985f8777821140f/IA%20y%20Copilot%20para%20business%20professionals/Files/05_Contrato_NovaDesk.docx) | Segundo caso de prueba |
+| [`06_Solicitud_Compra_NovaDesk.docx`](https://github.com/quizeth/Labs/blob/c0575f96bbd9a821b7cef0330985f8777821140f/IA%20y%20Copilot%20para%20business%20professionals/Files/06_Solicitud_Compra_NovaDesk.docx) | Datos económicos y de negocio del segundo caso |
 
 > **Regla clave:** Los archivos 01 y 02 contienen reglas estables y se añaden al conocimiento del agente. Los archivos 03 a 06 representan expedientes variables y se adjuntan al utilizar el agente. No mezcles ambas capas.
 
