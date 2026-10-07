@@ -1,4 +1,4 @@
-# Lab 2: Creación de prompts efectivos con el marco RCTF
+# Lab: Creación de prompts efectivos con el marco RCTF
 
 La calidad de las respuestas de una IA generativa depende directamente de la calidad de las instrucciones que recibe. Un prompt vago produce resultados genéricos; un prompt estructurado produce resultados utilizables.
 
