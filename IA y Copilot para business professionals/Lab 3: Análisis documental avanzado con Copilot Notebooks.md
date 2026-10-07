@@ -1,4 +1,4 @@
-# Lab 3: Contraste documental Escritura–Registro–Catastro con Copilot Notebooks
+# Lab 3: Análisis documental avanzado con Copilot Notebooks
 
 Microsoft Copilot Notebooks permite reunir documentos y otras referencias en un espacio acotado para formular preguntas basadas en el contenido seleccionado. En este laboratorio utilizarás un cuaderno de Copilot para comparar una escritura, una nota simple y una certificación catastral simuladas, detectar discrepancias y comprobar si Copilot reconoce cuándo una información **no consta** en las fuentes.
 
