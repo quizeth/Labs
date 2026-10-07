@@ -9,7 +9,7 @@ En este ejercicio aprenderás a:
 - Analizar archivos subidos y generar comunicaciones a partir de ellos.
 - Colaborar en tiempo real usando Copilot Pages.
 
-**Duración estimada:** 30 minutos
+**Duración estimada:** 20 minutos
 
 > [!NOTE]
 > **Nota:** Para completar este laboratorio necesitas una suscripción a Microsoft 365. Estas tareas están diseñadas específicamente para usarse en **modo web** en Microsoft 365 Copilot Chat. Si tienes una licencia de Microsoft 365 Copilot, asegúrate de **cambiar manualmente al modo web** cuando abras Copilot Chat, ya que podría estar en modo trabajo por defecto. Usar el **modo web** garantiza que los prompts funcionen como se espera y obtengan información de contenido web público.
