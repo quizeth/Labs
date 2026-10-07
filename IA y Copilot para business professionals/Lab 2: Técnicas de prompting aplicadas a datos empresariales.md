@@ -1,4 +1,4 @@
-## Lab 2: Técnicas de prompting aplicadas a datos empresariales
+# Lab 2: Técnicas de prompting aplicadas a datos empresariales
 
 La misma tarea puede producir resultados muy distintos según la cantidad de contexto, los ejemplos y la estructura incorporados al prompt. En este laboratorio compararás cuatro técnicas de prompting utilizando los anexos del dossier proporcionado: **zero-shot**, **few-shot**, **superprompt** y **chain of thought**, reformulada aquí como razonamiento verificable.
 
@@ -18,7 +18,7 @@ En este ejercicio aprenderás a:
 > **Nota:** Para completar este laboratorio necesitas una suscripción a Microsoft 365. Estas tareas están diseñadas específicamente para usarse en **modo web** en Microsoft 365 Copilot Chat. Si tienes una licencia de Microsoft 365 Copilot, asegúrate de **cambiar manualmente al modo web** cuando abras Copilot Chat, ya que podría estar en modo trabajo por defecto. Usar el **modo web** garantiza que los prompts funcionen como se espera y obtengan información de contenido web público.
 
 - Microsoft 365 Copilot Chat.
-- El archivo **Documentos de Trabajo y Datasets para Cuadernos de Laboratorio.pdf**.
+- El archivo [**Documentos de Trabajo y Datasets para Cuadernos de Laboratorio.pdf**](https://github.com/quizeth/Labs/blob/79c31f2459d01b309aa1dbab9cab48e518604c05/IA%20y%20Copilot%20para%20business%20professionals/Files/Documentos%20de%20Trabajo%20y%20Datasets%20para%20Cuadernos%20de%20Laboratorio.pdf).
 - Anexo 1: Estado financiero y balance de situación.
 - Anexo 2: Dataset de incidencias de soporte técnico y comercial.
 - Anexo 3: Fichas de evaluación de proveedores TI.
@@ -33,13 +33,13 @@ En este ejercicio aprenderás a:
 
 ---
 
-### Tarea 1: Zero-shot prompting
+## Tarea 1: Zero-shot prompting
 
-#### ¿Qué es zero-shot?
+### ¿Qué es zero-shot?
 
 En un prompt **zero-shot**, Copilot recibe una tarea sin ejemplos de respuesta. La técnica es rápida, pero ofrece menos control sobre los criterios y el formato utilizados.
 
-#### Tarea práctica
+### Tarea práctica
 
 1. Abre Microsoft 365 Copilot Chat.
 2. Adjunta el dossier mediante **Agregar y administrar orígenes**.
@@ -61,13 +61,13 @@ Clasifica los tickets TCK-105, TCK-106, TCK-107 y TCK-108 por categoría y sever
 
 ---
 
-### Tarea 2: Few-shot prompting
+## Tarea 2: Few-shot prompting
 
-#### ¿Qué es few-shot?
+### ¿Qué es few-shot?
 
 El **few-shot prompting** incorpora ejemplos de entrada y salida para mostrar a Copilot el patrón que debe seguir. Los ejemplos ayudan a controlar la estructura y los criterios, pero deben revisarse porque también pueden transmitir errores o sesgos.
 
-#### Tarea práctica
+### Tarea práctica
 
 1. Abre una conversación nueva.
 2. Adjunta de nuevo el dossier.
@@ -107,7 +107,7 @@ Devuelve únicamente un array JSON válido. No añadas introducción ni conclusi
 
 4. Compara la respuesta con la obtenida mediante zero-shot.
 
-#### Comprobación
+### Comprobación
 
 - ¿Copilot mantiene los mismos campos en los cuatro objetos?
 - ¿Utiliza únicamente las severidades permitidas?
@@ -118,13 +118,13 @@ Devuelve únicamente un array JSON válido. No añadas introducción ni conclusi
 
 ---
 
-### Tarea 3: Superprompt
+## Tarea 3: Superprompt
 
-#### ¿Qué es un superprompt?
+### ¿Qué es un superprompt?
 
 Un **superprompt** reúne en una sola instrucción el rol, el contexto, la tarea, las restricciones, los criterios de evaluación y el formato esperado. Resulta útil cuando la tarea está bien definida y se necesita una salida reutilizable.
 
-#### Tarea práctica
+### Tarea práctica
 
 1. Abre una conversación nueva.
 2. Adjunta el dossier.
@@ -166,7 +166,7 @@ Compara TechCore Solutions, CloudScale Iberia y Nexus Global Operations según e
 
 4. Revisa si Copilot respeta todas las instrucciones.
 
-#### Comprobación
+### Comprobación
 
 - ¿Los importes coinciden con el Anexo 3?
 - ¿Se distingue entre tiempo de respuesta y cobertura horaria?
@@ -178,9 +178,9 @@ Compara TechCore Solutions, CloudScale Iberia y Nexus Global Operations según e
 
 ---
 
-### Tarea 4: Chain of thought y razonamiento verificable
+## Tarea 4: Chain of thought y razonamiento verificable
 
-#### ¿Qué se practica en esta tarea?
+### ¿Qué se practica en esta tarea?
 
 En tareas de cálculo, pedir simplemente una conclusión dificulta detectar errores. En lugar de solicitar el razonamiento interno ilimitado del modelo, pedirás **fórmulas, operaciones intermedias y resultados verificables**.
 
@@ -213,7 +213,7 @@ No incluyas partidas de ingresos, EBITDA ni totales agregados. No añadas causas
 
 4. Comprueba manualmente al menos uno de los cálculos.
 
-#### Verificación sugerida
+### Verificación sugerida
 
 Para **Infraestructura Cloud y Datacenters**:
 
@@ -225,11 +225,11 @@ Para **Infraestructura Cloud y Datacenters**:
 
 ---
 
-### Tarea 5: Crea y mejora tu propio prompt
+## Tarea 5: Crea y mejora tu propio prompt
 
 En esta tarea aplicarás una de las cuatro técnicas sin copiar un prompt completo. El objetivo es que tomes decisiones conscientes sobre el contexto, los ejemplos, las restricciones y el formato.
 
-#### Elige un caso
+### Elige un caso
 
 Selecciona **una** de estas opciones del dossier:
 
@@ -237,7 +237,7 @@ Selecciona **una** de estas opciones del dossier:
 - **Opción B - Anexo 2:** clasificar uno o varios tickets por categoría, severidad y acción recomendada.
 - **Opción C - Anexo 3:** comparar proveedores según los criterios que consideres relevantes.
 
-#### Redacta tu prompt
+### Redacta tu prompt
 
 1. Elige la técnica más adecuada: **zero-shot**, **few-shot**, **superprompt** o **razonamiento verificable**.
 2. Escribe un prompt propio que incluya, cuando resulte pertinente:
@@ -252,7 +252,7 @@ Selecciona **una** de estas opciones del dossier:
 4. Identifica **un problema concreto** en el resultado.
 5. Modifica el prompt para corregir ese problema y ejecútalo de nuevo.
 
-#### Plantilla opcional
+### Plantilla opcional
 
 ```text
 [TÉCNICA ELEGIDA]
@@ -270,7 +270,7 @@ Selecciona **una** de estas opciones del dossier:
 [EJEMPLOS O FÓRMULAS, SI SON NECESARIOS]
 ```
 
-#### Evaluación
+### Evaluación
 
 Comprueba si el segundo prompt:
 
@@ -284,7 +284,7 @@ Comprueba si el segundo prompt:
 
 ---
 
-### Tarea 6: Comparación final
+## Tarea 6: Comparación final
 
 Completa esta tabla a partir de tus resultados:
 
@@ -295,7 +295,7 @@ Completa esta tabla a partir de tus resultados:
 | Superprompt |  |  |  |
 | Chain of thought / razonamiento verificable |  |  |  |
 
-### Resumen
+## Resumen
 
 | Técnica | Punto clave |
 |---|---|
