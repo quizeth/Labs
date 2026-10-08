@@ -36,17 +36,17 @@
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); gap: 1rem;">
 <a href="recursos/files/Documentos%20de%20Trabajo%20y%20Datasets%20para%20Cuadernos%20de%20Laboratorio.pdf" style="display: block; padding: 1.25rem; border: 1px solid var(--md-default-fg-color--lightest); border-radius: 6px; background: var(--md-code-bg-color); color: var(--md-default-fg-color); text-decoration: none;">
-<strong>Dossier de finanzas, soporte y proveedores</strong>
+<strong>Lab 2 · Dossier de finanzas, soporte y proveedores</strong>
 <p>Dossier con información financiera, incidencias de soporte y evaluación de proveedores para el Lab 2.</p>
 <strong>Abrir dossier</strong>
 </a>
 <a href="recursos/#lab-3" style="display: block; padding: 1.25rem; border: 1px solid var(--md-default-fg-color--lightest); border-radius: 6px; background: var(--md-code-bg-color); color: var(--md-default-fg-color); text-decoration: none;">
-<strong>Escritura, nota simple y certificación catastral</strong>
+<strong>Lab 3 · Escritura, nota simple y certificación catastral</strong>
 <p>Escritura, nota simple y certificación catastral simuladas para el Lab 3.</p>
 <strong>Ver documentos</strong>
 </a>
 <a href="recursos/#lab-4" style="display: block; padding: 1.25rem; border: 1px solid var(--md-default-fg-color--lightest); border-radius: 6px; background: var(--md-code-bg-color); color: var(--md-default-fg-color); text-decoration: none;">
-<strong>Expedientes contractuales OrionCloud y NovaDesk</strong>
+<strong>Lab 4 · Expedientes contractuales OrionCloud y NovaDesk</strong>
 <p>Playbook, política financiera, contratos y solicitudes de compra para el Lab 4.</p>
 <strong>Ver casos</strong>
 </a>
