@@ -1,6 +1,6 @@
-# 📚 Labs – Materiales de cursos
+# 📚 LearningLabs – Materiales de cursos
 
-Este repositorio reúne materiales prácticos para distintos cursos.  
+Repositorio de laboratorios, talleres y recursos de aprendizaje para distintas tecnologías y plataformas.
 Cada curso está organizado en su propia carpeta e incluye laboratorios con instrucciones detalladas.
 
 ---
