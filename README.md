@@ -1,6 +1,6 @@
 # 📚 LearningLabs – Materiales de cursos
 
-Repositorio de laboratorios, talleres y recursos de aprendizaje para distintas tecnologías y plataformas.
+Laboratorios y recursos de aprendizaje en datos, IA y tecnologías Microsoft.
 Cada curso está organizado en su propia carpeta e incluye laboratorios con instrucciones detalladas.
 
 ---
