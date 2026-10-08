@@ -17,6 +17,7 @@ Este laboratorio no tiene recursos.
 
 | Archivo | Uso |
 |---|---|
+| [`conocimiento.md`](../conocimiento.md) | Base de conocimiento alternativa para licencias básicas de Microsoft 365 Copilot |
 | [`01_Playbook_Juridico_SaaS.docx`](files/01_Playbook_Juridico_SaaS.docx) | Conocimiento permanente del agente |
 | [`02_Politica_Financiera_Aprobaciones_SaaS.docx`](files/02_Politica_Financiera_Aprobaciones_SaaS.docx) | Conocimiento permanente del agente |
 | [`03_Contrato_OrionCloud.docx`](files/03_Contrato_OrionCloud.docx) | Primer caso de prueba |

@@ -44,7 +44,7 @@ Todos los archivos están en la carpeta /Files del curso.
 | [`05_Contrato_NovaDesk.docx`](recursos/files/05_Contrato_NovaDesk.docx) | Segundo caso de prueba |
 | [`06_Solicitud_Compra_NovaDesk.docx`](recursos/files/06_Solicitud_Compra_NovaDesk.docx) | Datos económicos y de negocio del segundo caso |
 
-> **Regla clave:** Los archivos 01 y 02 contienen reglas estables y se añaden al conocimiento del agente. Los archivos 03 a 06 representan expedientes variables y se adjuntan al utilizar el agente. No mezcles ambas capas.
+> **Nota importante:** Los archivos 01 y 02 contienen reglas estables para el conocimiento del agente. Si tienes una licencia básica de Microsoft 365 Copilot y no puedes subir directamente archivos a la base de conocimiento del agente, utiliza [conocimiento.md](conocimiento.md) en su lugar.
 
 ---
 
@@ -93,13 +93,17 @@ Debe identificar la fuente concreta de cada conclusión importante.
 
 El conocimiento permanente contiene las reglas que el agente debe reutilizar en todos los expedientes. Los contratos concretos no pertenecen a esta sección porque cambian en cada ejecución.
 
+!!! note "Si tienes la licencia básica de Microsoft 365 Copilot"
+
+   Utiliza el archivo [conocimiento.md](conocimiento.md) como fuente de conocimiento, en lugar de cargar por separado los archivos 01 y 02.
+
 ### Tarea práctica
 
 1. En la pestaña **Configurar**, localiza **Conocimiento**.
-2. Añade estos dos archivos:
+2. Si no tienes la licencia básica, añade estos dos archivos:
    - `01_Playbook_Juridico_SaaS.docx`
    - `02_Politica_Financiera_Aprobaciones_SaaS.docx`
-3. Comprueba que ambos aparecen como fuentes de conocimiento.
+3. Comprueba que los archivos 01 y 02, o `conocimiento.md` según tu licencia, aparecen como fuente de conocimiento.
 4. No añadas los contratos OrionCloud o NovaDesk.
 5. En **Indicaciones sugeridas**, añade:
 
@@ -115,7 +119,7 @@ Calcula el compromiso económico y dime qué aprobaciones financieras requiere.
 Resume los riesgos jurídicos y financieros para una reunión con Compras.
 ```
 
-**Punto de control:** Antes de continuar, confirma que solo el playbook jurídico y la política financiera forman parte del conocimiento permanente.
+**Punto de control:** Antes de continuar, confirma que el conocimiento permanente incluye el playbook jurídico y la política financiera, ya sea mediante los archivos 01 y 02 o mediante `conocimiento.md`.
 
 ---
 
