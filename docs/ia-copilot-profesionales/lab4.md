@@ -44,7 +44,7 @@ Todos los archivos están en la carpeta /Files del curso.
 | [`05_Contrato_NovaDesk.docx`](recursos/files/05_Contrato_NovaDesk.docx) | Segundo caso de prueba |
 | [`06_Solicitud_Compra_NovaDesk.docx`](recursos/files/06_Solicitud_Compra_NovaDesk.docx) | Datos económicos y de negocio del segundo caso |
 
-> **Nota importante:** Los archivos 01 y 02 contienen reglas estables para el conocimiento del agente. Si tienes una licencia básica de Microsoft 365 Copilot y no puedes subir directamente archivos a la base de conocimiento del agente, utiliza [conocimiento.md](conocimiento.md) en su lugar.
+> **Nota importante:** Los archivos 01 y 02 contienen reglas estables para el conocimiento del agente. Si tienes una licencia básica de Microsoft 365 Copilot y no puedes subir directamente archivos a la base de conocimiento del agente, utiliza [conocimiento.md](../conocimiento.md) en su lugar.
 
 ---
 
@@ -95,7 +95,7 @@ El conocimiento permanente contiene las reglas que el agente debe reutilizar en 
 
 !!! note "Si tienes la licencia básica de Microsoft 365 Copilot"
 
-   Utiliza el archivo [conocimiento.md](conocimiento.md) como fuente de conocimiento, en lugar de cargar por separado los archivos 01 y 02.
+   Utiliza el archivo [conocimiento.md](../conocimiento.md) como fuente de conocimiento, en lugar de cargar por separado los archivos 01 y 02.
 
 ### Tarea práctica
 
