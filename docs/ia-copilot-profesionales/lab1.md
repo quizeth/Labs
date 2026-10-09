@@ -1,7 +1,8 @@
 # Lab 1: Primeros pasos con Microsoft 365 Copilot Chat
 
-Imagina que eres un/a asociado/a de operaciones de negocio en una consultora de tamaño medio. Tu responsable te ha pedido que lideres la planificación de una próxima Cumbre de Innovación para Clientes. Utilizarás Microsoft 365 Copilot Chat para recopilar información, generar ideas, visualizar la agenda, redactar un documento de planificación, resumirlo y colaborar con tus compañeros/as.
+Imagina que eres un/a asociado/a de operaciones de negocio en una consultora de tamaño medio. Tu responsable te ha pedido que lideres la planificación de una próxima Cumbre de Innovación para Clientes. Utilizarás Microsoft 365 Copilot para recopilar información, generar ideas, visualizar la agenda, redactar un documento de planificación, resumirlo y colaborar con tus compañeros/as.
 
+### Objetivos de aprendizaje 
 En este ejercicio aprenderás a:
 
 - Navegar y crear prompts en Microsoft 365 Copilot Chat.

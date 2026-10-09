@@ -34,7 +34,14 @@
 
 ## Recursos
 
+
+
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); gap: 1rem;">
+<a href="recursos/#diapositivas" style="display: block; padding: 1.25rem; border: 1px solid var(--md-default-fg-color--lightest); border-radius: 6px; background: var(--md-code-bg-color); color: var(--md-default-fg-color); text-decoration: none;">
+<strong>Diapositivas · IA Generativa y Microsoft Copilot</strong>
+<p>Material de apoyo visual para introducir la IA generativa, Microsoft 365 Copilot y sus aplicaciones en contexto profesional.</p>
+<strong>Ver diapositivas</strong>
+</a>
 <a href="recursos/files/Documentos%20de%20Trabajo%20y%20Datasets%20para%20Cuadernos%20de%20Laboratorio.pdf" style="display: block; padding: 1.25rem; border: 1px solid var(--md-default-fg-color--lightest); border-radius: 6px; background: var(--md-code-bg-color); color: var(--md-default-fg-color); text-decoration: none;">
 <strong>Lab 2 · Dossier de finanzas, soporte y proveedores</strong>
 <p>Dossier con información financiera, incidencias de soporte y evaluación de proveedores para el Lab 2.</p>
