@@ -42,7 +42,6 @@ theme:
 
 nav:
   - Inicio: index.md
-  - Base de conocimiento: conocimiento.md
 
   - IA y M365 Copilot para profesionales:
       - Presentación del curso: ia-copilot-profesionales/index.md
