@@ -11,23 +11,23 @@
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); gap: 1rem;">
 <a href="lab1/" style="display: block; padding: 1.25rem; border: 1px solid var(--md-default-fg-color--lightest); border-radius: 6px; background: var(--md-code-bg-color); color: var(--md-default-fg-color); text-decoration: none;">
-<strong>Lab 1 · Planifica una cumbre con Copilot Chat y Pages</strong>
-<p>Investiga tendencias, genera contenido y colabora con Copilot Chat y Pages.</p>
+<strong>Lab 1 · Primeros pasos con Microsoft 365 Copilot Chat</strong>
+<p>Aprende a usar Microsoft 365 Copilot Chat para investigar, generar ideas, crear contenido, resumir documentos y colaborar en la planificación de una cumbre de clientes.</p>
 <strong>Abrir laboratorio</strong>
 </a>
 <a href="lab2/" style="display: block; padding: 1.25rem; border: 1px solid var(--md-default-fg-color--lightest); border-radius: 6px; background: var(--md-code-bg-color); color: var(--md-default-fg-color); text-decoration: none;">
-<strong>Lab 2 · Prompting aplicado a datos empresariales</strong>
-<p>Practica zero-shot, few-shot y superprompts con datos empresariales.</p>
+<strong>Lab 2 · Técnicas de prompting aplicadas a datos empresariales</strong>
+<p>Compara técnicas de prompting (zero-shot, few-shot, superprompt y razonamiento verificable) para mejorar la precisión, el control y la trazabilidad de análisis sobre datos empresariales.</p>
 <strong>Abrir laboratorio</strong>
 </a>
 <a href="lab3/" style="display: block; padding: 1.25rem; border: 1px solid var(--md-default-fg-color--lightest); border-radius: 6px; background: var(--md-code-bg-color); color: var(--md-default-fg-color); text-decoration: none;">
-<strong>Lab 3 · Contraste inmobiliario con Copilot Notebooks</strong>
-<p>Contrasta documentos en Copilot Notebooks y detecta discrepancias.</p>
+<strong>Lab 3 · Análisis documental avanzado con Copilot Notebooks</strong>
+<p>Utiliza Copilot Notebooks para analizar y contrastar múltiples documentos, identificar discrepancias, verificar fuentes y evitar conclusiones no fundamentadas.</p>
 <strong>Abrir laboratorio</strong>
 </a>
 <a href="lab4/" style="display: block; padding: 1.25rem; border: 1px solid var(--md-default-fg-color--lightest); border-radius: 6px; background: var(--md-code-bg-color); color: var(--md-default-fg-color); text-decoration: none;">
-<strong>Lab 4 · Revisión legal y financiera de contratos SaaS</strong>
-<p>Configura un agente para revisar contratos y riesgos financieros.</p>
+<strong>Lab 4 · Crear y probar un agente con M365 Copilot</strong>
+<p>Crea, configura y prueba un agente de Microsoft 365 Copilot capaz de realizar revisiones legales y financieras reutilizables sobre contratos SaaS, manteniendo siempre la supervisión humana.</p>
 <strong>Abrir laboratorio</strong>
 </a>
 </div>

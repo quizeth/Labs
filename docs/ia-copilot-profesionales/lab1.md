@@ -3,17 +3,23 @@
 Imagina que eres un/a asociado/a de operaciones de negocio en una consultora de tamaño medio. Tu responsable te ha pedido que lideres la planificación de una próxima Cumbre de Innovación para Clientes. Utilizarás Microsoft 365 Copilot Chat para recopilar información, generar ideas, visualizar la agenda, redactar un documento de planificación, resumirlo y colaborar con tus compañeros/as.
 
 En este ejercicio aprenderás a:
+
 - Navegar y crear prompts en Microsoft 365 Copilot Chat.
+
 - Usar Copilot para investigar tendencias, generar ideas y crear contenido visual.
+
 - Redactar documentos de planificación y convertirlos en archivos de Word.
+
 - Analizar archivos subidos y generar comunicaciones a partir de ellos.
+
 - Colaborar en tiempo real usando Copilot Pages.
 
 **Duración estimada:** 20 minutos
 
 !!! note "Nota"
 
-  Para completar este laboratorio necesitas una suscripción a Microsoft 365. Estas tareas están diseñadas específicamente para usarse en **modo web** en Microsoft 365 Copilot Chat. Si tienes una licencia de Microsoft 365 Copilot, asegúrate de **cambiar manualmente al modo web** cuando abras Copilot Chat, ya que podría estar en modo trabajo por defecto. Usar el **modo web** garantiza que los prompts funcionen como se espera y obtengan información de contenido web público.
+  > Para completar este laboratorio necesitas acceso a Microsoft 365 Copilot. Si tienes **Work IQ** habilitado, algunas respuestas pueden incorporar datos de tu organización y diferir de los resultados esperados. Para los ejercicios de investigación, prioriza las fuentes web.
+  
 
 ---
 
@@ -43,6 +49,7 @@ A partir de las tendencias que acabas de investigar, usa Copilot para generar t�
 ```
 Basándote en esas tendencias, sugiere 5 títulos de sesiones atractivos y escribe descripciones breves para una cumbre de innovación de clientes.
 ```
+
 - Selecciona **Enviar**, revisa la información proporcionada por Copilot y, si es necesario, refina el prompt.
   
 - **Envía este prompt de seguimiento:**

@@ -1,4 +1,4 @@
-# Lab 4: Crear y probar un agente Legal-Financiero con M365 Copilot
+# Lab 4: Crear y probar un agente con M365 Copilot
 
 Los agentes de Microsoft 365 Copilot permiten configurar un comportamiento especializado y reutilizable mediante instrucciones, fuentes de conocimiento e indicaciones sugeridas. En este laboratorio crearás un agente para realizar una primera revisión interna de contratos SaaS, comprobarás su comportamiento con un caso de riesgo y reutilizarás el mismo método con un segundo expediente.
 
